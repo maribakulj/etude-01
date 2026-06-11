@@ -108,4 +108,59 @@ python3 test_extraction.py                            # doit finir OK / OK (exit
 python3 extraction_spectre.py note.wav [f0_hz] out.json
 python3 etape2_p5.py out.json                         # verdict P5 + figure
 python3 etape2_p5.py --analytique                     # démo sans mesure
+python3 segmentation_notes.py melodie.mp3 notes.json  # front-end mélodie (§7)
 ```
+
+---
+
+## 7. Entrées datées (modifications et matériau postérieurs au gel)
+
+### 2026-06-11 — premier matériau reçu : mélodie au lieu de notes isolées. Verdict P5 : NON RENDU.
+
+**Reçu** : enregistrement d'une boîte à manivelle à bande perforée jouant la
+fugue en ré mineur de Bach (~51 s, mp3 stéréo 44,1 kHz ; bruit de manivelle ;
+voix humaine après ~30 s — analyse limitée à 0-30 s). Matériau hors
+spécification §5 (mélodie polyphonique dense, ~3 notes/s, 93 onsets en 30 s).
+
+**Ajout déclaré (couche de sélection uniquement)** : `segmentation_notes.py` —
+onsets par flux spectral ; fenêtres mono-note bornées par l'onset suivant ;
+gardes de naissance (un partiel doit naître à l'onset : absent avant, sans
+renforcement tardif) ; regroupement statistique des occurrences par dent avec
+exigence de récurrence (un partiel doit être vu dans ≥60 % des occurrences).
+**Les paramètres d'extraction, la métrique Φ et les seuils du verdict n'ont pas
+été touchés. Φ n'a pas été évaluée sur ce matériau.**
+
+**Résultat de la qualification — le matériau ne qualifie pas, pour quatre
+raisons indépendantes de Φ :**
+1. **Distorsion de chaîne** : des doubles à ×2,000 exact de composantes fortes
+   apparaissent sur des dents différentes (1,997 ±3 c sur la dent à 555,7 Hz,
+   2×1,597 sur la dent à 621,4 Hz). Une lamelle encastrée n'a pas de mode à
+   2,0 : c'est une 2de harmonique de distorsion (saturation micro/compression),
+   qui injecte un faux partiel harmonique dans chaque spectre mesuré.
+2. **Contamination polyphonique démontrée** : le diagnostic « ping d'attaque »
+   (fenêtres de 50 ms post-onset, moyennées par dent) montre des composantes à
+   fréquence ABSOLUE fixe partagées entre dents distinctes (926, 829, 1251 Hz)
+   — les autres voix qui résonnent, vues comme de faux « modes » à des ratios
+   différents par chaque dent.
+3. **Indécidabilité sur musique tonale** : le contexte harmonique se répète
+   avec la dent (ex. : la dent à 555,7 Hz ~C#5 co-frappée avec E6 à chaque
+   harmonie de dominante → composante récurrente à 2,38 indiscernable d'un
+   mode). La statistique de récurrence, conçue pour un contexte variable, ne
+   sépare plus mode et contexte.
+4. **Limite de chaîne sur matériau dense** : fenêtres réduites à 0,26-1,0 s
+   par la densité ; un mode 2 réel à décroissance rapide (<0,15 s) peut rester
+   sous l'exigence de persistance (4 trames = 0,24 s). Son absence ici n'est
+   donc pas une mesure de son absence.
+
+**Décision** : pas de verdict P5 sur ce matériau (un « P5 échoue » sur spectre
+contaminé serait un faux critère d'abandon ; un « P5 tient » serait tout aussi
+invalide). La chaîne, la segmentation et les diagnostics ont fonctionné :
+c'est la qualification qui a arrêté la mesure, pas un réglage.
+
+**Matériau demandé (précisé — facile avec une boîte à bande perforée)** :
+perforer une bande avec des notes ISOLÉES — une seule note à la fois, ~3-4 s
+entre deux trous, chaque note répétée 3-5 fois, sur 3-5 dents différentes (les
+plus graves de préférence) ; manivelle lente et régulière ; micro à 10-20 cm,
+niveau modéré (pas de saturation), sans AGC ni normalisation si possible ;
+personne ne parle ; wav/flac de préférence, sinon mp3 à haut débit. Le bruit de
+manivelle n'est pas un problème (large bande : rejeté par les filtres).
