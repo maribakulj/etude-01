@@ -88,3 +88,15 @@ Robustesse : les résultats QUALITATIFS (les pics se déplacent avec le timbre ;
 
 ## Statut épistémique honnête (à garder en tête pour thèse/article)
 Ce qu'on a : une prédiction physique (depuis le spectre) de règles contrapuntiques, vérifiée sur le cas connu et montrant un déplacement timbre-dépendant. Ce qu'on n'a pas encore : la validation de la métrique de fusion contre du réel, et un spectre mesuré. La force du cadrage tient à ce que la prédiction PRÉCÈDE la mesure — préserver cette discipline à chaque étape est ce qui distingue ce projet d'un système génératif de plus.
+
+---
+
+## Mise à jour datée — 2026-06-11 (étapes 0 et 1 effectuées)
+
+*Addendum append-only ; le texte ci-dessus est conservé tel quel comme état au moment de la passation.*
+
+- **Étape 0 faite.** Documents + noyau posés à la racine du dépôt. **Langage acté : Python jusqu'à la fin de l'étape 2** (validation numérique = itération sur formules ; le noyau de référence est en Python ; ce qui migrerait ensuite est une fonction scalaire pure). Décision Clojure réexaminée à l'entrée de l'étape 3 (graphe/instrument), où règles-comme-données + Overtone + REPL commencent à payer.
+- **Étape 1 faite — la métrique Φ est choisie, déclarée et figée.** Voir `DECISION-PHI.md` (le document de décision) ; résumé : 4 métriques de littérature implémentées (`metriques_fusion.py`) et comparées à la proxy (`comparaison_phi.py` + `comparaison_phi.png`). Toutes reproduisent P2 — le résultat du noyau n'était pas un artefact de la proxy. **Figée : coïncidence spectrale sous transposition, σ = 6,83 c (= spectral pitch similarity de Milne, constante publiée)** — la proxy d'origine était une instance non calibrée de ce modèle publié. Les gabarits d'harmonicité (crible Darwin/Moore, pitch virtuel Terhardt/Parncutt) passent P2 mais ont des pics ancrés aux rationnels des fondamentales → gardés comme modèles de contrôle du récepteur humain (utiles à l'étape 4), inaptes à porter P5. Périodicité de Stolzenburg = étalon arithmétique.
+- **Kashino différé.** Référence identifiée : Kashino (1994), « A computational model of auditory segregation of two frequency components — evaluation and integration of multiple cues », *Electronics and Communications in Japan III*, 77(7). Modèle multi-indices dont les indices différenciants (attaques, modulation) sont hors périmètre v1 (simultanéité statique) ; à reprendre à l'étape « dynamique temporelle ». PDF non obtenu (paywall).
+- **Fragilité n°1 reclassée, pas éteinte.** La pièce centrale passe de « proxy fabriquée, non validée contre rien » à « forme publiée + constante publiée + corroboration croisée par deux familles indépendantes sur le cas connu ». Ce qui manque toujours : une validation contre des données de fusion perceptive directes (cf. réserves dans `DECISION-PHI.md` §5).
+- **Prochain chemin critique : étape 2** (spectre de boîte à musique MESURÉ, puis refaire P5 avec la Φ figée).
