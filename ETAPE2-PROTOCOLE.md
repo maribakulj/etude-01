@@ -164,3 +164,10 @@ plus graves de préférence) ; manivelle lente et régulière ; micro à 10-20 c
 niveau modéré (pas de saturation), sans AGC ni normalisation si possible ;
 personne ne parle ; wav/flac de préférence, sinon mp3 à haut débit. Le bruit de
 manivelle n'est pas un problème (large bande : rejeté par les filtres).
+
+*Mise à jour (même jour)* : l'utilisateur n'a pas de boîte physique (le
+matériau reçu était un rip YouTube). Matériau attendu désormais : la série
+Wikimedia Commons « Music box notes 1…13 » (notes isolées d'une vraie boîte,
+CC BY-SA — la cible identifiée au §4), téléchargée par l'utilisateur et
+déposée dans la conversation, ou récupérée directement si l'allowlist réseau
+est élargie.
