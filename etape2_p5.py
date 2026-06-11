@@ -39,6 +39,13 @@ SIGMA_FIGEE = 6.83          # DECISION-PHI.md — ne pas modifier ici
 SEUIL_DEPLACEMENT = 25.0    # cents — déclaré avant mesure
 PIC_MIN_FRAC = 0.05
 PICS_HARMONIQUES = [1200.0, 702.0, 498.0]   # P2, validés étape 1
+# Garde de dégénérescence (ajout daté du 2026-06-11, ETAPE2-PROTOCOLE.md §7,
+# déclarée avant tout calcul de Φ sur le matériau mesuré) : si la courbe
+# mesurée culmine sous 5 % du pic d'octave harmonique, elle est PLATE -> cas
+# dégénéré du CADRAGE §9, verdict P5 SANS OBJET. La garde ne peut qu'empêcher
+# un verdict (le harnais détecterait sinon des « pics » de bruit numérique sur
+# une courbe nulle), jamais en fabriquer un.
+GARDE_DEGENERESCENCE = 0.05
 
 CENTS = np.linspace(1.0, 1200.0, 1200)
 
@@ -108,13 +115,24 @@ def main():
     print(f"\nPics principaux ({label}) :")
     for c, v in pics_mes:
         print(f"  {c:7.1f} c   Φ={v:.4f}")
-    tient, detail = verdict_p5(pics_mes)
-    print(f"\nVerdict P5 (seuil {SEUIL_DEPLACEMENT:.0f} c, déclaré avant mesure) :")
-    for ln in detail:
-        print("  " + ln)
-    msg = ('TIENT : la structure des pics de fusion diffère du cas harmonique' if tient
-           else 'ÉCHOUE : les pics coïncident avec le cas harmonique (critère d’abandon SPEC §6.2)')
-    print(f"\n  => P5 {msg}")
+
+    masque = CENTS >= 100.0
+    ref_octave = float(P_har[masque].max())
+    cmax = float(P_mes[masque].max())
+    if cmax < GARDE_DEGENERESCENCE * ref_octave:
+        print(f"\nGarde de dégénérescence : max Φ(mesuré) = {cmax:.4f} "
+              f"< {GARDE_DEGENERESCENCE:.0%} du pic harmonique ({ref_octave:.4f}).")
+        print("  Courbe PLATE -> cas dégénéré (CADRAGE §9) : ce timbre, tel que mesuré")
+        print("  en régime tenu, ne porte pas de structure de fusion.")
+        print("\n  => P5 SANS OBJET sur cet exemplaire (ni confirmé ni infirmé).")
+    else:
+        tient, detail = verdict_p5(pics_mes)
+        print(f"\nVerdict P5 (seuil {SEUIL_DEPLACEMENT:.0f} c, déclaré avant mesure) :")
+        for ln in detail:
+            print("  " + ln)
+        msg = ('TIENT : la structure des pics de fusion diffère du cas harmonique' if tient
+               else 'ÉCHOUE : les pics coïncident avec le cas harmonique (critère d’abandon SPEC §6.2)')
+        print(f"\n  => P5 {msg}")
 
     print("\nComparaison à la prédiction analytique (information, pas critère) :")
     for c, v in pics_principaux(P_ana):

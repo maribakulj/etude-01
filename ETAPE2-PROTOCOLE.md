@@ -171,3 +171,90 @@ Wikimedia Commons « Music box notes 1…13 » (notes isolées d'une vraie boît
 CC BY-SA — la cible identifiée au §4), téléchargée par l'utilisateur et
 déposée dans la conversation, ou récupérée directement si l'allowlist réseau
 est élargie.
+
+### 2026-06-11 — second matériau reçu : « Music box notes 1-5 » (Wikimedia Commons, CC BY-SA), notes isolées. QUALIFIANT.
+
+**Reçu** : 5 fichiers ogg (44,1 kHz, ~3-7 s), 1 à 3 frappes par fichier, notes
+différentes par frappe (gamme échantillonnée sur ~994-2650 Hz). Niveaux sains
+(pic ≤0,42, pas d'écrêtage). Voie de traitement : découpage par attaque
+(enveloppe, +12 dB, séparation 0,4 s), extraction figée par segment.
+
+**Constats de mesure** (avant tout calcul de Φ) :
+- chaque frappe : fondamental dominant + composantes faibles ;
+- harmoniques EXACTEMENT entières (2,000 / 2,999, ±0,3 %) faibles, dont le
+  niveau varie entre fichiers pour LA MÊME dent (994 Hz : 2,0 à amp 0,17 dans
+  le fichier fort, absente dans le fichier faible) → **distorsion de chaîne
+  dépendante du niveau, démontrée en interne** ;
+- un mode inharmonique récurrent : **10,53× sur la dent 994 Hz, vu dans deux
+  fichiers indépendants** (amp 0,13 et 0,07) ;
+- composantes faibles sous le fondamental (0,89-0,94×) et à ~1,29-1,46×
+  non récurrentes entre dents : sonnerie sympathique de dents voisines.
+
+**Règles de nettoyage, déclarées ICI avant tout calcul de Φ** — le spectre de
+la dent retenu pour Φ est le spectre TRANSPOSABLE de la note (ce que la voix
+emporte quand elle se transpose), donc :
+1. exclusion des ratios entiers exacts (|ratio − n| < 0,01, n = 2, 3, 4) :
+   artefacts de chaîne prouvés ci-dessus (une lamelle encastrée n'a pas de
+   modes harmoniques exacts) ;
+2. exclusion des composantes sous 0,97×f0 et des composantes non récurrentes
+   entre frappes de la même dent : dents voisines sympathiques et contexte —
+   elles ne se transposent pas avec la voix ;
+3. exclusion des frappes-accords (≥2 composantes fortes dans la zone des
+   intervalles musicaux 1,06-2,30).
+4. **Garde de dégénérescence** (ajoutée ici car le harnais figé suppose une
+   courbe structurée ; elle ne peut qu'EMPÊCHER un verdict, jamais en
+   fabriquer un) : si max Φ(mesuré) sur (100 c, 1200 c) < 5 % du pic d'octave
+   du cas harmonique de référence, la courbe est déclarée PLATE → cas
+   dégénéré du CADRAGE §9 (« spectre très pauvre → pas de structure → pas de
+   grammaire ») → verdict P5 : SANS OBJET sur cet exemplaire (ni confirmé ni
+   infirmé). Déclaré après lecture des spectres extraits mais AVANT tout
+   calcul de Φ sur ce matériau.
+
+**Spectre retenu** (dent la plus grave, la mieux établie — 2 fichiers
+indépendants) : f0 = 993,8 Hz ; partiels transposables {1,000 : amp 1,00 ;
+10,53 : amp 0,10 (médiane des deux observations)}. Conservé dans
+`materiau/dent994.json`.
+
+**RÉSULTAT (verdict rendu par la chaîne figée + garde déclarée) :**
+
+> **P5 : SANS OBJET sur cet exemplaire — cas dégénéré.** La courbe Φ du
+> spectre mesuré nettoyé est PLATE (max Φ = 0,0000 contre 0,7318 au pic
+> d'octave harmonique) : le timbre tenu de cette boîte, tel que mesuré, est
+> quasi sinusoïdal ({1 ; 10,53 à amp 0,10} — aucune paire de partiels ne
+> tombe dans l'octave) et **ne porte pas de structure de fusion**. C'est le
+> cas dégénéré prévu par CADRAGE §9 (« ce son ne porte pas de contrepoint ») :
+> un résultat légitime, ni confirmation ni infirmation de P5.
+
+**Sensibilité (à valeur démonstrative, PAS de verdict)** : en GARDANT les
+harmoniques de distorsion ({2,000 : 0,17 ; 2,999 : 0,08}), Φ pique à 1200 c
+(0,170) puis 701 c (0,014) — la distorsion de chaîne fabrique une grammaire
+harmonique et aurait déclenché à tort le critère d'abandon SPEC §6.2
+(« les pics coïncident »). La qualification du matériau n'est pas du luxe :
+elle sépare un verdict d'un artefact de micro.
+
+**Implications (à reporter dans PASSATION)** :
+1. **La fragilité n°2 de la passation est tranchée par la mesure** : les
+   amplitudes analytiques (1/√k → mode 2 à 0,71) sont fausses en régime tenu
+   pour ce type de boîte — les modes inharmoniques réels y sont ≥10× plus
+   faibles que le fondamental. Le « signe de vie » P5 du test exploratoire
+   reposait sur ces amplitudes irréalistes.
+2. **Portée limitée à l'exemplaire** : petit peigne aigu (dents mesurées
+   994-2650 Hz ; le mode 10,53 de la dent grave sort à 10,5 kHz, en limite de
+   bande). Une grande boîte à cylindre à dents graves lestées (f0 200-400 Hz,
+   modes en pleine bande, sustain plus long) peut porter un timbre tenu plus
+   riche : P5 y reste testable tel quel.
+3. **L'inharmonicité réelle vit dans l'ATTAQUE** (le « ping » bref) : c'est la
+   dimension temporelle, hors périmètre v1 (simultanéité statique). L'étape
+   « dynamique temporelle » de la PASSATION devient le lieu naturel de P5 pour
+   les petites boîtes.
+4. **Alternative v1 immédiate** : des timbres inharmoniques RICHES en régime
+   tenu existent et sont documentés (cloches, carillons — cf. Harrison &
+   MacConnachie 2024 cités au CADRAGE §3) : P5 peut être testé en v1 sur un
+   spectre de cloche mesuré publié, en déclarant la substitution d'exemplaire.
+
+**Attribution du matériau** : série « Music box notes » 1-5, Wikimedia
+Commons, licence CC BY-SA 4.0, fichiers déposés par l'utilisateur dans la
+conversation. Les fichiers audio ne sont PAS commités au dépôt : l'attribution
+exacte (auteur) est à compléter (page Commons inaccessible depuis le
+conteneur). Seules les mesures dérivées (faits) sont conservées
+(`materiau/dent994.json`).
