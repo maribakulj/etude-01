@@ -23,41 +23,41 @@ lire les §3-§5 avant d'avoir noté les six fichiers.*
 - **Ne PAS juger l'agrément** (beau/laid, doux/rêche). La rugosité n'est pas
   la fusion — l'hygiène C≠Φ vaut aussi à l'écoute. Un son peut être rêche ET
   à deux voix nettes, lisse ET fusionné.
-- Ordre conseillé : B, A, D, F, C, E, puis réécoutes libres.
+- Ordre conseillé (v2) : E, A, C, D, F, B, puis réécoutes libres.
 - **Noter les six chiffres avant de lire la suite.**
 
 Grille : `A: _/5  B: _/5  C: _/5  D: _/5  E: _/5  F: _/5`
 
 ---
 
-## 2. Correspondance des fichiers (à lire APRÈS notation)
+## 2. Correspondance des fichiers — **v2** (à lire APRÈS notation)
 
 | Fichier | Timbre | Matériau | Statut grammatical |
 |---|---|---|---|
-| A | cloche Westerkerk | tierces-de-cloche (307 c) parallèles, cantus Fux | **INTERDIT** par R2-cloche |
-| B | harmonique | chemin légal dérivé (étape 3), cantus Fux | LÉGAL (grammaire harmonique) |
-| C | cloche Westerkerk | quintes (702 c) parallèles, cantus Fux | ~légal sur cloche (Φ=0,287, juste sous le seuil) |
-| D | harmonique | quintes (702 c) parallèles, cantus Fux | **INTERDIT** par R2-harmonique |
-| E | cloche Westerkerk | chemin légal dérivé (étape 3), cantus miroir | LÉGAL (grammaire cloche) |
-| F | harmonique | tierces-de-cloche (307 c) parallèles, cantus Fux | légal sur harmonique (Φ≈0,02, creux de fusion) |
+| A | harmonique | quintes (702 c) parallèles, cantus Fux | **INTERDIT** par R2-harmonique |
+| B | cloche Westerkerk | chemin légal dérivé (étape 3), cantus miroir | LÉGAL (grammaire cloche) |
+| C | harmonique | tierces-de-cloche (307 c) parallèles, cantus Fux | légal sur harmonique (Φ≈0,02, creux de fusion) |
+| D | cloche Westerkerk | tierces-de-cloche (307 c) parallèles, cantus Fux | **INTERDIT** par R2-cloche |
+| E | harmonique | chemin légal dérivé (étape 3), cantus Fux | LÉGAL (grammaire harmonique) |
+| F | cloche Westerkerk | quintes (702 c) parallèles, cantus Fux | ~légal sur cloche (Φ=0,287, juste sous le seuil) |
 
-Croisements : **D↔C** = mêmes notes (quintes parallèles), timbre échangé ;
-**A↔F** = mêmes notes (307 c parallèles), timbre échangé.
+Croisements : **A↔F** = mêmes notes (quintes parallèles), timbre échangé ;
+**D↔C** = mêmes notes (307 c parallèles), timbre échangé.
 
-## 3. Prédictions enregistrées (avant écoute)
+## 3. Prédictions enregistrées (avant écoute — lettres v2)
 
 Forme faible suffisante : les ORDRES de séparabilité ci-dessous (pas d'écart
 quantitatif exigé).
 
-- **E1 (contrôle, le connu)** : D < B — les quintes parallèles fusionnent
+- **E1 (contrôle, le connu)** : A < E — les quintes parallèles fusionnent
   plus que le contrepoint légal, sur timbre harmonique. *Si E1 tombe, c'est
   Fux qu'on échoue à reproduire à l'écoute : chaîne de rendu ou Φ en cause.*
-- **E2 (le neuf, intra-cloche)** : A < E — les tierces-de-cloche parallèles
+- **E2 (le neuf, intra-cloche)** : D < B — les tierces-de-cloche parallèles
   fusionnent plus que le contrepoint légal de la cloche.
-- **E3 (croisement décisif)** : D < C — les MÊMES quintes parallèles
+- **E3 (croisement décisif)** : A < F — les MÊMES quintes parallèles
   fusionnent davantage sur timbre harmonique que sur cloche. *C'est l'interdit
   de quintes rendu timbre-dépendant, à l'oreille.*
-- **E4 (croisement symétrique)** : A < F — les MÊMES tierces 307 c parallèles
+- **E4 (croisement symétrique)** : D < C — les MÊMES tierces 307 c parallèles
   fusionnent davantage sur cloche que sur harmonique.
 
 Confusions possibles, déclarées :
@@ -90,3 +90,39 @@ Commentaires libres (basculer, moments, timbre) :
 
 `python3 etape4_stimuli.py` — graine fixe, stimuli reproductibles bit à bit ;
 mapping dans `etape4_mapping.json`.
+
+---
+
+## 7. Journal daté
+
+### 2026-06-12 (17 h) — première écoute (stimuli v1) : échec de plancher, consigné comme donnée
+
+Retour de l'auditeur sur les stimuli v1 (spectres tenus, sans articulation) :
+« ça ressemble à un son de synthé, je ne vois pas de différenciation de voix »
+— y compris, donc, sur les stimuli LÉGAUX. Aucune notation rendue.
+
+**Diagnostic** : le rendu statique littéral (tenue stationnaire, voix
+synchrones, même timbre, mono) supprime tous les indices d'événement de la
+scène auditive (attaques, décroissances) ; sans événements, il n'y a pas de
+voix à séparer — effet de plancher, prédictions intestables. **C'est une
+donnée, pas un simple bug** : l'idéalisation « simultanéité statique » de v1,
+rendue telle quelle, ne produit même pas l'explanandum (des voix). Première
+confirmation à l'oreille que la dimension temporelle n'est pas un raffinement
+mais une précondition de la polyphonie — cohérent avec le différé « dynamique
+temporelle » du CADRAGE §9, qui passe de « extension » à « nécessité » pour
+toute écoute future.
+
+**Correction v2, déclarée** : articulation par note IDENTIQUE pour les deux
+voix et les deux timbres (attaque 15 ms, décroissance exponentielle globale
+τ=0,9 s) — « globale » : tous les partiels décroissent ensemble, les rapports
+d'amplitudes donc Φ restent exactement ceux du modèle à chaque instant
+(vérifié : ratios identiques à ±1 % entre début et fin de note). Aucun indice
+de ségrégation asymétrique ajouté : la seule chose qui distingue encore les
+stimuli est (structure d'intervalles × timbre). Le timbre de cloche retrouve
+au passage son identité perceptive (attaque-décroissance).
+
+**Aveugle** : l'assignation v1 des lettres étant potentiellement compromise,
+les lettres ont été RETIRÉES À NEUF en v2 (table §2 ci-dessus mise à jour).
+Les prédictions E1-E4 sont inchangées sur le fond, lettres réassignées. Les
+stimuli v1 ne sont pas conservés dans le dépôt (remplacés) ; leur génération
+reste reproductible via l'historique git.

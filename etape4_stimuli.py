@@ -32,29 +32,39 @@ from graphe_grammaire import construire_automate, chemin_legal, grille_etats
 
 SR = 44100
 DUREE_NOTE = 1.15      # s
-FONDU = 0.02           # crossfade entre notes (s)
+ATT_NOTE = 0.015       # attaque par note (s)
+TAU_DECAY = 0.9        # décroissance exponentielle GLOBALE par note (s).
+                       # Globale = tous les partiels décroissent ensemble :
+                       # les rapports d'amplitudes (donc Φ) restent EXACTEMENT
+                       # ceux du modèle à chaque instant de la note. On
+                       # restaure l'événement (l'articulation, sans laquelle
+                       # AUCUNE voix n'est audible — constat de la 1re écoute,
+                       # v. ETAPE4-ECOUTE.md §7) sans toucher au spectre.
 ATT, REL = 0.03, 0.12  # attaque/relâchement global (s)
 F_BASE = 220.0         # cantus : note de référence (cents=0)
 
 
 def voix(spec, cents_seq, f_base=F_BASE):
-    """Une voix : séquence de notes tenues (synthèse additive du spectre)."""
+    """Une voix : notes articulées (attaque brève + décroissance exponentielle
+    globale), synthèse additive du spectre du modèle. Enveloppe IDENTIQUE pour
+    toutes les voix et tous les timbres (aucun indice de ségrégation
+    asymétrique ajouté)."""
     ratios, amps = spec
     n_note = int(DUREE_NOTE * SR)
-    n_x = int(FONDU * SR)
     total = n_note * len(cents_seq)
     y = np.zeros(total)
+    t = np.arange(n_note) / SR
+    n_att = int(ATT_NOTE * SR)
+    env = np.exp(-t / TAU_DECAY)
+    env[:n_att] *= np.linspace(0, 1, n_att)
+    env[-int(0.005 * SR):] *= np.linspace(1, 0, int(0.005 * SR))
     for k, c in enumerate(cents_seq):
         f = f_base * 2 ** (c / 1200.0)
-        t = np.arange(n_note) / SR
         note = np.zeros(n_note)
         for r, a in zip(ratios, amps):
             fp = f * r
             if fp < SR / 2 * 0.95:
                 note += a * np.sin(2 * np.pi * fp * t + 2 * np.pi * np.random.rand())
-        env = np.ones(n_note)
-        env[:n_x] = np.linspace(0, 1, n_x)
-        env[-n_x:] = np.linspace(1, 0, n_x)
         a0 = k * n_note
         y[a0:a0 + n_note] += note * env
     return y
@@ -98,26 +108,28 @@ def main():
     PAR_P5 = [702.0] * len(CANTUS_FUX)    # quintes parallèles strictes
     PAR_M3C = [307.0] * len(CANTUS_FUX)   # tierces-de-cloche parallèles
 
-    print("Génération des stimuli (noms neutres) :")
+    # v2 (2026-06-12, après 1re écoute) : nouvelle assignation des lettres
+    # (l'aveugle de la v1 est compromis), enveloppes articulées.
+    print("Génération des stimuli v2 (noms neutres, nouveau tirage) :")
     plan = {
-        'stim_A.wav': dict(timbre='cloche', notes='tierces 307c parallèles (cantus Fux)',
-                           statut='INTERDIT par R2-cloche',
-                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_M3C),
-        'stim_B.wav': dict(timbre='harmonique', notes='chemin légal étape 3 (cantus Fux)',
-                           statut='LÉGAL (grammaire harmonique)',
-                           spec=spec_h, cantus=CANTUS_FUX, ctp=ch_h),
-        'stim_C.wav': dict(timbre='cloche', notes='quintes 702c parallèles (cantus Fux)',
-                           statut='~légal sur cloche (Φ=0.287 < tau_F=0.291)',
-                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_P5),
-        'stim_D.wav': dict(timbre='harmonique', notes='quintes 702c parallèles (cantus Fux)',
+        'stim_A.wav': dict(timbre='harmonique', notes='quintes 702c parallèles (cantus Fux)',
                            statut='INTERDIT par R2-harmonique',
                            spec=spec_h, cantus=CANTUS_FUX, ctp=PAR_P5),
-        'stim_E.wav': dict(timbre='cloche', notes='chemin légal étape 3 (cantus miroir)',
+        'stim_B.wav': dict(timbre='cloche', notes='chemin légal étape 3 (cantus miroir)',
                            statut='LÉGAL (grammaire cloche)',
                            spec=spec_b, cantus=MIROIR, ctp=ch_b),
-        'stim_F.wav': dict(timbre='harmonique', notes='tierces 307c parallèles (cantus Fux)',
+        'stim_C.wav': dict(timbre='harmonique', notes='tierces 307c parallèles (cantus Fux)',
                            statut='légal sur harmonique (Φ≈0.02, creux)',
                            spec=spec_h, cantus=CANTUS_FUX, ctp=PAR_M3C),
+        'stim_D.wav': dict(timbre='cloche', notes='tierces 307c parallèles (cantus Fux)',
+                           statut='INTERDIT par R2-cloche',
+                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_M3C),
+        'stim_E.wav': dict(timbre='harmonique', notes='chemin légal étape 3 (cantus Fux)',
+                           statut='LÉGAL (grammaire harmonique)',
+                           spec=spec_h, cantus=CANTUS_FUX, ctp=ch_h),
+        'stim_F.wav': dict(timbre='cloche', notes='quintes 702c parallèles (cantus Fux)',
+                           statut='~légal sur cloche (Φ=0.287 < tau_F=0.291)',
+                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_P5),
     }
     mapping = {}
     for nom, d in plan.items():
