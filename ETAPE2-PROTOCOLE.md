@@ -258,3 +258,77 @@ conversation. Les fichiers audio ne sont PAS commités au dépôt : l'attributio
 exacte (auteur) est à compléter (page Commons inaccessible depuis le
 conteneur). Seules les mesures dérivées (faits) sont conservées
 (`materiau/dent994.json`).
+
+### 2026-06-12 — substitution d'exemplaire déclarée : cloche de carillon (Westerkerk), spectre mesuré PUBLIÉ
+
+**Décision validée par l'utilisateur** (option (b) de la réorientation) : P5
+étant sans objet sur la petite boîte (timbre tenu dégénéré), on teste le
+déplacement des pics de fusion sur un timbre inharmonique RICHE en tenu : une
+cloche de carillon. La prédiction structurelle P5 (SPEC §5 : les pics de Φ se
+déplacent avec le timbre, donc l'interdit de parallèles R2 aussi) s'applique
+telle quelle ; seul l'exemplaire change, et ce document le déclare.
+
+**Source (publiée, idéale)** : Harrison & MacConnachie (2024), « Consonance in
+the carillon », J. Acoust. Soc. Am. 156(2). Matériaux du papier sur GitHub
+(pmcharrison/CarillonConsonancePaper) : enregistrements bruts des cloches du
+carillon de la Westerkerk + spectres extraits par les auteurs
+(`output/lower_bell_spectrum.csv` : 11 partiels, rapports de fréquence mesurés
+relatifs à la prime + amplitudes — hum 0,497/1,40 ; prime 1/1 ; tierce
+1,194/1,29 ; quint 1,500/0,17 ; nominal 1,992/0,35 ; undeciem 2,588/0,27 ;
+duodeciem 2,986/0,35 ; III-4 3,296/0,23 ; octave sup. 4,129/0,23 ; quarte sup.
+5,381/0,19 ; sixte sup. 6,721/0,09).
+
+**Règles, déclarées avant tout calcul de Φ sur ce matériau :**
+1. Entrée du verdict = le spectre publié `lower_bell_spectrum` TEL QUEL (aucun
+   nettoyage de notre main ; les règles de nettoyage de l'entrée « boîte à
+   musique » étaient propres à ce matériau-là et ne s'appliquent pas — une
+   cloche est ACCORDÉE vers des rapports rationnels, ses quasi-entiers sont
+   réels).
+2. Seuils du verdict et garde de dégénérescence : inchangés (25 c ; 5 %).
+3. Contrôle de robustesse (rapporté, non décisionnel) : le même verdict relancé
+   sur le spectre que NOTRE chaîne figée extrait du wav brut du bourdon
+   `12-c1.wav` du même dépôt.
+
+**Validation croisée de la chaîne sur réel publié (avant verdict)** : sur
+`12-c1.wav` brut, la chaîne figée retrouve 9 partiels nommés de la
+campanologie : 0,497 (hum), 1,000 (prime), 1,185 (tierce), 1,981 (nominal),
+2,501 (deciem), 2,587 (undeciem — publié : 2,588), 2,973 (duodeciem), 3,268
+(III-4), 4,113 (octave sup.) — aux écarts cloche-à-cloche près. La chaîne de
+mesure est donc validée sur matériau réel contre une extraction publiée
+indépendante.
+
+**RÉSULTAT (verdict de la chaîne figée) :**
+
+> **P5 TIENT sur la cloche de carillon — sur les DEUX entrées.**
+> - Spectre publié (`materiau/cloche_westerkerk_publie.json`) : pics Φ à
+>   **307 c** (Φ=1,28, argmax — la tierce mineure propre de la cloche, paire
+>   tierce/prime 1,194), **887 c** (0,45, paire nominal/tierce), 1193 c (0,41,
+>   quasi-octave), 701 c (0,29, quinte accordée), 394 c, 454 c. Quatre pics
+>   principaux DÉPLACÉS (dont l'argmax, à 191 c du plus proche pic
+>   harmonique) ; octave et quinte persistent en pics secondaires.
+> - Contrôle de robustesse (notre extraction du bourdon brut,
+>   `materiau/cloche_westerkerk_12c1_extraction.json`) : même famille de pics
+>   (1183 / 889 / 703 / 295 / 462 c) → verdict TIENT également.
+>
+> Conséquence R2 dérivée : sur ce timbre, l'interdit de mouvement parallèle
+> quitte l'exclusivité octave/quinte et se loge sur les intervalles propres de
+> la cloche — le plus robuste aux deux profils d'amplitudes étant **~888 c**
+> (sixte majeure comprimée, déplacée de ~185 c), et selon le profil, la
+> **tierce mineure ~307 c** prend la tête. La grammaire carillon GARDE une
+> part de Fux (pics quinte/octave, héritage de l'accordage des fondeurs) et
+> en déplace une autre : exactement la structure que le projet prédit.
+
+**Nuance d'honnêteté (à garder pour l'article)** : l'ARGMAX (la forme forte de
+P5 et l'entrée de R3) dépend du profil d'amplitudes — tierce en tête sur le
+spectre représentatif publié (hum/tierce lourdes), quasi-octave en tête sur
+notre extraction mono-cloche (nominal lourd). Les POSITIONS des pics
+(substrat) sont stables ; leur HIÉRARCHIE (saillance) dépend de la convention
+d'amplitude et de la cloche — cohérent avec la distinction substrat/saillance
+du CADRAGE §5, et à trancher à l'étape 3 par l'analyse de sensibilité prévue
+(balayage de τ_F).
+
+**Cohérence externe (information)** : Harrison & MacConnachie trouvent, côté
+interférence/consonance C, la tierce mineure devenue consonante sur carillon ;
+notre Φ — qui ne contient AUCUNE rugosité (hygiène C≠Φ) — désigne le même
+intervalle comme pic de fusion. Deux mécanismes distincts convergent sur le
+même intervalle, et la SPEC P4 avait enregistré cette direction avant calcul.
