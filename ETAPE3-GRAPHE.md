@@ -90,17 +90,43 @@ parallèles ». Et les pièces commencent/finissent sur l'unisson ou la
 tierce-de-cloche. C'est P5 traduit en grammaire opérante — la bifurcation du
 CADRAGE §7, structurée.
 
-**Fait structurel inattendu : le cantus de Fux est REJETÉ par la grammaire de
-la cloche** (aucun chemin légal : R3 exige de finir sur {0, 307} ; la descente
-finale du cantus rend l'unisson inaccessible — toute arrivée y serait
-parallèle/directe — et la tierce-de-cloche exige une approche contraire depuis
-un état < 107 c, lui-même inaccessible). **Contre-épreuve : le cantus MIROIR
-(inversion stricte) admet un chemin légal** — unisson · P5 · m3 · unisson ·
-P5 · unisson · P5 · unisson · P5 · m3 · unisson. Le matériau mélodique
-lui-même est donc timbre-relatif : un cantus écrit pour la grammaire
-harmonique peut n'avoir aucune réalisation dans celle d'une cloche. (Avec la
-réserve : ce rejet dépend aussi de la convention Φ(unisson)=+∞ et du compas
-v1 limité à l'octave — un compas de douzième rouvrirait des sorties.)
+**Fait structurel (formulation corrigée le 2026-06-12, voir note)** : aux
+seuils déclarés, le cantus de Fux n'a aucune réalisation légale dans
+l'automate v1 de la cloche, alors que son MIROIR en a une (unisson · P5 · m3 ·
+unisson · P5 · unisson · P5 · unisson · P5 · m3 · unisson). Matrice de
+contrôle complète (chemin légal ?) :
+
+| | cantus de Fux | cantus miroir |
+|---|---|---|
+| grammaire harmonique | OUI | OUI |
+| grammaire cloche (v1) | **NON** | OUI |
+
+**Note de correction (2026-06-12, après relecture critique)** — la première
+rédaction concluait « le matériau mélodique est timbre-relatif » ; c'était
+SURINTERPRÉTÉ. Le balayage montre que le rejet est **indépendant de τ_F**
+(il tient de τ_F=0,05 à 1,20) : ce n'est donc PAS le paysage de fusion R2 de
+la cloche qui rejette le cantus. Le mécanisme réel est la conjonction de
+trois choix v1 : (i) **R3-argmax strict** — la frontière de la cloche est
+BASSE dans l'octave (307 c) ; (ii) **la convention Φ(unisson)=+∞** — toute
+arrivée parallèle/directe à l'unisson est tuée, et en cadence descendante
+l'unisson n'est approchable par aucun mouvement contraire ; (iii) **l'espace
+d'action v1** — contrepoint au-dessus, compas ≤ octave, pas d'équivalence
+d'octave. Une cadence descendante ne peut conclure sur un état de frontière
+que par mouvement contraire DEPUIS EN DESSOUS ; sous 307 c il n'y a que
+l'unisson, lui-même inaccessible. La grammaire harmonique échappe au problème
+parce que sa frontière (l'octave) est HAUTE — l'arrivée M6→P8 par mouvement
+contraire est précisément la clausule classique.
+
+Énoncé défendable et retenu : **dans v1, la grammaire dérivée de la cloche
+n'admet pas de cadence descendante** (sa conclusion naturelle est ascendante,
+vers la tierce-de-cloche) — conséquence dérivée, testable à l'oreille à
+l'étape 4. Ce qui dissoudrait le rejet, à tester comme variantes déclarées :
+un R3 adouci (frontière = états à Φ ≥ fraction du max : 886 c entrerait, et
+la cadence descendante 1020→886 par contraire existerait), un compas de
+douzième, ou la voix de contrepoint EN DESSOUS du cantus. L'énoncé général
+« un cantus écrit pour un timbre peut être rejeté par la grammaire d'un
+autre » reste vrai comme POSSIBILITÉ démontrée dans v1, pas comme fait sur
+les cloches.
 
 ## 4. Sensibilité : règles robustes / fragiles (extraits des plateaux)
 
