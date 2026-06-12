@@ -1,80 +1,68 @@
 # ETAPE4-ECOUTE — écoute de falsification : protocole et prédictions enregistrées
 
-*Daté du 2026-06-12. Les stimuli sont générés et les prédictions ci-dessous
-sont ENREGISTRÉES AVANT toute écoute par quiconque. L'auditeur (l'utilisateur)
-est le tribunal ; ce document est la feuille d'expérience. Discipline : ne pas
-lire les §3-§5 avant d'avoir noté les six fichiers.*
+*Daté du 2026-06-12 (v3 — format par paires ; journal des versions au §7).
+Les prédictions sont ENREGISTRÉES AVANT toute écoute des stimuli concernés.
+L'auditeur (l'utilisateur) est le tribunal. Discipline : répondre aux quatre
+questions AVANT de lire les §2-§3.*
 
 ---
 
-## 1. Protocole (à lire avant d'écouter — NE PAS lire plus loin)
+## 1. Protocole v3 (à lire avant d'écouter — NE PAS lire plus loin)
 
-- **Matériel** : casque ou bonnes enceintes, volume modéré. Fichiers mono par
-  construction (la spatialisation séparerait les voix par un indice hors
-  modèle).
-- **Matériau** : 6 fichiers `stim_A.wav` … `stim_F.wav` (~13 s chacun).
-  Chaque fichier : deux voix de MÊME timbre, note contre note (1re espèce),
-  synthèse additive portant exactement les partiels d'un des deux modèles de
-  l'étude.
-- **La question, unique** : au fil de l'écoute, j'entends…
-  **1 = une seule couche sonore** (les voix se confondent en un objet)
-  … **5 = deux voix clairement indépendantes**.
-  Noter un chiffre par fichier + tout moment où la perception bascule.
-- **Ne PAS juger l'agrément** (beau/laid, doux/rêche). La rugosité n'est pas
-  la fusion — l'hygiène C≠Φ vaut aussi à l'écoute. Un son peut être rêche ET
-  à deux voix nettes, lisse ET fusionné.
-- Ordre conseillé (v2) : E, A, C, D, F, B, puis réécoutes libres.
-- **Noter les six chiffres avant de lire la suite.**
+- **Matériel** : casque ou bonnes enceintes, volume modéré. Mono par
+  construction.
+- **Matériau** : 4 fichiers `paire_P1.wav` … `paire_P4.wav` (~16 s chacun).
+  Chaque fichier contient DEUX extraits séparés par un silence. Chaque
+  extrait : deux voix de même timbre, note contre note, notes articulées dont
+  la résonance déborde (comme un carillon).
+- **La question, une par fichier** : *dans quelle moitié les deux lignes se
+  fondent-elles le plus en une seule coulée ?* Réponse : « moitié 1 » ou
+  « moitié 2 » (+ « net » ou « léger » si tu veux qualifier).
+- Le timbre n'a pas à « faire cloche » : c'est l'objet-modèle qu'on écoute
+  (spectre publié + enveloppe commune), pas une imitation. La question n'est
+  jamais le réalisme ni l'agrément — seulement : une coulée, ou deux lignes ?
+- Réécoute librement chaque fichier avant de répondre.
+- **Noter les quatre réponses avant de lire la suite.**
 
-Grille : `A: _/5  B: _/5  C: _/5  D: _/5  E: _/5  F: _/5`
+Grille : `P1: moitié _   P2: moitié _   P3: moitié _   P4: moitié _`
 
 ---
 
-## 2. Correspondance des fichiers — **v2** (à lire APRÈS notation)
+## 2. Contenu des paires — v3 (à lire APRÈS réponse)
 
-| Fichier | Timbre | Matériau | Statut grammatical |
+| Paire | Moitié 1 | Moitié 2 | Ce qui est testé |
 |---|---|---|---|
-| A | harmonique | quintes (702 c) parallèles, cantus Fux | **INTERDIT** par R2-harmonique |
-| B | cloche Westerkerk | chemin légal dérivé (étape 3), cantus miroir | LÉGAL (grammaire cloche) |
-| C | harmonique | tierces-de-cloche (307 c) parallèles, cantus Fux | légal sur harmonique (Φ≈0,02, creux de fusion) |
-| D | cloche Westerkerk | tierces-de-cloche (307 c) parallèles, cantus Fux | **INTERDIT** par R2-cloche |
-| E | harmonique | chemin légal dérivé (étape 3), cantus Fux | LÉGAL (grammaire harmonique) |
-| F | cloche Westerkerk | quintes (702 c) parallèles, cantus Fux | ~légal sur cloche (Φ=0,287, juste sous le seuil) |
+| P1 | harmonique, quintes parallèles (interdit R2-harm) | harmonique, chemin légal | E1 — le connu (Fux) |
+| P2 | cloche, chemin légal | cloche, tierces 307 c parallèles (interdit R2-cloche) | E2 — le neuf, intra-cloche |
+| P3 | cloche, quintes parallèles (~légal) | harmonique, quintes parallèles (interdit) | E3 — croisement : mêmes notes, timbre échangé |
+| P4 | harmonique, tierces 307 c parallèles (légal) | cloche, tierces 307 c parallèles (interdit) | E4 — croisement symétrique |
 
-Croisements : **A↔F** = mêmes notes (quintes parallèles), timbre échangé ;
-**D↔C** = mêmes notes (307 c parallèles), timbre échangé.
+Chemins légaux utilisés (sans unisson médian, cf. §7-v3) : harmonique
+[1200, 387, 498, 969, 387, 814, 387, 618, 884, 387, 1200] ; cloche
+[0, 809, 702, 307, 809, 307, 809, 307, 702, 307, 0] (cantus miroir).
 
-## 3. Prédictions enregistrées (avant écoute — lettres v2)
+## 3. Prédictions enregistrées (lettres v3)
 
-Forme faible suffisante : les ORDRES de séparabilité ci-dessous (pas d'écart
-quantitatif exigé).
+- **E1 (contrôle, le connu)** : P1 → moitié 1 (les quintes parallèles
+  fusionnent plus que le légal, sur harmonique). *Si E1 tombe, c'est Fux
+  qu'on échoue à reproduire à l'écoute : rendu ou Φ en cause.*
+- **E2 (le neuf)** : P2 → moitié 2 (les tierces-de-cloche parallèles
+  fusionnent plus que le légal de la cloche).
+- **E3 (croisement décisif)** : P3 → moitié 2 (les mêmes quintes parallèles
+  fusionnent plus sur harmonique que sur cloche).
+- **E4 (croisement symétrique)** : P4 → moitié 2 (les mêmes tierces 307 c
+  fusionnent plus sur cloche que sur harmonique).
 
-- **E1 (contrôle, le connu)** : A < E — les quintes parallèles fusionnent
-  plus que le contrepoint légal, sur timbre harmonique. *Si E1 tombe, c'est
-  Fux qu'on échoue à reproduire à l'écoute : chaîne de rendu ou Φ en cause.*
-- **E2 (le neuf, intra-cloche)** : D < B — les tierces-de-cloche parallèles
-  fusionnent plus que le contrepoint légal de la cloche.
-- **E3 (croisement décisif)** : A < F — les MÊMES quintes parallèles
-  fusionnent davantage sur timbre harmonique que sur cloche. *C'est l'interdit
-  de quintes rendu timbre-dépendant, à l'oreille.*
-- **E4 (croisement symétrique)** : D < C — les MÊMES tierces 307 c parallèles
-  fusionnent davantage sur cloche que sur harmonique.
-
-Confusions possibles, déclarées :
-1. Sur F (307 c, harmonique), des battements peuvent rendre le son RÊCHE sans
-   le fusionner — juger uniquement « une couche ou deux voix ».
-2. La cloche tenue est un objet inhabituel ; comparer d'abord cloche↔cloche
-   (A, C, E) avant les croisements.
-3. Les chemins légaux (B, E) contiennent des unissons médians (résidu mesuré
-   à l'étape 3) : la séparabilité s'y effondre LOCALEMENT par construction —
-   l'unisson EST fusion dans le modèle. À noter à part, pas comme échec.
+Confusions possibles, déclarées : sur P4-moitié 1 (307 c, harmonique), des
+battements peuvent rendre le son RÊCHE sans le fusionner — la question reste
+« une coulée ou deux lignes », pas « doux ou rêche ».
 
 ## 4. Ce qui ferait échouer quoi (falsification)
 
 - **E3 et E4 tombent** → le déplacement de l'interdit n'a pas de réalité
   perceptive sur cette paire de timbres : P5 perceptif réfuté ; la
-  grammaire-cloche redevient un objet formel (et le projet §8.3 enregistre son
-  « résultat riche » : la coïncidence spectrale ne suffit pas à la fusion).
+  grammaire-cloche redevient un objet formel (résultat §8.3 du CADRAGE :
+  la coïncidence spectrale ne suffit pas à la fusion).
 - **E1 tombe** → problème en amont (rendu ou Φ) ; tout le reste est suspendu.
 - **Seuls E2/E4 tombent** → Φ prédit la fusion sur l'harmonique mais pas sur
   l'inharmonique : la borne de validité de la métrique est localisée — c'est
@@ -82,47 +70,54 @@ Confusions possibles, déclarées :
 
 ## 5. Verdict (à remplir après l'écoute)
 
-Notes de l'auditeur : `A: _  B: _  C: _  D: _  E: _  F: _`
-E1 (D<B) : __ ; E2 (A<E) : __ ; E3 (D<C) : __ ; E4 (A<F) : __
-Commentaires libres (basculer, moments, timbre) :
+Réponses de l'auditeur : `P1: _  P2: _  P3: _  P4: _`
+E1 : __ ; E2 : __ ; E3 : __ ; E4 : __
+Commentaires libres :
 
 ## 6. Rejouer
 
-`python3 etape4_stimuli.py` — graine fixe, stimuli reproductibles bit à bit ;
-mapping dans `etape4_mapping.json`.
+`python3 etape4_stimuli.py` — graine fixe ; ordre des moitiés et chemins dans
+`etape4_mapping.json`.
 
 ---
 
 ## 7. Journal daté
 
-### 2026-06-12 (17 h) — première écoute (stimuli v1) : échec de plancher, consigné comme donnée
+### 2026-06-12 (17 h) — 1re écoute (stimuli v1, tenues statiques) : échec de plancher, consigné comme donnée
 
-Retour de l'auditeur sur les stimuli v1 (spectres tenus, sans articulation) :
-« ça ressemble à un son de synthé, je ne vois pas de différenciation de voix »
-— y compris, donc, sur les stimuli LÉGAUX. Aucune notation rendue.
+Retour auditeur : « son de synthé, pas de différenciation de voix » — y
+compris sur les stimuli légaux. **Donnée, pas simple bug** : le rendu
+statique littéral (tenues stationnaires, voix synchrones, même timbre, mono)
+supprime tous les indices d'événement de la scène auditive ; sans événements,
+pas de voix à séparer. L'idéalisation « simultanéité statique » de v1, rendue
+telle quelle, ne produit pas l'explanandum. La dimension temporelle passe
+d'« extension » (CADRAGE §9) à « précondition » pour toute écoute.
+Correction v2 : articulation par note identique partout (attaque 15 ms,
+décroissance exponentielle GLOBALE — rapports de partiels donc Φ invariants
+dans la note, vérifié ±1 %) ; lettres retirées à neuf.
 
-**Diagnostic** : le rendu statique littéral (tenue stationnaire, voix
-synchrones, même timbre, mono) supprime tous les indices d'événement de la
-scène auditive (attaques, décroissances) ; sans événements, il n'y a pas de
-voix à séparer — effet de plancher, prédictions intestables. **C'est une
-donnée, pas un simple bug** : l'idéalisation « simultanéité statique » de v1,
-rendue telle quelle, ne produit même pas l'explanandum (des voix). Première
-confirmation à l'oreille que la dimension temporelle n'est pas un raffinement
-mais une précondition de la polyphonie — cohérent avec le différé « dynamique
-temporelle » du CADRAGE §9, qui passe de « extension » à « nécessité » pour
-toute écoute future.
+### 2026-06-12 (17 h 20) — 2e écoute (stimuli v2, notation absolue 1-5) : tâche inadaptée ; un micro-résultat au passage
 
-**Correction v2, déclarée** : articulation par note IDENTIQUE pour les deux
-voix et les deux timbres (attaque 15 ms, décroissance exponentielle globale
-τ=0,9 s) — « globale » : tous les partiels décroissent ensemble, les rapports
-d'amplitudes donc Φ restent exactement ceux du modèle à chaque instant
-(vérifié : ratios identiques à ±1 % entre début et fin de note). Aucun indice
-de ségrégation asymétrique ajouté : la seule chose qui distingue encore les
-stimuli est (structure d'intervalles × timbre). Le timbre de cloche retrouve
-au passage son identité perceptive (attaque-décroissance).
+Retours auditeur : (i) sur B (chemin légal cloche, qui alternait unissons et
+intervalles) — « une voix mais parfois 2 » : **l'auditeur a entendu la
+structure du chemin légal sans la connaître** (l'alternance unisson/intervalle
+était réelle). Micro-datum positif. (ii) « les autres pourraient toutes avoir
+2 voix » : la notation ABSOLUE 1-5 sur 13 s ne discrimine pas — tâche trop
+dure, effet de plafond/ambiguïté. (iii) « ça n'a pas le son de cloches » :
+acté — le rendu est l'objet-modèle, pas une imitation ; reformulé dans la
+consigne.
 
-**Aveugle** : l'assignation v1 des lettres étant potentiellement compromise,
-les lettres ont été RETIRÉES À NEUF en v2 (table §2 ci-dessus mise à jour).
-Les prédictions E1-E4 sont inchangées sur le fond, lettres réassignées. Les
-stimuli v1 ne sont pas conservés dans le dépôt (remplacés) ; leur génération
-reste reproductible via l'historique git.
+**Correction v3 (déclarée)** :
+1. **Choix forcé par paires** — les prédictions E1-E4 sont des ordres ; on les
+   teste directement : 4 fichiers, deux extraits dos à dos, « quelle moitié se
+   fond le plus ? ». Tâche standard en psychoacoustique, beaucoup plus
+   sensible que la notation absolue.
+2. **Tempo musical** (0,62 s/note) avec résonance débordante (la ségrégation
+   vit dans le mouvement) — enveloppe toujours identique partout, spectre du
+   modèle inchangé à chaque instant.
+3. **Chemins légaux sans unisson médian** (sélection de STIMULUS, pas
+   changement de grammaire) : la fusion de l'unisson est triviale par
+   construction et masquait la comparaison — et c'est la règle de Fux
+   (unisson aux extrémités seulement), résidu déjà documenté à l'étape 3.
+4. Stimuli v2 retirés (reproductibles via git) ; prédictions inchangées sur le
+   fond, reformulées par paire.

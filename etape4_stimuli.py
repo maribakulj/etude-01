@@ -31,27 +31,32 @@ from etape3_fux import cloche_westerkerk, CANTUS_FUX
 from graphe_grammaire import construire_automate, chemin_legal, grille_etats
 
 SR = 44100
-DUREE_NOTE = 1.15      # s
-ATT_NOTE = 0.015       # attaque par note (s)
-TAU_DECAY = 0.9        # décroissance exponentielle GLOBALE par note (s).
+DUREE_NOTE = 0.62      # s — v3 : tempo musical (la ségrégation vit dans le mouvement)
+RING = 2.0             # chaque note résonne au-delà de son pas (×DUREE_NOTE),
+                       # comme un vrai carillon ; identique partout
+ATT_NOTE = 0.008       # attaque par note (s)
+TAU_DECAY = 0.55       # décroissance exponentielle GLOBALE par note (s).
                        # Globale = tous les partiels décroissent ensemble :
                        # les rapports d'amplitudes (donc Φ) restent EXACTEMENT
                        # ceux du modèle à chaque instant de la note. On
                        # restaure l'événement (l'articulation, sans laquelle
                        # AUCUNE voix n'est audible — constat de la 1re écoute,
                        # v. ETAPE4-ECOUTE.md §7) sans toucher au spectre.
-ATT, REL = 0.03, 0.12  # attaque/relâchement global (s)
+ATT, REL = 0.03, 0.25  # attaque/relâchement global (s)
 F_BASE = 220.0         # cantus : note de référence (cents=0)
+PAUSE_PAIRE = 0.9      # silence entre les deux moitiés d'une paire (s)
 
 
 def voix(spec, cents_seq, f_base=F_BASE):
     """Une voix : notes articulées (attaque brève + décroissance exponentielle
-    globale), synthèse additive du spectre du modèle. Enveloppe IDENTIQUE pour
-    toutes les voix et tous les timbres (aucun indice de ségrégation
+    globale) dont la résonance DÉBORDE sur la note suivante (RING), comme un
+    carillon réel. Synthèse additive du spectre du modèle. Enveloppe IDENTIQUE
+    pour toutes les voix et tous les timbres (aucun indice de ségrégation
     asymétrique ajouté)."""
     ratios, amps = spec
-    n_note = int(DUREE_NOTE * SR)
-    total = n_note * len(cents_seq)
+    n_pas = int(DUREE_NOTE * SR)
+    n_note = int(RING * DUREE_NOTE * SR)
+    total = n_pas * len(cents_seq) + (n_note - n_pas)
     y = np.zeros(total)
     t = np.arange(n_note) / SR
     n_att = int(ATT_NOTE * SR)
@@ -65,12 +70,30 @@ def voix(spec, cents_seq, f_base=F_BASE):
             fp = f * r
             if fp < SR / 2 * 0.95:
                 note += a * np.sin(2 * np.pi * fp * t + 2 * np.pi * np.random.rand())
-        a0 = k * n_note
+        a0 = k * n_pas
         y[a0:a0 + n_note] += note * env
     return y
 
 
-def stimulus(spec, cantus, contrepoint, fichier):
+def sans_unisson_median(automate):
+    """Copie de l'automate où l'unisson est retiré des colonnes MÉDIANES, pour
+    la sélection du chemin-STIMULUS uniquement (pas un changement de
+    grammaire) : la fusion de l'unisson est triviale par construction et
+    masquerait la comparaison demandée à l'auditeur — et c'est par ailleurs la
+    règle de Fux (unisson réservé aux extrémités), résidu déjà documenté à
+    l'étape 3."""
+    a = dict(automate)
+    cols = [list(c) for c in automate['colonnes']]
+    for t in range(1, len(cols) - 1):
+        cols[t] = [e for e in cols[t] if e['intervalle'] > 1e-9]
+    ok = {(t, e['intervalle']) for t, col in enumerate(cols) for e in col}
+    a['colonnes'] = cols
+    a['aretes'] = [ar for ar in automate['aretes']
+                   if (ar['t'], ar['de']) in ok and (ar['t'] + 1, ar['vers']) in ok]
+    return a
+
+
+def extrait(spec, cantus, contrepoint):
     """Deux voix (cantus + contrepoint en cents au-dessus), RMS égal, mono."""
     vA = voix(spec, cantus)
     vB = voix(spec, [c + i for c, i in zip(cantus, contrepoint)])
@@ -80,7 +103,12 @@ def stimulus(spec, cantus, contrepoint, fichier):
     n_att, n_rel = int(ATT * SR), int(REL * SR)
     y[:n_att] *= np.linspace(0, 1, n_att)
     y[-n_rel:] *= np.linspace(1, 0, n_rel)
-    y = 0.7 * y / np.max(np.abs(y))
+    return 0.7 * y / np.max(np.abs(y))
+
+
+def paire(ex1, ex2, fichier):
+    """Un fichier = extrait 1, silence, extrait 2 (choix forcé)."""
+    y = np.concatenate([ex1, np.zeros(int(PAUSE_PAIRE * SR)), ex2])
     sf.write(fichier, y, SR, subtype='PCM_16')
     print(f"  {fichier}  ({len(y)/SR:.1f} s)")
 
@@ -99,44 +127,44 @@ def main():
     phimax_b = max(e['Phi'] for e in g_b if np.isfinite(e['Phi']))
     TAUF_REL = 0.226
     auto_h = construire_automate(spec_h, CANTUS_FUX, 0.279, TAUF_REL * phimax_h)
-    ch_h = chemin_legal(auto_h)
+    ch_h = chemin_legal(sans_unisson_median(auto_h))
     MIROIR = [-c for c in CANTUS_FUX]
     auto_b = construire_automate(spec_b, MIROIR, 0.226, TAUF_REL * phimax_b)
-    ch_b = chemin_legal(auto_b)
-    assert ch_h and ch_b
+    ch_b = chemin_legal(sans_unisson_median(auto_b))
+    assert ch_h and ch_b, "pas de chemin légal sans unisson médian"
+    print(f"chemin harmonique (sans unisson médian) : {[round(c) for c in ch_h]}")
+    print(f"chemin cloche     (sans unisson médian) : {[round(c) for c in ch_b]}")
 
     PAR_P5 = [702.0] * len(CANTUS_FUX)    # quintes parallèles strictes
     PAR_M3C = [307.0] * len(CANTUS_FUX)   # tierces-de-cloche parallèles
 
-    # v2 (2026-06-12, après 1re écoute) : nouvelle assignation des lettres
-    # (l'aveugle de la v1 est compromis), enveloppes articulées.
-    print("Génération des stimuli v2 (noms neutres, nouveau tirage) :")
-    plan = {
-        'stim_A.wav': dict(timbre='harmonique', notes='quintes 702c parallèles (cantus Fux)',
-                           statut='INTERDIT par R2-harmonique',
-                           spec=spec_h, cantus=CANTUS_FUX, ctp=PAR_P5),
-        'stim_B.wav': dict(timbre='cloche', notes='chemin légal étape 3 (cantus miroir)',
-                           statut='LÉGAL (grammaire cloche)',
-                           spec=spec_b, cantus=MIROIR, ctp=ch_b),
-        'stim_C.wav': dict(timbre='harmonique', notes='tierces 307c parallèles (cantus Fux)',
-                           statut='légal sur harmonique (Φ≈0.02, creux)',
-                           spec=spec_h, cantus=CANTUS_FUX, ctp=PAR_M3C),
-        'stim_D.wav': dict(timbre='cloche', notes='tierces 307c parallèles (cantus Fux)',
-                           statut='INTERDIT par R2-cloche',
-                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_M3C),
-        'stim_E.wav': dict(timbre='harmonique', notes='chemin légal étape 3 (cantus Fux)',
-                           statut='LÉGAL (grammaire harmonique)',
-                           spec=spec_h, cantus=CANTUS_FUX, ctp=ch_h),
-        'stim_F.wav': dict(timbre='cloche', notes='quintes 702c parallèles (cantus Fux)',
-                           statut='~légal sur cloche (Φ=0.287 < tau_F=0.291)',
-                           spec=spec_b, cantus=CANTUS_FUX, ctp=PAR_P5),
+    # Extraits (conditions nommées)
+    ex = {
+        'harm_legal':    extrait(spec_h, CANTUS_FUX, ch_h),
+        'harm_par_P5':   extrait(spec_h, CANTUS_FUX, PAR_P5),
+        'harm_par_307':  extrait(spec_h, CANTUS_FUX, PAR_M3C),
+        'cloche_legal':  extrait(spec_b, MIROIR, ch_b),
+        'cloche_par_P5': extrait(spec_b, CANTUS_FUX, PAR_P5),
+        'cloche_par_307': extrait(spec_b, CANTUS_FUX, PAR_M3C),
     }
+
+    # v3 (2026-06-12, après 2e écoute) : CHOIX FORCÉ PAR PAIRES — chaque
+    # fichier = deux extraits dos à dos ; question : quelle moitié se fond le
+    # plus en une seule coulée ? L'ordre des moitiés est tiré et consigné dans
+    # le mapping (à ne lire qu'après réponse).
+    paires = {
+        'paire_P1.wav': ('harm_par_P5', 'harm_legal'),       # E1, ordre: parallèles d'abord
+        'paire_P2.wav': ('cloche_legal', 'cloche_par_307'),  # E2, ordre: légal d'abord
+        'paire_P3.wav': ('cloche_par_P5', 'harm_par_P5'),    # E3, ordre: cloche d'abord
+        'paire_P4.wav': ('harm_par_307', 'cloche_par_307'),  # E4, ordre: harmonique d'abord
+    }
+    print("Génération des paires v3 :")
     mapping = {}
-    for nom, d in plan.items():
-        stimulus(d['spec'], d['cantus'], d['ctp'], nom)
-        mapping[nom] = {k: v for k, v in d.items() if k in ('timbre', 'notes', 'statut')}
-        if d['ctp'] in (ch_h, ch_b):
-            mapping[nom]['contrepoint_cents'] = [round(c) for c in d['ctp']]
+    for nom, (m1, m2) in paires.items():
+        paire(ex[m1], ex[m2], nom)
+        mapping[nom] = dict(moitie_1=m1, moitie_2=m2)
+    mapping['chemins'] = dict(harm=[round(c) for c in ch_h],
+                              cloche=[round(c) for c in ch_b])
     with open('etape4_mapping.json', 'w') as fh:
         json.dump(mapping, fh, indent=1, ensure_ascii=False)
     print("écrit : etape4_mapping.json")

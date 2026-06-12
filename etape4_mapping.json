@@ -1,58 +1,46 @@
 {
- "stim_A.wav": {
-  "timbre": "harmonique",
-  "notes": "quintes 702c parallèles (cantus Fux)",
-  "statut": "INTERDIT par R2-harmonique"
+ "paire_P1.wav": {
+  "moitie_1": "harm_par_P5",
+  "moitie_2": "harm_legal"
  },
- "stim_B.wav": {
-  "timbre": "cloche",
-  "notes": "chemin légal étape 3 (cantus miroir)",
-  "statut": "LÉGAL (grammaire cloche)",
-  "contrepoint_cents": [
+ "paire_P2.wav": {
+  "moitie_1": "cloche_legal",
+  "moitie_2": "cloche_par_307"
+ },
+ "paire_P3.wav": {
+  "moitie_1": "cloche_par_P5",
+  "moitie_2": "harm_par_P5"
+ },
+ "paire_P4.wav": {
+  "moitie_1": "harm_par_307",
+  "moitie_2": "cloche_par_307"
+ },
+ "chemins": {
+  "harm": [
+   1200,
+   387,
+   498,
+   969,
+   387,
+   814,
+   387,
+   618,
+   884,
+   387,
+   1200
+  ],
+  "cloche": [
    0,
+   809,
    702,
    307,
-   0,
-   702,
-   0,
-   702,
-   0,
+   809,
+   307,
+   809,
+   307,
    702,
    307,
    0
   ]
- },
- "stim_C.wav": {
-  "timbre": "harmonique",
-  "notes": "tierces 307c parallèles (cantus Fux)",
-  "statut": "légal sur harmonique (Φ≈0.02, creux)"
- },
- "stim_D.wav": {
-  "timbre": "cloche",
-  "notes": "tierces 307c parallèles (cantus Fux)",
-  "statut": "INTERDIT par R2-cloche"
- },
- "stim_E.wav": {
-  "timbre": "harmonique",
-  "notes": "chemin légal étape 3 (cantus Fux)",
-  "statut": "LÉGAL (grammaire harmonique)",
-  "contrepoint_cents": [
-   1200,
-   0,
-   387,
-   618,
-   0,
-   498,
-   0,
-   387,
-   618,
-   814,
-   1200
-  ]
- },
- "stim_F.wav": {
-  "timbre": "cloche",
-  "notes": "quintes 702c parallèles (cantus Fux)",
-  "statut": "~légal sur cloche (Φ=0.287 < tau_F=0.291)"
  }
 }
