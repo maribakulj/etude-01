@@ -68,11 +68,37 @@ battements peuvent rendre le son RÊCHE sans le fusionner — la question reste
   l'inharmonique : la borne de validité de la métrique est localisée — c'est
   une mesure, pas une défaite.
 
-## 5. Verdict (à remplir après l'écoute)
+## 5. Verdict — rempli le 2026-06-12, 17 h 31 (réponses verbatim de l'auditeur)
 
-Réponses de l'auditeur : `P1: _  P2: _  P3: _  P4: _`
-E1 : __ ; E2 : __ ; E3 : __ ; E4 : __
-Commentaires libres :
+Réponses : « P1 : moitié 1 se fond plus, + net ; P2 : moitié 2 ; P3 :
+moitié 2 ; P4 : difficile mais moitié 2 un peu, plus net ».
+
+| Prédiction | Prédit | Répondu | Verdict |
+|---|---|---|---|
+| E1 — quintes ∥ vs légal (harmonique) | moitié 1 | moitié 1, **net** | **CONFIRMÉE (nette)** |
+| E2 — légal vs tierces-de-cloche ∥ (cloche) | moitié 2 | moitié 2 | **CONFIRMÉE** |
+| E3 — quintes ∥ : cloche vs harmonique | moitié 2 | moitié 2 | **CONFIRMÉE** |
+| E4 — tierces 307 c ∥ : harmonique vs cloche | moitié 2 | moitié 2, « difficile, un peu » | **CONFIRMÉE (faible)** |
+
+**4/4 dans le sens prédit, aucune réfutation.** Lecture :
+- E1 nette = le contrôle passe : la chaîne de rendu sait rendre audible la
+  fusion attendue, et le connu (Fux) est reproduit à l'oreille.
+- E3 = le résultat central : les MÊMES quintes parallèles fusionnent
+  davantage sur timbre harmonique que sur cloche — **l'interdit de quintes
+  est timbre-dépendant à l'oreille**, pas seulement dans la métrique.
+- E4 faible mais dans le bon sens, conforme à la confusion déclarée (§3 :
+  battements possibles côté harmonique) et au fait que l'effet y est porté
+  par un seul pic de fusion (Φ_cloche(307)=1,28 contre creux harmonique).
+- E2 = la grammaire dérivée de la cloche est perceptivement la bonne
+  polarité : son chemin légal segrège mieux que ses parallèles interdits.
+
+**Limites, déclarées** : un seul auditeur ; auditeur informé de la théorie
+(l'aveugle ne portait que sur l'ordre des moitiés, consigné dans le mapping
+et non lu avant réponse — sur la foi du protocole) ; falsification
+informelle, pas une expérience contrôlée (pas de répétitions, pas d'ordre
+contrebalancé) ; timbre-modèle, pas instruments réels. Statut : **P5
+perceptif corroboré en falsification informelle** — il a eu quatre occasions
+enregistrées d'échouer et n'a pas échoué.
 
 ## 6. Rejouer
 
