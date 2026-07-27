@@ -1,0 +1,99 @@
+name: Export Lean 4.32.1 Toolchain
+
+on:
+  push:
+    branches:
+      - ci/lean-4-32-1-export
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean and Mathlib
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          source "$HOME/.elan/env"
+          cd lean-export
+          lake update
+          lake exe cache get
+          lake build
+          lean --version
+          lake --version
+      - name: Pack and split environment
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p lean-export-parts
+          tar --zstd -cf lean-export-environment.tar.zst \
+            -C "$HOME" .elan \
+            -C "$GITHUB_WORKSPACE/lean-export" .lake lake-manifest.json lakefile.toml lean-toolchain
+          split -b 400M -d -a 2 lean-export-environment.tar.zst lean-export-parts/part-
+          sha256sum lean-export-parts/* > lean-export-parts/SHA256SUMS
+          ls -lh lean-export-parts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-00
+          path: lean-export-parts/part-00
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-01
+          path: lean-export-parts/part-01
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-02
+          path: lean-export-parts/part-02
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-03
+          path: lean-export-parts/part-03
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-04
+          path: lean-export-parts/part-04
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-05
+          path: lean-export-parts/part-05
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-06
+          path: lean-export-parts/part-06
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-07
+          path: lean-export-parts/part-07
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-part-08
+          path: lean-export-parts/part-08
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-export-checksums
+          path: lean-export-parts/SHA256SUMS
+          retention-days: 1
