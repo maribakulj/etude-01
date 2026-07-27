@@ -1,9 +1,9 @@
 name: Export Lean 4.32.1 Toolchain
 
 on:
-  push:
+  pull_request:
     branches:
-      - ci/lean-4-32-1-export
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   export:
+    if: github.head_ref == 'ci/lean-4-32-1-export'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
