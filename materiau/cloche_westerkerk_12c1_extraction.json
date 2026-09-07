@@ -1,0 +1,95 @@
+{
+ "source": "Bourdon 12-c1.wav (Westerkerk), extraction par NOTRE cha\u00eene fig\u00e9e \u2014 contr\u00f4le de robustesse",
+ "sha256_16": "401634cac052a27c",
+ "sr": 44100,
+ "f0_hz": 544.8,
+ "n_trames": 60,
+ "partiels": [
+  {
+   "ratio": 0.4971243269701421,
+   "amp": 0.4006768780954953,
+   "hz": 270.83333333333337,
+   "excursion_cents": 13.32,
+   "trames": 60
+  },
+  {
+   "ratio": 0.9999847038668627,
+   "amp": 0.46048386448262213,
+   "hz": 544.7916666666667,
+   "excursion_cents": 13.22,
+   "trames": 60
+  },
+  {
+   "ratio": 1.1854503181595695,
+   "amp": 0.3521423998804094,
+   "hz": 645.8333333333334,
+   "excursion_cents": 2.79,
+   "trames": 60
+  },
+  {
+   "ratio": 1.9808492413117966,
+   "amp": 1.0,
+   "hz": 1079.1666666666667,
+   "excursion_cents": 3.34,
+   "trames": 37
+  },
+  {
+   "ratio": 2.500917767988253,
+   "amp": 0.04839909076039661,
+   "hz": 1362.5,
+   "excursion_cents": 5.3,
+   "trames": 14
+  },
+  {
+   "ratio": 2.586958516886931,
+   "amp": 0.12211091105194513,
+   "hz": 1409.375,
+   "excursion_cents": 2.56,
+   "trames": 29
+  },
+  {
+   "ratio": 2.6462310327949097,
+   "amp": 0.09139164040699624,
+   "hz": 1441.6666666666667,
+   "excursion_cents": 8.74,
+   "trames": 41
+  },
+  {
+   "ratio": 2.973185878609888,
+   "amp": 0.33491241730440874,
+   "hz": 1619.7916666666667,
+   "excursion_cents": 14.48,
+   "trames": 46
+  },
+  {
+   "ratio": 3.2676364415075874,
+   "amp": 0.04559621585184103,
+   "hz": 1780.2083333333335,
+   "excursion_cents": 2.03,
+   "trames": 33
+  },
+  {
+   "ratio": 3.737036527165933,
+   "amp": 0.021358964013453264,
+   "hz": 2035.9375,
+   "excursion_cents": 1.77,
+   "trames": 8
+  },
+  {
+   "ratio": 4.112747797356828,
+   "amp": 0.06103269636947641,
+   "hz": 2240.625,
+   "excursion_cents": 5.63,
+   "trames": 35
+  }
+ ],
+ "parametres": {
+  "win_s": 0.12,
+  "hop_s": 0.04,
+  "zpad": 8,
+  "line_tol": 0.012,
+  "max_wander_cents": 20.0,
+  "amp_window_s": 0.3,
+  "db_keep": -50.0
+ }
+}
