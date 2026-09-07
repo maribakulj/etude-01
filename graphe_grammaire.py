@@ -60,9 +60,15 @@ GABARITS = {
 # ---------------------------------------------------------------------------
 # Courbes et grille d'états
 # ---------------------------------------------------------------------------
-def courbes(spec, bw_scale=1.0, sigma=SIGMA_FIGEE, n=1201):
-    """C(i) et Φ(i) sur 0..1200 c. Φ sous X_FLOOR : NaN (hors domaine)."""
-    cents = np.linspace(0.0, 1200.0, n)
+def courbes(spec, bw_scale=1.0, sigma=SIGMA_FIGEE, n=1201, cmax=1200.0):
+    """C(i) et Φ(i) sur 0..cmax cents. Φ sous X_FLOOR : NaN (hors domaine).
+
+    `cmax` : compas d'analyse. Défaut 1200 c = le compas d'une octave déclaré
+    en v1 (résultats des étapes 3 et 4 inchangés au bit près). Le diagramme de
+    phase l'étend (DIAGRAMME-PHASE.md §2.0) : sur un timbre dont l'octave se
+    déplace, un compas fixé à 1200 c découperait justement le phénomène qu'on
+    mesure. Le compas d'une octave est une convention du monde harmonique."""
+    cents = np.linspace(0.0, cmax, n)
     C = consonance_curve(spec, cents, bw_scale=bw_scale)
     P = np.array([proxy_coincidence(spec, 2 ** (c / 1200.0), w_cents=sigma)
                   if c >= X_FLOOR else np.nan for c in cents])
@@ -89,13 +95,13 @@ def phi_de(P, cents, c):
     """Φ(c) avec la convention unisson (cf. en-tête)."""
     if c < X_FLOOR:
         return np.inf if c < 1e-9 else np.nan
-    return float(P[int(round(c / 1200.0 * (len(cents) - 1)))])
+    return float(P[int(np.argmin(np.abs(cents - c)))])
 
 
-def grille_etats(spec, bw_scale=1.0, sigma=SIGMA_FIGEE):
+def grille_etats(spec, bw_scale=1.0, sigma=SIGMA_FIGEE, cmax=1200.0):
     """Grille candidate = pics locaux de C ; chaque candidat porte C et Φ.
     Le gate R1 (tau_C) s'applique ensuite, balayable."""
-    cents, C, P = courbes(spec, bw_scale, sigma)
+    cents, C, P = courbes(spec, bw_scale, sigma, cmax=cmax)
     out = []
     for i in pics_locaux(C, cents):
         c = float(cents[i])
