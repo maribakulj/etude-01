@@ -1,0 +1,26 @@
+{
+ "source": "Wikimedia Commons, s\u00e9rie 'Music box notes' (fichiers 2 et 4), CC BY-SA, via d\u00e9p\u00f4t utilisateur",
+ "sha256_16": "commons-mbn2-mbn4",
+ "sr": 44100,
+ "f0_hz": 993.8,
+ "n_trames": 0,
+ "partiels": [
+  {
+   "ratio": 1.0,
+   "amp": 1.0,
+   "hz": 993.8,
+   "excursion_cents": 0.0,
+   "trames": 0
+  },
+  {
+   "ratio": 10.53,
+   "amp": 0.1,
+   "hz": 10464.7,
+   "excursion_cents": 0.0,
+   "trames": 0
+  }
+ ],
+ "parametres": {
+  "nettoyage": "ETAPE2-PROTOCOLE.md \u00a77 (entr\u00e9e du 2026-06-11, second mat\u00e9riau)"
+ }
+}

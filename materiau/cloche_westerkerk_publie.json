@@ -1,0 +1,100 @@
+{
+ "source": "Harrison & MacConnachie 2024 (JASA), lower_bell_spectrum.csv \u2014 carillon Westerkerk, spectre publi\u00e9",
+ "sha256_16": "pub-harrison-2024",
+ "sr": 0,
+ "f0_hz": 1.0,
+ "n_trames": 0,
+ "partiels": [
+  {
+   "ratio": 0.49698128024669413,
+   "amp": 1.3982078517550474,
+   "hz": 0.49698128024669413,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Hum"
+  },
+  {
+   "ratio": 1.0,
+   "amp": 1.0,
+   "hz": 1.0,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Prime"
+  },
+  {
+   "ratio": 1.1939232572861356,
+   "amp": 1.2854002083113991,
+   "hz": 1.1939232572861356,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Tierce"
+  },
+  {
+   "ratio": 1.500000000136588,
+   "amp": 0.1746305305156148,
+   "hz": 1.500000000136588,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Quint"
+  },
+  {
+   "ratio": 1.9924535915811332,
+   "amp": 0.34789159652905266,
+   "hz": 1.9924535915811332,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Nominal"
+  },
+  {
+   "ratio": 2.5881088791156346,
+   "amp": 0.2676262475615424,
+   "hz": 2.5881088791156346,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Undeciem"
+  },
+  {
+   "ratio": 2.985605955084007,
+   "amp": 0.34659564202230375,
+   "hz": 2.985605955084007,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Duodeciem"
+  },
+  {
+   "ratio": 3.2961022530588933,
+   "amp": 0.23211996633622306,
+   "hz": 3.2961022530588933,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "III-4"
+  },
+  {
+   "ratio": 4.129369772373063,
+   "amp": 0.23228084825197176,
+   "hz": 4.129369772373063,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Upper Octave"
+  },
+  {
+   "ratio": 5.381356415546836,
+   "amp": 0.18545652000275253,
+   "hz": 5.381356415546836,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Upper Fourth"
+  },
+  {
+   "ratio": 6.7205882356677265,
+   "amp": 0.09099880416551999,
+   "hz": 6.7205882356677265,
+   "excursion_cents": 0.0,
+   "trames": 0,
+   "label": "Upper Sixth"
+  }
+ ],
+ "parametres": {
+  "regles": "ETAPE2-PROTOCOLE.md \u00a77, entr\u00e9e 2026-06-12 (substitution cloche)"
+ }
+}

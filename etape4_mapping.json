@@ -1,0 +1,46 @@
+{
+ "paire_P1.wav": {
+  "moitie_1": "harm_par_P5",
+  "moitie_2": "harm_legal"
+ },
+ "paire_P2.wav": {
+  "moitie_1": "cloche_legal",
+  "moitie_2": "cloche_par_307"
+ },
+ "paire_P3.wav": {
+  "moitie_1": "cloche_par_P5",
+  "moitie_2": "harm_par_P5"
+ },
+ "paire_P4.wav": {
+  "moitie_1": "harm_par_307",
+  "moitie_2": "cloche_par_307"
+ },
+ "chemins": {
+  "harm": [
+   1200,
+   387,
+   498,
+   969,
+   387,
+   814,
+   387,
+   618,
+   884,
+   387,
+   1200
+  ],
+  "cloche": [
+   0,
+   809,
+   702,
+   307,
+   809,
+   307,
+   809,
+   307,
+   702,
+   307,
+   0
+  ]
+ }
+}
