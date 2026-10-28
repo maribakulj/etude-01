@@ -1,0 +1,5 @@
+# Versions avec lesquelles reproduire.sh a été rejoué (Python 3.13).
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.11.2
+soundfile==0.14.0

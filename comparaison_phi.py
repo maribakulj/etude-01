@@ -193,7 +193,7 @@ def main():
         ax.set_ylabel('Φ norm.', fontsize=8)
     axes[-1].set_xlabel('intervalle (cents) — unisson → octave  (timbre harmonique, récepteur humain)')
     plt.tight_layout()
-    out = '/home/user/etude-01/comparaison_phi.png'
+    out = 'comparaison_phi.png'
     plt.savefig(out, dpi=130)
     print(f"\nFigure écrite : {out}")
     return resultats

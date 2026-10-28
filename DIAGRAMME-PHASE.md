@@ -223,3 +223,12 @@ valeur exacte. Le §1 n'a pas été modifié, conformément à la règle du proj
    couple harmonique/cloche.
 4. Le rapport « écart d'octave ↔ `B` » est comparé à la littérature en ordre
    de grandeur, pas ajusté sur une courbe de Railsback mesurée.
+
+## 2.7 Addendum daté — 2026-10-28 : sensibilité au seuil
+
+La localisation de la 1re bifurcation (B ≈ 7,7e-3) et le nombre de
+bifurcations (8) valent pour τ_F = 0,226. Balayé sur τ_F ∈ [0,10 ; 0,40], la
+1re bifurcation se déplace de 9,4e-4 à 1,1e-1 et le nombre de bifurcations
+varie de 1 à 18 (`sensibilite_seuil.py`, README.md limite 3). La lecture
+« la grammaire garde sa structure sur toute la plage des cordes réelles » ne
+tient donc qu'à seuil fixé. Le §1 et les verdicts D1-D4 ne sont pas modifiés.

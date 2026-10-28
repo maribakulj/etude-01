@@ -160,3 +160,13 @@ règles-comme-données réalisées en structures déclaratives). **La question
 Clojure est explicitement reportée à l'étape 4** — rendu/écoute — où Overtone
 et le REPL deviennent l'argument réel (recompiler la grammaire à chaud en
 entendant le résultat).
+
+## 7. Addendum daté — 2026-10-28 : calibration et marge de la cloche
+
+- Le résultat « F2+F3 : OUI » sur l'harmonique est **par construction** :
+  τ_F a été fixé au milieu de la fenêtre qui le produit (§1.4). Il ne compte
+  pas comme prédiction.
+- Sur la cloche, l'ensemble d'interdits {0, 307, 886} tient pour
+  τ_F ∈ [0,224 ; 0,346]. La valeur déclarée 0,226 est à **0,002** du bord
+  inférieur, sous lequel P5 et P8 redeviennent interdites
+  (`sensibilite_seuil.py`). Seul l'interdit à 307 c est robuste au seuil.

@@ -3,7 +3,7 @@ etape2_p5.py — Étape 2 : rejouer P5 sur un spectre MESURÉ, avec la métrique
 figée (DECISION-PHI.md : coïncidence spectrale sous transposition, σ=6,83 c).
 
 Usage :
-  python3 etape2_p5.py extraction.json      # spectre mesuré (extraction_spectre.py)
+  python3 etape2_p5.py extraction.json [figure.png]  # spectre mesuré (extraction_spectre.py)
   python3 etape2_p5.py --analytique         # démo : spectre Euler-Bernoulli (pas une mesure)
 
 Verdict P5 (opérationnalisation de SPEC §6.2, déclarée AVANT toute mesure,
@@ -155,7 +155,7 @@ def main():
     ax.legend(fontsize=8, loc='upper left')
     ax.set_title(f"P5 — Φ figée (σ={SIGMA_FIGEE} c) : {label}", fontsize=10, loc='left')
     plt.tight_layout()
-    out = 'etape2_p5.png'
+    out = sys.argv[2] if len(sys.argv) > 2 else 'etape2_p5.png'
     plt.savefig(out, dpi=130)
     print(f"\nFigure : {out}")
     return 0

@@ -19,5 +19,5 @@ for a,(spec,lab) in zip(ax,[(harmonic(),'Timbre harmonique'),(music_box(),'Boît
     a.set_title(lab,fontsize=11,loc='left'); a.set_ylabel('normalisé'); a.set_ylim(0,1.08)
     a.legend(fontsize=8,loc='upper left')
 ax[1].set_xlabel('intervalle (cents) — unisson → octave')
-plt.tight_layout(); plt.savefig('/home/claude/out/courbes.png',dpi=130)
+plt.tight_layout(); plt.savefig('courbes.png',dpi=130)
 print("ok")

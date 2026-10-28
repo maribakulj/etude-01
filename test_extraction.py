@@ -16,7 +16,9 @@ Deux tests :
 Échec => code retour non nul. Ne pas modifier les seuils après coup.
 """
 
+import os
 import sys
+import tempfile
 
 import numpy as np
 import soundfile as sf
@@ -59,10 +61,13 @@ def peak_positions(spec, n=3):
 
 def main():
     ok = True
+    tmp = tempfile.mkdtemp()
+    WAV_A = os.path.join(tmp, 'synth_A.wav')
+    WAV_B = os.path.join(tmp, 'synth_B.wav')
 
     # ---- Test A : propre ----------------------------------------------------
-    sf.write('/tmp/synth_A.wav', synth(decays=[1.2] * len(MODES)), SR)
-    res = extraire('/tmp/synth_A.wav', f0_nominal_hz=F0)
+    sf.write(WAV_A, synth(decays=[1.2] * len(MODES)), SR)
+    res = extraire(WAV_A, f0_nominal_hz=F0)
     got = {round(p['ratio'], 3): p['amp'] for p in res['partiels']}
     print("Test A (propre) — partiels extraits :", got)
     for m, a in zip(MODES, AMPS):
@@ -79,9 +84,9 @@ def main():
 
     # ---- Test B : réaliste --------------------------------------------------
     okB = True
-    sf.write('/tmp/synth_B.wav',
+    sf.write(WAV_B,
              synth(decays=[1.5, 0.6, 0.25, 0.12, 0.07], detune=0.003, noise_db=-45.0), SR)
-    resB = extraire('/tmp/synth_B.wav', f0_nominal_hz=F0)
+    resB = extraire(WAV_B, f0_nominal_hz=F0)
     gotB = sorted(p['ratio'] for p in resB['partiels'])
     print("Test B (réaliste) — ratios extraits :", [round(r, 3) for r in gotB])
     for m in MODES:
