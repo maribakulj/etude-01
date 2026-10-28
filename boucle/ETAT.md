@@ -15,8 +15,8 @@ TAUS et DUREE_PAS.
 
 - Étape 1 de la boucle simulée (protocole `2a4e20d`, code `5942083`,
   résultats `fd4b0eb`) ; plan `92d5161`.
-- Phase 0 terminée. Paquet, registre (28 paramètres : 1 oreille,
-  20 techniques, 7 à remplacer), module `oreille/`, 8 tests (`501aaf1`).
+- Phase 0 terminée. Paquet, registre (29 paramètres : 1 oreille,
+  21 techniques, 7 à remplacer), module `oreille/`, 8 tests (`501aaf1`).
   Critère de sortie rempli : `python3 boucle/boucle.py` puis `rendu.py`
   redonnent `resultats.json`, les 8 sons et la figure identiques au bit près.
   Défaut trouvé et corrigé : l'élagage du calcul de coïncidence supposait une
