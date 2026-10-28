@@ -116,6 +116,7 @@ mais moins que prévu (R = 1,44 au lieu de ≥ 2). Observation non prédite : le
 son fixe un réseau de hauteurs (le réseau pythagoricien pour le son
 harmonique), tandis que la boucle fixe un mouvement qui n'a rien d'une
 mélodie. Détails : `boucle/PROTOCOLE.md`, `boucle/RESULTATS.md`.
+Plan jusqu'au prototype, sans règle musicale arbitraire : `boucle/PLAN.md`.
 
 ## Reproduire
 
