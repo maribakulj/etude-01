@@ -43,7 +43,62 @@ PARAMS = {
                   "(DECISION-PHI.md §5)",
         test='test_oreille.py::test_coincidence_egale_phi_publiee'),
 
+    'ERB_A': Param(
+        24.7, 'oreille', "ERB(f) = A × (B f/1000 + 1) : constante A (Hz)",
+        reference="Glasberg & Moore (1990), Hearing Research 47, 103-138 "
+                  "(formule confirmée par des implémentations publiques ; texte à vérifier)",
+        test='test_oreille.py::test_erb'),
+    'ERB_B': Param(
+        4.37, 'oreille', "ERB : constante B", reference="idem ERB_A",
+        test='test_oreille.py::test_erb'),
+    'BC_ZWICKER': Param(
+        (25.0, 75.0, 1.4, 0.69), 'oreille',
+        "bande critique (Hz) = c0 + c1 (1 + c2 (f/1000)²)^e, utilisée pour situer "
+        "le maximum de rugosité (C2)",
+        reference="Zwicker & Terhardt (1980), JASA 68 — de mémoire, à vérifier",
+        test='test_oreille.py::test_rugosite_maximum_quart_de_bande'),
+    'DELTA_HARMONICITE': Param(
+        0.02, 'oreille', "écart relatif sous lequel un partiel est expliqué par un "
+        "harmonique (C4, C5)",
+        reference="Moore, Glasberg & Peters (1986), JASA 80(2) : seuils de 1 à 3 % "
+                  "selon les auditeurs (résumé lu) ; milieu de la plage",
+        test='test_oreille.py::test_harmonique_desaccorde',
+        sensibilite="à faire (phase 2) : 1 % et 3 %"),
+    'LIMITE_BASSE_HZ': Param(
+        30.0, 'oreille', "limite basse de la hauteur mélodique (C5, C6)",
+        reference="Pressnitzer, Patterson & Krumbholz (2001), JASA 109 — résumé "
+                  "via source secondaire, à vérifier",
+        test='test_oreille.py::test_plage_transposition'),
+    'LIMITE_HAUTE_HZ': Param(
+        4700.0, 'oreille', "limite haute de la hauteur mélodique, sons purs (C6)",
+        reference="Semal & Demany (1990), Music Perception 8(2) — résumé, à vérifier ; "
+                  "contestée pour les sons complexes (Oxenham et al. 2011, à vérifier)",
+        test='test_oreille.py::test_plage_transposition'),
+    'FISSION_DEMITONS': Param(
+        1.0, 'oreille', "frontière de fission (demi-tons), T entre 0,1 et 0,4 s (C7)",
+        reference="van Noorden (1975), thèse TH Eindhoven, p. 15 (lue)",
+        test='test_oreille.py::test_frontieres_van_noorden'),
+    'TCB_PENTE': Param(
+        0.15, 'oreille', "pente de la frontière de cohérence (demi-tons par ms) (C7)",
+        reference="van Noorden (1975), p. 16 : Ic = 0,15 (T − 100) (lue)",
+        test='test_oreille.py::test_frontieres_van_noorden'),
+    'TCB_GENOU_MS': Param(
+        100.0, 'oreille', "période (ms) du coude de la frontière de cohérence (C7)",
+        reference="van Noorden (1975), p. 15-16 (lue)",
+        test='test_oreille.py::test_frontieres_van_noorden'),
+    'DECALAGE_COMPLEXE_MS': Param(
+        60.0, 'oreille', "décalage de période (ms) pour des sons complexes (C7)",
+        reference="van Noorden (1975), p. 73 : sons harmoniques à spectre plat (lue)",
+        test='test_oreille.py::test_frontieres_van_noorden'),
+
     # --- Choix techniques ---------------------------------------------------
+    'K_HARMONIQUES': Param(
+        16, 'technique', "rang harmonique maximal considéré par la hauteur virtuelle "
+        "(C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX)",
+        sensibilite="à faire (phase 2) : 10 et 20"),
+    'EGALITE_PART': Param(
+        1e-9, 'technique', "tolérance d'égalité entre parts d'amplitude expliquées (C5)",
+        sensibilite="à faire (phase 2)"),
     'PAS_GRILLE': Param(
         2.0, 'technique', "pas (cents) de la grille des transpositions candidates",
         sensibilite="à faire (phase 2) ; les maxima sont affinés par "

@@ -7,11 +7,23 @@
 | Paramètre | Valeur | Rôle | Provenance / sensibilité |
 |---|---|---|---|
 | `SIGMA_MILNE` | 6.83 | tolérance (cents) du noyau de coïncidence entre partiels | Milne (2013) ; valeur par défaut du paquet hrep de Harrison. Ajustée sur des données d'affinité mélodique, pas de fusion (DECISION-PHI.md §5); test : `test_oreille.py::test_coincidence_egale_phi_publiee` |
+| `ERB_A` | 24.7 | ERB(f) = A × (B f/1000 + 1) : constante A (Hz) | Glasberg & Moore (1990), Hearing Research 47, 103-138 (formule confirmée par des implémentations publiques ; texte à vérifier); test : `test_oreille.py::test_erb` |
+| `ERB_B` | 4.37 | ERB : constante B | idem ERB_A; test : `test_oreille.py::test_erb` |
+| `BC_ZWICKER` | (25.0, 75.0, 1.4, 0.69) | bande critique (Hz) = c0 + c1 (1 + c2 (f/1000)²)^e, utilisée pour situer le maximum de rugosité (C2) | Zwicker & Terhardt (1980), JASA 68 — de mémoire, à vérifier; test : `test_oreille.py::test_rugosite_maximum_quart_de_bande` |
+| `DELTA_HARMONICITE` | 0.02 | écart relatif sous lequel un partiel est expliqué par un harmonique (C4, C5) | Moore, Glasberg & Peters (1986), JASA 80(2) : seuils de 1 à 3 % selon les auditeurs (résumé lu) ; milieu de la plage; test : `test_oreille.py::test_harmonique_desaccorde`; sensibilité : à faire (phase 2) : 1 % et 3 % |
+| `LIMITE_BASSE_HZ` | 30.0 | limite basse de la hauteur mélodique (C5, C6) | Pressnitzer, Patterson & Krumbholz (2001), JASA 109 — résumé via source secondaire, à vérifier; test : `test_oreille.py::test_plage_transposition` |
+| `LIMITE_HAUTE_HZ` | 4700.0 | limite haute de la hauteur mélodique, sons purs (C6) | Semal & Demany (1990), Music Perception 8(2) — résumé, à vérifier ; contestée pour les sons complexes (Oxenham et al. 2011, à vérifier); test : `test_oreille.py::test_plage_transposition` |
+| `FISSION_DEMITONS` | 1.0 | frontière de fission (demi-tons), T entre 0,1 et 0,4 s (C7) | van Noorden (1975), thèse TH Eindhoven, p. 15 (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
+| `TCB_PENTE` | 0.15 | pente de la frontière de cohérence (demi-tons par ms) (C7) | van Noorden (1975), p. 16 : Ic = 0,15 (T − 100) (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
+| `TCB_GENOU_MS` | 100.0 | période (ms) du coude de la frontière de cohérence (C7) | van Noorden (1975), p. 15-16 (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
+| `DECALAGE_COMPLEXE_MS` | 60.0 | décalage de période (ms) pour des sons complexes (C7) | van Noorden (1975), p. 73 : sons harmoniques à spectre plat (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
 
 ## Choix techniques
 
 | Paramètre | Valeur | Rôle | Provenance / sensibilité |
 |---|---|---|---|
+| `K_HARMONIQUES` | 16 | rang harmonique maximal considéré par la hauteur virtuelle (C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX) | sensibilité : à faire (phase 2) : 10 et 20 |
+| `EGALITE_PART` | 1e-09 | tolérance d'égalité entre parts d'amplitude expliquées (C5) | sensibilité : à faire (phase 2) |
 | `PAS_GRILLE` | 2.0 | pas (cents) de la grille des transpositions candidates | sensibilité : à faire (phase 2) ; les maxima sont affinés par interpolation parabolique |
 | `EGALITE` | 1e-09 | tolérance numérique pour déclarer deux maxima égaux | sensibilité : à faire (phase 2) |
 | `N_PAS` | 48 | nombre de pas d'une trajectoire (durée d'observation) | sensibilité : à faire (phase 2) |
@@ -46,4 +58,4 @@
 | `DUREE_PAS` | 0.45 | durée (s) d'un pas au rendu | à remplacer par : moment d'un nouvel événement dépendant du son et de l'oreille (phase 2, PLAN.md §4) |
 | `F0_RENDU` | 220.0 | fréquence (Hz) de t = 0 au rendu | à remplacer par : fréquence mesurée du son de départ |
 
-Restent : 7 paramètres à remplacer, 15 analyses de sensibilité à faire.
+Restent : 7 paramètres à remplacer, 18 analyses de sensibilité à faire.
