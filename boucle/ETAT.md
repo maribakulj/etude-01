@@ -5,9 +5,9 @@ par unité de travail terminée, avec le commit correspondant.*
 
 ## Phase en cours
 
-Phase 1 — L'oreille, à partir de données : prochaine unité = protocole de la
-phase (composants, données publiées de référence, tolérances), avant tout
-code.
+Phase 1 — L'oreille, à partir de données. Protocole commité
+(`PHASE1-PROTOCOLE.md`). Prochaine unité : composants C1 à C7 et leurs
+tests.
 
 ## Fait
 
@@ -33,3 +33,5 @@ code.
 
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
 - 2026-10-28 : phase 0 terminée.
+- 2026-10-28 : protocole de la phase 1 (sources lues : van Noorden 1975 en
+  texte intégral, Moore et al. 1986 en résumé ; les autres marquées à vérifier).
