@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "etude01"
+version = "0.1.0"
+description = "Étude 01 : interdits de mouvement et boucle sonore calculés à partir d'un spectre"
+requires-python = ">=3.10"
+dependencies = ["numpy", "scipy", "matplotlib", "soundfile"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+py-modules = ["metriques_fusion", "rugosite", "famille_raide", "graphe_grammaire"]
+packages = ["boucle", "boucle.oreille"]
+
+[tool.pytest.ini_options]
+testpaths = ["boucle/tests"]

@@ -20,15 +20,18 @@ import numpy as np
 import soundfile as sf
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, ICI)
+# Le dossier du script masquerait le paquet `boucle` : on le retire du chemin.
+sys.path[:] = [p for p in sys.path if os.path.abspath(p or '.') != ICI]
+sys.path.insert(0, os.path.dirname(ICI))
 
-from boucle import sons, W_MIN, REGLAGE_CANONIQUE   # noqa: E402
+from boucle.etape1 import sons, W_MIN, REGLAGE_CANONIQUE   # noqa: E402
+from boucle.registre import val                            # noqa: E402
 
-SR = 22050
-DUREE_PAS = 0.45     # s
-F0 = 220.0           # Hz pour t = 0
-ATTAQUE = 0.005      # s
-FONDU = 0.03         # s, pour éviter un clic à l'arrêt de la copie
+SR = val('SR_RENDU')
+DUREE_PAS = val('DUREE_PAS')
+F0 = val('F0_RENDU')
+ATTAQUE = val('ATTAQUE_RENDU')
+FONDU = val('FONDU_RENDU')
 
 
 def rendre(son, ts, tau, graine=0):
