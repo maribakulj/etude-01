@@ -5,11 +5,9 @@ par unité de travail terminée, avec le commit correspondant.*
 
 ## Phase en cours
 
-Phase 2 — Boucle v2 sans consigne. Prochaine unité : protocole de la phase
-2, avec en particulier la mesure de proximité entre événements successifs
-pour les sons inharmoniques (la hauteur virtuelle n'est pas fiable pour eux,
-PHASE1-RESULTATS.md §4), et le remplacement d'EXCLUSION, W_MIN, T_MIN/T_MAX,
-TAUS et DUREE_PAS.
+Phase 2 — Boucle v2 sans consigne. Protocole commité (`PHASE2-PROTOCOLE.md`).
+Prochaine unité : mesure de la décroissance de la cloche (12-c1.wav), puis
+code de la boucle v2 et de la formation des lignes.
 
 ## Fait
 
@@ -27,6 +25,13 @@ TAUS et DUREE_PAS.
   à partiels décalés et sur la cloche (note de frappe non retrouvée). La
   hauteur des sons inharmoniques est donc « non modélisée ».
 
+## Notes pour les phases suivantes
+
+- Le dépôt public de Harrison & MacConnachie (2024) contient leurs données
+  comportementales de consonance sur carillon : données indépendantes,
+  utilisables pour valider C (rugosité) sur cloches lors de la préparation de
+  la phase 4.
+
 ## En attente d'une personne ou de matériel
 
 - Écoutes de fin de phase (retours, pas preuves) : à faire par le porteur du
@@ -40,6 +45,7 @@ TAUS et DUREE_PAS.
 
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
 - 2026-10-28 : phase 0 terminée.
+- 2026-10-28 : protocole de la phase 2 (prédictions Q1-Q4).
 - 2026-10-28 : phase 1 terminée ; 2 validations sur 3 de la hauteur virtuelle échouent.
 - 2026-10-28 : protocole de la phase 1 (sources lues : van Noorden 1975 en
   texte intégral, Moore et al. 1986 en résumé ; les autres marquées à vérifier).
