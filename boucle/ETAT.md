@@ -5,9 +5,11 @@ par unité de travail terminée, avec le commit correspondant.*
 
 ## Phase en cours
 
-Phase 1 — L'oreille, à partir de données. Protocole commité
-(`PHASE1-PROTOCOLE.md`). Prochaine unité : composants C1 à C7 et leurs
-tests.
+Phase 2 — Boucle v2 sans consigne. Prochaine unité : protocole de la phase
+2, avec en particulier la mesure de proximité entre événements successifs
+pour les sons inharmoniques (la hauteur virtuelle n'est pas fiable pour eux,
+PHASE1-RESULTATS.md §4), et le remplacement d'EXCLUSION, W_MIN, T_MIN/T_MAX,
+TAUS et DUREE_PAS.
 
 ## Fait
 
@@ -19,6 +21,11 @@ tests.
   redonnent `resultats.json`, les 8 sons et la figure identiques au bit près.
   Défaut trouvé et corrigé : l'élagage du calcul de coïncidence supposait une
   grille couvrant tout le registre.
+
+- Phase 1 terminée (`f9712a9` code, résultats dans `PHASE1-RESULTATS.md`).
+  Tests de cohérence et C2 passent ; la hauteur virtuelle échoue sur le son
+  à partiels décalés et sur la cloche (note de frappe non retrouvée). La
+  hauteur des sons inharmoniques est donc « non modélisée ».
 
 ## En attente d'une personne ou de matériel
 
@@ -33,5 +40,6 @@ tests.
 
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
 - 2026-10-28 : phase 0 terminée.
+- 2026-10-28 : phase 1 terminée ; 2 validations sur 3 de la hauteur virtuelle échouent.
 - 2026-10-28 : protocole de la phase 1 (sources lues : van Noorden 1975 en
   texte intégral, Moore et al. 1986 en résumé ; les autres marquées à vérifier).

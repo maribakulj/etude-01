@@ -63,7 +63,8 @@ PARAMS = {
         reference="Moore, Glasberg & Peters (1986), JASA 80(2) : seuils de 1 à 3 % "
                   "selon les auditeurs (résumé lu) ; milieu de la plage",
         test='test_oreille.py::test_harmonique_desaccorde',
-        sensibilite="à faire (phase 2) : 1 % et 3 %"),
+        sensibilite="faite pour C5 (PHASE1-RESULTATS.md §3) : à 1 %, le test de "
+                    "décalage de hauteur passe ; à 2 et 3 %, il échoue"),
     'LIMITE_BASSE_HZ': Param(
         30.0, 'oreille', "limite basse de la hauteur mélodique (C5, C6)",
         reference="Pressnitzer, Patterson & Krumbholz (2001), JASA 109 — résumé "
@@ -95,7 +96,8 @@ PARAMS = {
     'K_HARMONIQUES': Param(
         16, 'technique', "rang harmonique maximal considéré par la hauteur virtuelle "
         "(C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX)",
-        sensibilite="à faire (phase 2) : 10 et 20"),
+        sensibilite="faite pour C5 (PHASE1-RESULTATS.md §3) : 10, 16, 20 ; "
+                    "sans effet sur le verdict"),
     'EGALITE_PART': Param(
         1e-9, 'technique', "tolérance d'égalité entre parts d'amplitude expliquées (C5)",
         sensibilite="à faire (phase 2)"),
