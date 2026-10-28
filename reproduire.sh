@@ -38,8 +38,12 @@ etape() { echo; echo "===== $* ====="; "$@"; }
   # Diagramme de phase (~20 s)
   etape python3 diagramme_phase.py
 
-  # Audit de sensibilité au seuil (lit les résultats ci-dessus, STATUT.md)
+  # Audit de sensibilité au seuil (lit les résultats ci-dessus, README.md)
   etape python3 sensibilite_seuil.py
+
+  # Boucle simulée, étape 1 (~3 min), puis rendu audio
+  etape python3 boucle/boucle.py
+  etape python3 boucle/rendu.py
 } 2>&1 | tee journal_reproduction.txt
 
 echo

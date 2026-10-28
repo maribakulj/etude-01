@@ -105,6 +105,18 @@ Pas d'extension du modèle (nouvelles règles, nouveaux timbres, nouveaux
 balayages) tant que l'hypothèse n'a pas été testée dans des conditions
 indépendantes. Brouillon du protocole : `PROTOCOLE-TEST-INDEPENDANT.md`.
 
+## Boucle simulée (`boucle/`)
+
+Une deuxième piste, séparée du modèle de grammaire : une boucle où chaque
+nouvelle copie du son entre là où elle coïncide le plus avec ce qui sonne
+déjà, sans gamme ni règle musicale. Question : la trajectoire dépend-elle
+plus du son de départ que des réglages de la boucle ? Étape 1 (sans
+consigne) : 1 prédiction sur 4 vérifiée. Le son compte plus que les réglages,
+mais moins que prévu (R = 1,44 au lieu de ≥ 2). Observation non prédite : le
+son fixe un réseau de hauteurs (le réseau pythagoricien pour le son
+harmonique), tandis que la boucle fixe un mouvement qui n'a rien d'une
+mélodie. Détails : `boucle/PROTOCOLE.md`, `boucle/RESULTATS.md`.
+
 ## Reproduire
 
 ```bash
@@ -112,7 +124,7 @@ pip install -r requirements.txt
 ./reproduire.sh
 ```
 
-Le script rejoue toutes les expériences commitées (~45 s) et écrit le journal
+Le script rejoue toutes les expériences commitées (~4 min) et écrit le journal
 dans `journal_reproduction.txt`. Rejoué le 2026-10-28 avec les versions de
 `requirements.txt` : les JSON et WAV régénérés sont identiques octet pour
 octet à ceux du dépôt, et les verdicts sont inchangés. Les PNG diffèrent

@@ -92,6 +92,15 @@ non défini, rendre visibles les biais et ramener les conclusions à ce que
 les données permettent. Les prédictions, seuils et résultats chiffrés des
 documents d'étape n'ont pas été modifiés.
 
+## 2026-10-28 — Boucle simulée, étape 1 (`boucle/`)
+
+Nouvelle piste : le son comme système qui produit sa propre évolution.
+Protocole et prédictions commités avant le code. Résultat : le son compte
+plus que les réglages (R = 1,44, p < 0,001) mais moins que prédit (R ≥ 2) ;
+1 prédiction vérifiée sur 4. Observation non prédite : le son fixe un réseau
+de hauteurs, la boucle fixe un mouvement en zigzag sans continuité
+mélodique.
+
 ## Suite envisagée
 
 Ne pas étendre le modèle avant le test de `PROTOCOLE-TEST-INDEPENDANT.md`.
