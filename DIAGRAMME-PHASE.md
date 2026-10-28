@@ -1,12 +1,15 @@
-# DIAGRAMME-PHASE — la grammaire comme fonction d'un paramètre physique continu
+# DIAGRAMME-PHASE — balayage de l'inharmonicité
 
-*Extension naturelle de l'étape 3, prévue au CADRAGE §7 (« diagramme de phase du
-contrepoint au-dessus de l'espace timbral »). Ce n'est pas l'étape 5
-(l'instrument), qui reste différée.*
+*Le nom du fichier est historique. « Diagramme de phase » désigne ici
+seulement l'ensemble des interdits calculé le long d'un paramètre de spectre,
+et « bifurcation » une valeur où cet ensemble change de taille ; rien
+n'indique qu'il s'agisse de transitions au sens physique.*
 
-**§1 est écrit et commité AVANT tout calcul.** L'historique git en fait foi :
-le commit qui introduit ce fichier ne contient aucun code de balayage ni aucun
-résultat. Les §2 et suivants sont ajoutés après, dans un commit séparé.
+*Le §1 a été commité avant tout calcul (commit `b3be72f`, sans code ni
+résultat) ; les §2 et suivants dans un commit séparé. Texte révisé le
+2026-10-28 (ton ; notes de relecture marquées « Note 2026-10-28 ») ;
+prédictions et chiffres inchangés. Version d'origine :
+`git show 9a03b9b:DIAGRAMME-PHASE.md`.*
 
 ---
 
@@ -31,8 +34,8 @@ Choisi pour trois raisons :
    ~10⁻⁴ pour les cordes médium d'un piano, ~10⁻³ et au-delà pour les basses
    d'un petit droit. Le diagramme fait donc des prédictions vérifiables hors
    du modèle.
-3. **Continu.** C'est la condition pour qu'il y ait des *bifurcations* au sens
-   du CADRAGE §7 : des valeurs de `B` où une règle apparaît ou disparaît.
+3. **Continu.** On peut donc chercher des valeurs de `B` où une règle
+   apparaît ou disparaît.
 
 ### 1.2 Chaîne de calcul — inchangée, figée
 
@@ -48,7 +51,7 @@ fini du timbre). **Aucun paramètre n'est ré-ajusté pour ce balayage.**
   parallèles {unisson, 702, 1200}, frontières {unisson, 1200}. *Si D1 tombe,
   l'implémentation du balayage est fausse, rien d'autre n'est lisible.*
 
-- **D2 — l'octave étirée (prédiction risquée, vérifiable À L'EXTÉRIEUR).**
+- **D2 — l'octave étirée.**
   Quand `B` croît, le pic de Φ voisin de 1200 c se déplace vers l'**aigu**
   (> 1200 c), de quelques cents dès `B ≈ 10⁻⁴`. *C'est le phénomène d'octave
   étirée des pianos (courbe de Railsback), documenté depuis 1938 et jamais
@@ -57,22 +60,33 @@ fini du timbre). **Aucun paramètre n'est ré-ajusté pour ce balayage.**
   validation externe de Φ ; s'il produit l'inverse (octave comprimée), c'est
   une réfutation nette.*
 
+  *Note 2026-10-28 : D2 n'était pas risquée. Pour une corde raide, le 2ᵉ
+  partiel de la voix grave est au-dessus de 2 f₀, si bien que sa coïncidence
+  avec la fondamentale de la voix aiguë se produit au-delà de 1200 c. Toute
+  mesure de coïncidence de partiels donne ce résultat ; c'est d'ailleurs
+  l'explication connue de l'étirement des octaves de piano. D2 vérifie
+  l'implémentation, pas Φ comme modèle de fusion.*
+
 - **D3 — la grammaire est en escalier, pas continue.** Il existe au moins une
   valeur de `B` où l'ensemble des interdits de parallèles change (composition
   ou cardinalité), en restant stable de part et d'autre. *C'est la définition
   opératoire d'une bifurcation. Si l'ensemble des interdits varie de façon
   lisse et sans plateaux, ou ne varie pas du tout sur toute la plage, la
-  notion de bifurcation ne s'applique pas à ce système et le §7 du CADRAGE
+  notion de bifurcation ne s'applique pas à ce système et le §7 du cadrage d'origine
   tombe.*
+
+  *Note 2026-10-28 : le critère de bifurcation a été redéfini après un
+  premier comptage (§2.3), et le résultat dépend du seuil (§2.7).*
 
 - **D4 — la limite raide : disparition de l'octave.** À grand `B`, le spectre
   tend vers `f_n ∝ n²`, dont les coïncidences sous transposition tombent aux
   **carrés de rationnels simples** — 16/9 (996 c), 25/16 (766 c), 81/64
   (406 c) — et non aux rationnels simples eux-mêmes. Comme `2` n'est pas le
   carré d'un rationnel, **l'interdit de parallèles d'octave doit disparaître
-  entièrement** dans cette limite. *Prédiction structurelle forte : un monde
-  sonore où les octaves parallèles sont permises et où l'interdit se loge sur
-  des intervalles sans nom dans notre solfège.*
+  entièrement** dans cette limite.
+
+  *Note 2026-10-28 : comme D2, D4 découle directement de la forme du spectre
+  (f_n ∝ n²) ; elle ne teste pas la perception.*
 
 ### 1.4 Ce qui serait réfuté
 
@@ -80,7 +94,7 @@ fini du timbre). **Aucun paramètre n'est ré-ajusté pour ce balayage.**
 |---|---|
 | D1 tombe | balayage mal implémenté ; rien d'autre n'est interprétable |
 | D2 donne une octave **comprimée** | Φ prédit l'inverse d'un fait d'accordage établi → borne de validité de la métrique révélée |
-| D3 tombe (pas de plateaux) | pas de bifurcations : le CADRAGE §7 (diagramme de phase, « jouer le législateur ») n'a pas d'objet sur cet axe |
+| D3 tombe (pas de plateaux) | l'ensemble des interdits ne change pas par paliers sur cet axe |
 | Interdits identiques sur toute la plage | la grammaire ne dépend pas du timbre le long d'un axe physique réel → affaiblit P5 au-delà du cas cloche |
 
 ### 1.5 Livrables prévus
@@ -110,14 +124,14 @@ sorties des étapes 3 et 4 sont inchangées au bit près** (vérifié en relanç
 `etape3_fux.py`). Φ, C, les seuils et le schéma symétrique de l'étape 3 : rien
 d'autre n'est touché.
 
-## 2.1 D1 — ancrage bas : **CONFIRMÉE**
+## 2.1 D1 — ancrage bas : vérifiée
 
 À `B = 0`, dans la configuration exacte de l'étape 3 (compas 1200 c) :
 états `[0, 387, 498, 618, 702, 814, 884, 969, 1200]`, interdits
 `[0, 702, 1200]`, frontières `[0, 1200]` — identiques à l'étape 3. Le balayage
 est correctement branché sur la chaîne existante.
 
-## 2.2 D2 — l'octave étirée : **CONFIRMÉE**, et corroborée de l'extérieur
+## 2.2 D2 — l'octave étirée : vérifiée
 
 Le pic de fusion issu de l'octave, suivi par continuité, part **vers l'aigu**
 dès que `B` croît :
@@ -130,34 +144,26 @@ dès que `B` croît :
 | 1,1·10⁻² | 1227,66 c | +27,7 c | corde très raide |
 | ≥ 10⁻¹ | > 1400 c | — | régime de barre |
 
-**Ce que ça vaut, exactement.** L'étirement de l'octave des pianos est un fait
-documenté depuis Railsback (1938) : les octaves centrales sont à peine
-étirées, les extrêmes le sont jusqu'à ±30 cents. Notre modèle produit le bon
-**signe**, le bon **ordre de grandeur** (moins d'un cent au médium, quelques
-cents plus bas, des dizaines quand la raideur augmente), et la bonne
-**dépendance** (croissante avec `B`) — alors que Φ a été figée à l'étape 1
-pour des raisons entièrement étrangères (la fusion de deux voix), que ses
-constantes viennent de Milne (2013), et qu'**aucune donnée d'accordage n'est
-jamais entrée dans ce projet**.
+**Ce que cela vaut.** L'étirement des octaves de piano est documenté depuis
+Railsback (1938). Le modèle produit le bon signe, le bon ordre de grandeur et
+la bonne dépendance à `B`. Mais, comme dit en note de D2, c'est une
+conséquence arithmétique du spectre de corde raide : n'importe quelle mesure
+de coïncidence de partiels le produirait, et l'étirement s'explique déjà de
+cette façon, ainsi que par la minimisation de la dissonance sensorielle
+(« Explaining the Railsback stretch in terms of the inharmonicity of piano
+tones and sensory dissonance », JASA 138(4), 2015). C'est un contrôle de
+l'implémentation, pas une validation de Φ comme modèle de fusion.
 
-*Ce n'est pas une explication nouvelle du phénomène* : l'étirement se dérive
-déjà de l'inharmonicité par d'autres routes, notamment par minimisation de la
-dissonance sensorielle (« Explaining the Railsback stretch in terms of the
-inharmonicity of piano tones and sensory dissonance », JASA 138(4), 2015 —
-c'est-à-dire par `C`, pas par `Φ`). C'est un **contrôle de cohérence externe** que la métrique
-pouvait rater : une Φ mal choisie aurait donné une octave *comprimée*, ou
-aucun déplacement. Elle donne le bon.
+## 2.3 D3 — changements de l'ensemble des interdits : vérifiée, avec un critère redéfini
 
-## 2.3 D3 — bifurcations : **CONFIRMÉE**, après durcissement du critère
-
-**Correction méthodologique, à charge.** Le premier test comparait les
+**Changement de critère après un premier résultat.** Le premier test comparait les
 ensembles d'interdits arrondis au cent et comptait 57 « bifurcations ». C'était
 faux : l'écrasante majorité n'étaient que la **dérive continue** des mêmes
 règles (les interdits `{0, 729, 1217}` devenant `{0, 734, 1219}` quand le
-spectre s'étire). Une dérive n'est pas une bifurcation. Critère durci retenu :
-**une bifurcation est un changement de cardinalité** — une règle apparaît ou
-disparaît. Résultat : **8 bifurcations**, 49 pas de simple dérive, et
-**9 régions à nombre de règles constant** :
+spectre s'étire). Une dérive n'est pas un changement de règle. Critère
+retenu, défini après avoir vu ce premier comptage : un changement du
+**nombre** d'interdits. Résultat, au seuil déclaré : 8 changements, 49 pas de simple dérive, et
+9 régions à nombre d'interdits constant :
 
 | `B` (seuil) | nombre d'interdits | ensemble |
 |---|---|---|
@@ -167,31 +173,28 @@ disparaît. Résultat : **8 bifurcations**, 49 pas de simple dérive, et
 | 1,1·10⁻¹ | 5 | `{0, 649, 777, 975, 1204}` |
 | 2,1·10⁻¹ | 4 | … puis 5, 4, 5, 4 |
 
-**Le fait le plus intéressant du balayage.** La première bifurcation tombe à
-`B ≈ 7,7·10⁻³`, soit **un ordre de grandeur au-dessus des cordes de piano les
-plus raides**. Sur toute la plage des instruments à cordes réels, la grammaire
-garde donc sa **structure** — trois interdits : unisson, quinte, octave — et
-seules leurs **positions** dérivent de quelques cents. La région stable
-couvre 39 des 81 pas du balayage, `B` de 0 à 6,5·10⁻³.
+Au seuil déclaré, le premier changement tombe à `B ≈ 7,7·10⁻³`, au-dessus
+des valeurs habituelles des cordes de piano ; en dessous, les trois interdits
+(unisson, quinte, octave) restent et leurs positions dérivent de quelques
+cents. La région à trois interdits couvre 39 des 81 pas du balayage.
 
-Lecture : *le monde des cordes est tout entier dans une seule phase, et c'est
-celle de Fux.* Si la grammaire du contrepoint a paru universelle pendant des
-siècles, c'est peut-être que tous les instruments qui l'ont produite vivaient
-du même côté de la première bifurcation. On peut nommer ce qu'il faudrait pour
-en sortir : une raideur d'un ordre de grandeur au-dessus de celle d'une corde
-de piano — ce que sont, précisément, les barres et les cloches.
+*Note 2026-10-28 : la version d'origine en tirait une lecture historique (« le
+monde des cordes est tout entier dans une seule phase, celle de Fux », et
+l'universalité apparente des règles s'expliquerait par là). Cette lecture
+n'est pas soutenue : la position du premier changement dépend du seuil
+(de 9,4·10⁻⁴ à 1,1·10⁻¹ selon τ_F, §2.7), le seuil a été calibré sur le cas
+harmonique, et ce premier changement vient d'un nouvel interdit à 1274 c,
+dans la zone ouverte par l'extension du compas (§2.0).*
 
-## 2.4 D4 — limite raide : **CONFIRMÉE**
+## 2.4 D4 — limite raide : vérifiée
 
 À `B = 10`, pics de Φ à 533, 630, **771**, **992**, 1163, 1393 c. Les repères
 prédits, carrés de rationnels simples : 25/16 = **772,6 c** (pic mesuré à
 1,6 c), 16/9 = **996,1 c** (pic à 4,1 c). Le troisième repère annoncé,
 81/64 = 405,9 c, n'a pas de pic proche (127 c).
 
-Et surtout : **l'octave a disparu des interdits** — à `B` max, ils valent
-`{0, 771, 992, 1392}`. Un monde sonore où les octaves parallèles sont permises
-et où l'interdit se loge sur des intervalles sans nom dans notre solfège. La
-figure des trajectoires le montre autrement : le pic issu de la quinte quitte
+L'octave n'est plus dans les interdits : à `B` max, ils valent
+`{0, 771, 992, 1392}`. La figure des trajectoires le montre autrement : le pic issu de la quinte quitte
 702 c et converge vers 25/16 (772,6 c) ; celui issu de l'octave grimpe
 au-delà du compas et se stabilise vers 1763 c ≈ 25/9 (1768 c), le carré de 5/3.
 
@@ -202,14 +205,12 @@ valeur exacte. Le §1 n'a pas été modifié, conformément à la règle du proj
 
 ## 2.5 Figures
 
-- `diagramme_phase_trajectoires.png` — haut : les pics de fusion suivis par
-  continuité (le substrat) ; bas : la grammaire (états gris, interdits rouges)
-  le long de `B`. On y voit d'un coup le long plateau de Fux, puis la dérive,
-  puis l'éclatement.
-- `diagramme_phase_2d.png` — le diagramme de phase proprement dit : nombre de
-  règles anti-parallèles selon (`B`, τ_F). Les frontières de couleur sont les
-  bifurcations ; la plage des pianos réels est entièrement dans une seule
-  région.
+- `diagramme_phase_trajectoires.png` — haut : les maxima de Φ suivis par
+  continuité ; bas : états (gris) et interdits (rouge) le long de `B`, au
+  seuil déclaré.
+- `diagramme_phase_2d.png` — nombre d'interdits de parallèles selon `B` et
+  τ_F. Cette figure montre aussi que les frontières entre régions dépendent
+  de τ_F.
 
 ## 2.6 Réserves
 

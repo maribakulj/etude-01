@@ -1,114 +1,156 @@
-# Spec v1 — Le graphe-grammaire et ses prédictions
+# Spec v1 — graphe-grammaire et prédictions
 
-*Document d'enregistrement. Sa valeur tient à ce qu'il soit écrit AVANT tout calcul et non révisé après. Toute modification postérieure au premier test doit être datée et justifiée séparément — on ne réécrit pas une prédiction après avoir vu le résultat.*
+*Document enregistré avant le premier calcul (commit `9ec9fbb`, 2026-06-11).
+Texte révisé le 2026-10-28 : ton, vocabulaire, et notes de relecture
+ajoutées en fin de section (marquées « Note 2026-10-28 »). Le contenu des
+prédictions (§5) et des critères d'abandon (§6) n'a pas été modifié.
+Version d'origine : `git show 9a03b9b:SPEC-v1-graphe-grammaire.md`.*
 
-**Périmètre v1 : contrepoint de simultanéité, première espèce, deux voix.** Note contre note, un seul intervalle vertical par temps. Ce périmètre est choisi parce qu'il est *purement simultané* : pas de dissonance à préparer/résoudre (tout vertical est consonant), donc aucune règle séquentielle n'est requise. C'est exactement le domaine où le mécanisme « fusion par préservation de symétrie » est le plus fort et le mieux fondé. Le séquentiel (conduite mélodique interne, préparation/résolution des espèces supérieures) est **hors périmètre**, marqué comme extension.
-
----
-
-## 1. Les deux scalaires que le spectre compile
-
-Tout part de deux fonctions dérivées du spectre, distinctes et à ne jamais confondre. Pour un timbre donné et un récepteur donné, et pour chaque intervalle `i` :
-
-- **C(i) — consonance verticale.** Inverse de la rugosité (battements entre partiels voisins). Dépend de la bande critique → **dépend du récepteur**. C'est l'axe « ça sonne lisse ou rêche ». Acquis type Sethares.
-- **Φ(i) — tendance à la fusion.** Harmonicité du spectre combiné : quand les deux voix sonnent à l'intervalle `i`, à quel point l'union de leurs partiels (voix A + voix B transposée de `i`) se laisse décrire par une fondamentale commune. Élevé = les deux voix se fondent en un seul objet. **Le substrat (les pics de coïncidence) est arithmétique, indépendant du récepteur ; seule la fenêtre de tolérance qui décide quelles coïncidences "comptent" dépend du récepteur.**
-
-**Règle d'hygiène absolue :** la rugosité `C` n'entre PAS dans la métrique de fusion. Deux sons rugueux restent souvent perçus comme deux ; rugosité et fusion sont des mécanismes dissociés. `C` gouverne quels états existent (axe vertical) ; `Φ` gouverne quels mouvements fusionnent les voix (axe contrapuntique).
+**Périmètre v1** : deux voix, première espèce (note contre note), un seul
+intervalle vertical par temps, compas d'une octave. Pas de dissonance à
+préparer ni à résoudre, donc pas de règle séquentielle. Le séquentiel
+(conduite mélodique, espèces supérieures) est hors périmètre.
 
 ---
 
-## 2. Les états du graphe
+## 1. Les deux quantités calculées à partir du spectre
 
-> **État = (intervalle vertical, qualifié par son statut de consonance C pour ce timbre).**
+Pour un timbre, un modèle d'oreille et un intervalle `i` :
 
-Le treillis se déroule sur un cantus firmus de N notes : N colonnes, chaque colonne = les intervalles verticaux possibles au-dessus de la note de cantus à cet instant.
+- **C(i), consonance verticale** : l'opposé de la rugosité (battements entre
+  partiels proches). Dépend de la largeur des bandes critiques, donc du
+  modèle d'oreille. Modèle de Sethares.
+- **Φ(i), tendance à la fusion** : mesure de coïncidence entre les partiels
+  de la voix A et ceux de la voix B transposée de `i`. Élevée = beaucoup de
+  partiels coïncident. Les positions des maxima ne dépendent que du spectre ;
+  la tolérance qui décide si deux partiels « coïncident » représente
+  l'oreille. (La forme exacte a été fixée à l'étape 1, `DECISION-PHI.md`.)
 
-Décision explicite : l'état ne mémorise PAS à lui seul le mouvement entrant. Le mouvement est porté par l'**arête** (cf. §3). La règle anti-parallèle se vérifie donc sur le triplet (intervalle précédent, mouvement, intervalle courant), ce que la structure en treillis fournit naturellement (chaque arête connaît sa colonne de départ et d'arrivée).
+La rugosité C n'entre pas dans Φ. Motif : deux sons rugueux restent souvent
+entendus comme deux ; rugosité et fusion sont traitées comme des mécanismes
+distincts. C décide quels intervalles sont admis ; Φ décide quels mouvements
+sont interdits.
 
-Existence d'un état (gate de consonance) :
-- **R1 — Gate vertical.** Un intervalle `i` n'est un état admissible que si `C(i) ≥ τ_C`. En première espèce, tout vertical doit être consonant ; les intervalles rêches pour ce timbre n'ont pas d'état. *C'est R1 qui définit la liste des nœuds par colonne, et c'est la part « déjà acquise » (dérivation de la hiérarchie de consonance).*
+## 2. Les états
 
----
+État = un intervalle vertical admis pour ce timbre. Le graphe se déroule sur
+un cantus firmus de N notes : N colonnes, chacune contenant les intervalles
+possibles au-dessus de la note du cantus.
 
-## 3. Les arêtes et leurs gabarits
+Le mouvement est porté par l'arête, pas par l'état : la règle anti-parallèle
+se vérifie sur (intervalle précédent, mouvement, intervalle courant).
 
-Une **arête** relie un état de la colonne `t` à un état de la colonne `t+1`. Comme la note de cantus est donnée à chaque temps, l'arête est entièrement déterminée par le mouvement de la voix de contrepoint. Le couple (mouvement du cantus imposé, mouvement du contrepoint choisi) fixe le **type de mouvement** : parallèle / direct (similaire) / contraire / oblique.
+- **R1 — admission.** Un intervalle `i` est un état si `C(i) ≥ τ_C`.
 
-Les gabarits ci-dessous **génèrent ou suppriment** les arêtes. Une arête supprimée n'existe pas dans le graphe (elle n'est pas « barrée » ; on peut la matérialiser séparément pour l'analyse, comme adjacence sans arête).
+## 3. Les arêtes et les règles
 
-- **R2 — Règle de sélection anti-fusion (LE gabarit porteur de prédiction).**
-  Une arête en mouvement **parallèle ou direct** arrivant à un intervalle `i` tel que `Φ(i) ≥ τ_F` est **supprimée**.
-  *Justification : mouvement parallèle vers un intervalle de forte coïncidence = mouvement préservant la symétrie spectrale → les orbites de partiels restent confondues → fusion → perte d'indépendance des voix. C'est la généralisation spectrale de « pas de quintes/octaves parallèles ».*
-  Raffinement noté, non implémenté en v1 : le mouvement direct (similaire) vers haut-Φ peut recevoir un seuil distinct, plus permissif que le parallèle strict (analogue des « quintes directes/cachées », tolérées sous conditions).
+Une arête relie un état de la colonne `t` à un état de la colonne `t+1`. Le
+mouvement du cantus étant donné, l'arête fixe le type de mouvement :
+parallèle, direct, contraire ou oblique.
 
-- **R3 — Contraintes de frontière (dérivées, pas imposées).**
-  Premier et dernier état contraints à `argmax Φ` (l'intervalle le plus fusionnel = le plus stable/résolu).
-  *Conséquence dérivée : la pièce commence et finit sur l'intervalle le plus « parfait » de ce timbre. Sur timbre harmonique → octave/unisson, ce qui recouvre la règle classique. Sur un autre timbre → l'intervalle que SON spectre désigne comme le plus fusionnel.*
+- **R2 — interdit de fusion.** Une arête en mouvement parallèle ou direct qui
+  arrive sur un intervalle `i` avec `Φ(i) ≥ τ_F` est supprimée.
+  Motif supposé : deux voix qui avancent ensemble vers un intervalle où
+  beaucoup de partiels coïncident risquent d'être entendues comme une seule.
+  Sur un spectre harmonique, cela correspond à « pas de quintes ni d'octaves
+  parallèles ». Non implémenté : un seuil distinct, plus permissif, pour le
+  mouvement direct.
+- **R3 — début et fin.** Premier et dernier état = `argmax Φ`. Sur un spectre
+  harmonique, cela donne l'octave ou l'unisson, comme la règle classique.
+- **R5 — préférence de mouvement.** Le mouvement contraire et oblique est
+  favorisé, le mouvement direct vers une consonance forte pénalisé (poids
+  d'arête, pas suppression).
 
-- **R5 — Préférence de type de mouvement (graduée, pondère les arêtes survivantes).**
-  Parmi les arêtes admissibles, le mouvement contraire/oblique est préféré ; le mouvement direct vers consonance forte est pénalisé sans être interdit. Implémenté comme poids d'arête, pas comme suppression. *Recouvre la préférence classique pour le mouvement contraire.*
+Hors périmètre v1 : limite du nombre de tierces ou sixtes parallèles
+consécutives (demande une mémoire, donc du séquentiel) ; sauts, ambitus,
+croisements.
 
-Hors périmètre v1, à marquer comme extensions :
-- **R6 (séquentiel-accumulatif) :** limite du nombre de tierces/sixtes parallèles consécutives. C'est aussi de l'anti-fusion, mais *accumulée dans le temps* → nécessite un état à mémoire, donc séquentiel. Différé.
-- **Conduite mélodique interne, sauts, ambitus, croisements :** séquentiel et/ou contraintes de registre. Différé.
-
----
+*Note 2026-10-28 : les formes de R1, R2, R3 et R5 sont écrites à la main. Le
+système calcule seulement où elles s'appliquent pour un spectre donné.*
 
 ## 4. Ce que le graphe produit
 
-- Un **automate par (timbre × récepteur)**. Le timbre harmonique compile vers un graphe ; la boîte à musique vers un autre. La comparaison des deux graphes EST le résultat « le contrepoint dépend du son ».
-- Une composition légale = un **chemin** dans le graphe.
-- Mesures lisibles directement sur la structure, sans aucune 3D : nombre d'états par colonne, nombre d'arêtes, ensemble des arêtes supprimées par R2, position de `argmax Φ`.
+- Un automate par (timbre × modèle d'oreille). La comparaison des automates
+  montre en quoi les règles calculées diffèrent d'un timbre à l'autre.
+- Une réalisation légale du contrepoint = un chemin dans le graphe.
+- Mesures lisibles directement : états par colonne, arêtes, arêtes
+  supprimées par R2, position de `argmax Φ`.
 
----
+## 5. Prédictions (enregistrées avant calcul)
 
-## 5. PRÉDICTIONS (enregistrées avant calcul)
+### Bloc A — timbre harmonique, oreille humaine (cas de contrôle)
 
-### Bloc A — Timbre harmonique + récepteur humain (cas de contrôle : doit reproduire le connu)
+- **P1.** C(i) désigne comme consonants : octave, quinte, quarte, tierces et
+  sixtes.
+- **P2.** Φ(i) est maximale à l'unisson et à l'octave, puis à la quinte. R2
+  supprime donc les arêtes parallèles et directes vers octave et quinte, ce
+  qui correspond à « pas de quintes ni d'octaves parallèles ».
+- **P3.** R3 place le début et la fin sur l'octave ou l'unisson.
 
-- **P1.** `C(i)` désigne comme consonants : octave, quinte, quarte, tierces et sixtes (majeures/mineures). *Recouvre l'ensemble de consonance classique. Sanity check.*
-- **P2 (validation centrale).** `Φ(i)` est maximal à l'unisson et l'octave, puis à la quinte. Donc R2 supprime les arêtes parallèles/directes vers octave et quinte → **on retrouve « pas de quintes ni d'octaves parallèles »**. *Si cette prédiction tombe, le décompilateur est validé sur le cas connu.*
-- **P3.** R3 place début/fin sur octave/unisson. *Recouvre la règle de frontière classique.*
+*Note 2026-10-28 : le texte d'origine de P2 disait « Si cette prédiction
+tombe, le décompilateur est validé sur le cas connu ». C'était une erreur :
+il fallait lire « invalidé », comme le confirme le §6.1.*
 
-### Bloc B — Boîte à musique (poutre encastrée, modes ≈ 1 : 6,27 : 17,55) + récepteur humain
+### Bloc B — boîte à musique (modes ≈ 1 : 6,27 : 17,55), oreille humaine
 
-- **P4.** L'ensemble de consonance `C(i)` se déplace par rapport au Bloc A. Direction prédite (cohérente avec Harrison & MacConnachie sur timbre de cloche) : des intervalles habituellement dissonants peuvent devenir lisses et inversement (p. ex. tierce mineure ↗ consonance, tierce majeure ↘). 
-- **P5 (la prédiction décisive).** `argmax Φ` se déplace : l'intervalle le plus fusionnel n'est PLUS la quinte/octave, mais l'intervalle où les modes inharmoniques se réalignent le mieux sous transposition. **Donc l'« intervalle de parallèles interdit » de R2 se déplace** vers cet intervalle. Prédiction forte et risquée : même l'octave peut perdre son statut fusionnel privilégié, car doubler la fréquence ne réaligne pas {1 ; 6,27 ; 17,55} comme elle réaligne {1 ; 2 ; 3…}. *Le calcul servira à dire OÙ se place le nouveau pic ; la prédiction structurelle est qu'il se déplace et pourquoi.*
+- **P4.** L'ensemble des intervalles consonants C(i) change par rapport au
+  bloc A. Direction attendue, par analogie avec Harrison & MacConnachie sur
+  les cloches : certains intervalles habituellement dissonants peuvent
+  devenir plus consonants, et inversement (par exemple tierce mineure plus
+  consonante, tierce majeure moins).
+- **P5.** `argmax Φ` change : l'intervalle de fusion maximale n'est plus
+  l'octave ou la quinte, mais celui où les modes inharmoniques coïncident le
+  mieux après transposition. L'intervalle interdit en parallèle par R2 change
+  donc aussi. L'octave elle-même peut perdre sa place, puisque doubler la
+  fréquence n'aligne pas {1 ; 6,27 ; 17,55} comme {1 ; 2 ; 3…}. Le calcul
+  dira où se trouve le nouveau maximum ; la prédiction est seulement qu'il se
+  déplace.
 
-### Bloc C — Timbre harmonique, récepteur humain vs récepteur rhinolophe (le résultat épistémologique)
+*Note 2026-10-28 : pour un spectre nettement inharmonique, le déplacement des
+maxima de Φ est presque garanti par l'arithmétique. P5 était donc une
+prédiction peu risquée.*
 
-- **P6 (substrat vs saillance, testable).** Entre les deux récepteurs :
-  - `C(i)` (rugosité) **diffère nettement** — la rugosité dépend de la bande critique, et celle du rhinolophe est radicalement non humaine.
-  - `Φ(i)` (fusion) garde ses **pics co-localisés** — parce que la coïncidence de partiels est arithmétique, donc commune aux deux récepteurs ; seule la *finesse* des pics change (fenêtre de tolérance).
-  - **Conséquence prédite : humain et rhinolophe sont en DÉSACCORD sur la consonance verticale mais en ACCORD sur la localisation grossière des règles de parallèles.** *Si vrai : la part « dans le signal » et la part « dans l'oreille » sont séparées et mesurées. C'est le résultat le plus original.*
+### Bloc C — timbre harmonique, oreille humaine contre oreille à bandes étroites
 
----
+- **P6.** Entre les deux modèles d'oreille, C(i) diffère nettement, tandis que
+  les maxima de Φ restent aux mêmes positions (seule leur largeur change).
+  Humain et autre récepteur seraient donc en désaccord sur la consonance mais
+  d'accord sur la position des interdits de parallèles.
 
-## 6. CRITÈRES D'ABANDON / DE FALSIFICATION (écrits avant le test)
+*Note 2026-10-28 : P6 est vraie par construction, puisque changer la
+tolérance de Φ change la largeur de ses pics, pas leur centre
+(CADRAGE.md §5). Le second récepteur (désigné « rhinolophe » dans la version
+d'origine) était un simple rétrécissement de bande, pas un modèle de
+l'audition d'une chauve-souris.*
 
-Dans l'ordre où ils doivent être vérifiés :
+## 6. Critères d'abandon (enregistrés avant le test)
 
-1. **Test de la métrique sur le cas connu.** Si, sur harmonique + humain, `Φ` ne pique PAS aux consonances parfaites (P2 échoue) → **la métrique de fusion est fausse. Arrêt. On la corrige avant tout le reste.** C'est le vrai premier contrôle : reproduire le connu avant de prétendre au neuf.
+1. **Cas connu.** Si, sur l'harmonique avec oreille humaine, Φ ne culmine pas
+   aux consonances parfaites (P2 échoue), la mesure de fusion est fausse. On
+   la corrige avant toute autre chose.
+2. **Dépendance au timbre.** Si les maxima de Φ de la boîte à musique
+   coïncident avec ceux de l'harmonique (P5 échoue), les interdits de
+   mouvement ne dépendent pas du timbre dans ce modèle. Le projet se réduit
+   alors à un outil de composition.
+3. **Part de Fux retrouvée.** Sur l'harmonique, quelle fraction des règles de
+   première espèce de Fux est retrouvée par R1, R2, R3, R5 ? Si presque
+   aucune, il manque au modèle autre chose que la fusion. Si une part
+   importante, ce qui manque indique soit une convention, soit le
+   séquentiel non couvert.
+4. **Séparation spectre / oreille.** Si, entre les deux modèles d'oreille, les
+   maxima de Φ bougent autant que ceux de C (P6 échoue), la séparation entre
+   ce qui dépend du spectre et ce qui dépend de l'oreille ne tient pas dans
+   le modèle.
 
-2. **Le mouvement est-il timbre-dépendant ?** Si les pics de `Φ` de la boîte à musique COÏNCIDENT avec ceux de l'harmonique (pas de déplacement, P5 échoue) → **le contrepoint n'est pas timbre-dépendant au niveau du mouvement.** Le palier scientifique « fort » tombe ; le projet se réduit à sa valeur de création (donner une grammaire jouable à des timbres sans corpus). On l'aura su en une demi-journée.
+*Note 2026-10-28 : le critère 3 dépend de τ_F, qui a ensuite été choisi pour
+retrouver Fux (ETAPE3-GRAPHE.md §1.4). Son résultat n'est donc pas
+informatif sur l'harmonique.*
 
-3. **Complétude du mécanisme.** Sur harmonique + humain, quelle fraction des règles de première espèce de Fux (R1, R2, R3, R5 ci-dessus) est récupérée ? Si quasi nulle → le mécanisme « fusion par symétrie » est incomplet, il manque un second principe (à chercher). Si substantielle → le décompilateur fonctionne, et ce qui résiste mesure soit la convention pure, soit le périmètre séquentiel non couvert (les deux sont des résultats, pas des échecs).
+## 7. Ce que ce document ne fixe pas
 
-4. **Séparabilité substrat/saillance.** Si, entre humain et rhinolophe, les pics de `Φ` se déplacent autant que `C` (P6 échoue) → la distinction substrat/saillance ne tient pas dans le modèle, et la thèse « grammaire de l'objet » doit être réexaminée. Résultat négatif, mais informatif.
-
----
-
-## 7. Ce que ce document NE fixe pas (décisions repoussées, à dessein)
-
-- Les valeurs numériques des seuils `τ_C`, `τ_F` : ce sont précisément les curseurs de l'analyse de sensibilité. On ne les fige pas ; on les balaye et on observe quelles règles sont robustes (stables sur la plage) vs fragiles (basculent avec le seuil).
-- La forme analytique exacte de l'harmonicité combinée `Φ` (ajustement à une série, ou autocorrélation spectrale sous transposition, ou template harmonique) : à choisir au moment du calcul, mais le choix doit être déclaré et le même pour tous les timbres et récepteurs comparés.
-- Le langage et l'architecture : sans objet pour le test, qui peut se faire dans n'importe quel environnement de calcul.
-
----
-
-## Invariants de la spec
-- Deux scalaires : `C` (vertical, dépend du récepteur) et `Φ` (fusion, substrat arithmétique + fenêtre récepteur). Jamais confondus.
-- États = intervalles admis par le gate de consonance R1. Arêtes = mouvements, filtrés par R2 (anti-fusion) et R3 (frontières), pondérés par R5.
-- R2 est le gabarit porteur de prédiction : il déplace l'interdit de parallèles selon le timbre.
-- Un graphe par (timbre × récepteur) ; la comparaison des graphes est le résultat.
-- Les prédictions du §5 et les critères d'abandon du §6 sont enregistrés avant calcul et ne se réécrivent pas après.
+- Les valeurs de τ_C et τ_F : on les fait varier pour voir quelles règles
+  tiennent sur une large plage et lesquelles basculent.
+- La forme exacte de Φ (ajustement à une série harmonique, coïncidence sous
+  transposition, ou gabarit harmonique) : à choisir au moment du calcul, à
+  déclarer, et identique pour tous les timbres comparés.
+- Le langage de programmation.

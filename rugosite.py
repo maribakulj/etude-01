@@ -2,9 +2,8 @@
 rugosite.py — le scalaire C (consonance verticale) : inverse de la rugosité.
 
 Modèle de Sethares (constantes d'origine, ajustées sur Plomp-Levelt 1965) —
-accepté comme socle par la PASSATION (fragilité n°3 : empirique de seconde
-main, daté, mais standard). Le récepteur entre par bw_scale (échelle de bande
-critique) : c'est le port du CADRAGE §5.
+modèle empirique ancien mais standard. Le modèle d'oreille entre par bw_scale
+(échelle de bande critique), cf. CADRAGE.md §5.
 
 HYGIÈNE ABSOLUE (SPEC §1) : C ne contient pas Φ, Φ ne contient pas C. Ce
 module n'importe rien de metriques_fusion.

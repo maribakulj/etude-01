@@ -42,7 +42,7 @@ PICS_HARMONIQUES = [1200.0, 702.0, 498.0]   # P2, validés étape 1
 # Garde de dégénérescence (ajout daté du 2026-06-11, ETAPE2-PROTOCOLE.md §7,
 # déclarée avant tout calcul de Φ sur le matériau mesuré) : si la courbe
 # mesurée culmine sous 5 % du pic d'octave harmonique, elle est PLATE -> cas
-# dégénéré du CADRAGE §9, verdict P5 SANS OBJET. La garde ne peut qu'empêcher
+# dégénéré du CADRAGE.md §6.4, verdict P5 SANS OBJET. La garde ne peut qu'empêcher
 # un verdict (le harnais détecterait sinon des « pics » de bruit numérique sur
 # une courbe nulle), jamais en fabriquer un.
 GARDE_DEGENERESCENCE = 0.05
@@ -122,7 +122,7 @@ def main():
     if cmax < GARDE_DEGENERESCENCE * ref_octave:
         print(f"\nGarde de dégénérescence : max Φ(mesuré) = {cmax:.4f} "
               f"< {GARDE_DEGENERESCENCE:.0%} du pic harmonique ({ref_octave:.4f}).")
-        print("  Courbe PLATE -> cas dégénéré (CADRAGE §9) : ce timbre, tel que mesuré")
+        print("  Courbe PLATE -> cas dégénéré (CADRAGE.md §6.4) : ce timbre, tel que mesuré")
         print("  en régime tenu, ne porte pas de structure de fusion.")
         print("\n  => P5 SANS OBJET sur cet exemplaire (ni confirmé ni infirmé).")
     else:

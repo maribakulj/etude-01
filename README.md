@@ -1,92 +1,109 @@
-# Étude 01 — règles de mouvement contrapuntique dérivées d'un spectre
+# Étude 01 — interdits de mouvement parallèle calculés à partir d'un spectre
 
 *État au 2026-10-28. Ce fichier dit ce qui est implémenté, ce qui ne l'est
-pas, et à quel point les résultats tiennent. Il prime sur le ton des
-documents d'étape quand ils divergent.*
+pas, et ce que les résultats permettent de conclure. En cas de désaccord avec
+un document d'étape, c'est ce fichier qui fait foi.*
 
 ## Ce que c'est
 
-Une collection de scripts Python exploratoires qui testent une hypothèse :
-**les interdits de mouvement parallèle du contrepoint (quintes, octaves)
-pourraient suivre la fusion spectrale des intervalles, et donc changer avec le
-timbre.** À partir d'un spectre (liste de partiels), les scripts calculent :
+Un ensemble de scripts Python exploratoires autour d'une question : si
+l'interdit des quintes et octaves parallèles vient de ce que deux voix dont
+les partiels coïncident tendent à se fondre en une seule, alors l'intervalle
+à éviter devrait changer avec le timbre. Peut-on le calculer pour un spectre
+donné, et le calcul correspond-il à ce qu'on entend ?
 
-- C(i), la consonance de Sethares (rugosité de Plomp-Levelt) → les intervalles
-  admis comme états (règle R1) ;
-- Φ(i), un indice de coïncidence spectrale (formulation publiée, largeur
-  σ = 6,83 c) → les intervalles vers lesquels le mouvement parallèle est
+L'idée que les règles de conduite des voix s'expliquent par la perception
+n'est pas nouvelle : Huron (2001, *Music Perception* 19(1)) les dérive de
+principes de ségrégation des flux auditifs, pour des sons harmoniques. Ce
+projet essaie d'appliquer une idée de ce type à des spectres quelconques.
+Contexte et travaux existants : `CADRAGE.md`.
+
+À partir d'un spectre (liste de partiels), les scripts calculent :
+
+- C(i), la consonance de Sethares (fondée sur la rugosité), qui décide quels
+  intervalles sont admis (règle R1, seuil τ_C) ;
+- Φ(i), un indice de coïncidence des partiels (formulation de Milne,
+  σ = 6,83 c), qui décide vers quels intervalles le mouvement parallèle est
   interdit (règle R2, seuil τ_F) ;
-- un automate (états × mouvements) et ses chemins légaux pour un cantus.
+- un automate (intervalles admis × mouvements autorisés) et des
+  contrepoints légaux pour un cantus donné.
 
-Ce n'est **pas** un paquet logiciel, ni un modèle formellement vérifié, ni
-(encore) un résultat perceptif établi.
+Les formes de ces règles sont écrites à la main ; le système en calcule les
+paramètres pour chaque spectre.
 
-## Statut : implémenté / non implémenté
+## Ce qui existe
 
 | Élément | Statut |
 |---|---|
-| Métriques C et Φ, auto-tests | implémenté (`metriques_fusion.py`) |
-| Extraction de spectre depuis un WAV | implémenté, validé sur synthétique (`test_extraction.py`) |
-| Grammaire R1/R2/R3/R5, automate, chemin légal | implémenté (`graphe_grammaire.py`) |
-| Spectres réels | 2 : une dent de boîte à musique (cas dégénéré, sans objet) et une cloche de carillon (spectre publié, Harrison & MacConnachie 2024) |
-| Diagramme de phase | 1 famille synthétique (corde raide), 1 schéma de seuils |
-| Écoute | 1 auditeur, informé de la théorie, 4 essais à choix forcé |
-| `lean-export/` | **échafaudage CI** (import Mathlib + deux `#check`) ; aucun énoncé du modèle n'y est formalisé |
-| Tests automatisés | auto-tests et validation d'extraction ; pas de suite de tests unitaires |
+| Mesures C et Φ, avec auto-tests | `metriques_fusion.py`, `rugosite.py` |
+| Extraction de spectre depuis un WAV | `extraction_spectre.py`, validée sur signaux synthétiques (`test_extraction.py`) |
+| Règles R1/R2/R3/R5, automate, recherche de chemin | `graphe_grammaire.py` |
+| Spectres réels | 2 : une note de boîte à musique (spectre presque sinusoïdal, donc sans résultat) et une cloche de carillon (spectre publié par Harrison & MacConnachie, 2024) |
+| Balayage d'inharmonicité | une famille synthétique (corde raide), un seul schéma de seuils |
+| Écoute | 1 auditeur (l'auteur), qui connaissait l'hypothèse, 4 comparaisons |
+| `lean-export/` | workflow CI qui installe Lean et Mathlib ; aucun énoncé du modèle n'y est formalisé |
+| Tests | auto-tests et validation de l'extraction ; pas de suite de tests unitaires |
 
-## Limites connues (à lire avant tout résultat)
+## Limites connues
 
-1. **Le cas harmonique est une calibration, pas une prédiction.** τ_F (0,226 ×
-   max Φ fini du timbre) est le milieu de la fenêtre de seuils qui *reproduit*
-   Fux sur le spectre harmonique (ETAPE3-GRAPHE.md §1.4). Cette fenêtre va de
-   0,143 à 0,309 : en dessous, R2 interdit aussi les quartes et sixtes
-   parallèles ; au-dessus, les quintes parallèles deviennent légales.
-   Retrouver « quintes et octaves parallèles interdites » ne constitue donc
-   **aucune preuve** que la fusion spectrale *cause* l'interdit historique. Le
-   contenu non circulaire sur l'harmonique se réduit au classement
-   Φ(P8) > Φ(P5) > Φ(P4) > Φ(M6) > Φ(M3), proche de la hiérarchie
-   helmholtzienne des rapports simples, déjà connue.
+1. **Le cas harmonique ne prouve rien.** τ_F (0,226 × max Φ fini du timbre)
+   a été choisi au milieu de la plage de seuils qui reproduit Fux sur le
+   spectre harmonique (ETAPE3-GRAPHE.md §1.4). Cette plage va de 0,143 à
+   0,309 : en dessous, R2 interdit aussi les quartes et sixtes parallèles ;
+   au-dessus, les quintes parallèles deviennent permises. Ce qui reste sans
+   calibration, c'est le classement Φ(P8) > Φ(P5) > Φ(P4) > Φ(M6) > Φ(M3),
+   qui correspond à la hiérarchie connue des rapports simples.
 
-2. **Le seul résultat hors calibration (la cloche) est en partie au bord de son
-   plateau.** Avec le τ_F déclaré, la grammaire-cloche interdit les parallèles
-   vers {unisson, 307 c, 886 c} et laisse passer quintes et octaves. Mais
-   cet ensemble ne tient que pour τ_F ∈ [0,224 ; 0,346] : **0,002 sous** la
-   valeur déclarée, P5 et P8 redeviennent interdites. Ce qui est robuste :
-   la tierce mineure de cloche (307 c) a de loin le Φ le plus élevé
-   (1,285 contre 0,445 pour la suivante) et reste interdite à tout seuil.
-   « La cloche autorise les quintes parallèles » est fragile.
+2. **Le résultat sur la cloche dépend du seuil.** Au seuil déclaré, la cloche
+   interdit les parallèles vers {unisson, 307 c, 886 c} et permet quintes et
+   octaves. Cet ensemble ne tient que pour τ_F ∈ [0,224 ; 0,346] : 0,002 sous
+   la valeur déclarée, quintes et octaves redeviennent interdites. Seul
+   l'interdit à 307 c (la tierce mineure de la cloche) tient à tout seuil, et
+   la particularité de cet intervalle sur cette cloche était déjà connue
+   (Harrison & MacConnachie, 2024).
 
-3. **Les bifurcations du diagramme de phase dépendent du seuil.** La 1re
-   bifurcation à B ≈ 7,7e-3 ne tient que pour τ_F ≈ 0,20-0,25 ; ailleurs elle
-   va de 9,4e-4 à 1,1e-1, et le nombre de bifurcations varie de 1 à 18
-   sur τ_F ∈ [0,10 ; 0,40] (8 au seuil déclaré). La 1re bifurcation au seuil déclaré vient d'un état
-   à 1274 c, dans la zone 1200-1400 c ouverte par l'extension déclarée du
-   compas. « Bifurcation » y désigne un changement de cardinalité d'un
-   ensemble seuillé, pas une transition de phase au sens physique.
+3. **Le balayage d'inharmonicité dépend du seuil.** Le premier changement de
+   l'ensemble des interdits à B ≈ 7,7·10⁻³ ne tient que pour τ_F ≈ 0,20-0,25 ;
+   ailleurs il va de 9,4·10⁻⁴ à 1,1·10⁻¹, et le nombre de changements varie
+   de 1 à 18 sur τ_F ∈ [0,10 ; 0,40] (8 au seuil déclaré). Au seuil déclaré,
+   ce premier changement vient d'un interdit à 1274 c, dans la zone ouverte
+   en étendant l'analyse au-delà de l'octave.
 
-4. **Φ n'est pas validé comme mesure de fusion perceptive.** Sa formulation est
-   publiée (proxy de Milne, DECISION-PHI.md), mais σ = 6,83 c provient d'un travail sur l'affinité *mélodique*,
-   pas sur la ségrégation de flux auditifs. Coïncidence spectrale ≠ fusion de
-   deux voix.
+4. **Plusieurs « prédictions vérifiées » étaient presque garanties.**
+   L'octave qui s'élargit avec l'inharmonicité (D2) et les maxima sur des
+   carrés de rationnels (D4) découlent directement de la formule de la corde
+   raide. Le critère « P5 tient » (au moins un maximum de Φ déplacé de plus
+   de 25 c) est presque toujours satisfait par un spectre inharmonique. La
+   stabilité des maxima de Φ quand on change de modèle d'oreille (P6) est
+   vraie par construction. Ces résultats vérifient l'implémentation, pas
+   l'hypothèse.
 
-5. **L'écoute est exploratoire.** 4/4 dans le sens prédit par un seul
-   auditeur, informé de la théorie, sans répétition ni contrebalancement :
-   sous hasard pur, 4/4 arrive une fois sur 16 (p ≈ 0,06). Aucun modèle
-   concurrent (rugosité seule, par exemple) n'a fait de prédictions sur ces
-   mêmes stimuli.
+5. **Φ n'est pas validé comme mesure de fusion perceptive.** Sa formulation
+   est publiée, mais σ = 6,83 c vient de données d'affinité mélodique, pas de
+   jugements de fusion. Et Φ a été préférée aux mesures d'harmonicité en
+   partie parce qu'elle permet aux interdits de changer avec le timbre
+   (DECISION-PHI.md §3) : on a retenu la métrique compatible avec
+   l'hypothèse.
 
-6. **Vocabulaire.** « Quasicristal spectral », « règles de sélection »,
-   « transition de phase » sont, dans CADRAGE-v2.md, des **analogies**, pas
-   des notions définies mathématiquement dans le code.
+6. **L'écoute est exploratoire.** 4 réponses sur 4 dans le sens prédit, par
+   un seul auditeur informé, sans répétition ni contrebalancement, après
+   deux révisions des stimuli suivant ses retours. Au hasard, 4 sur 4 arrive
+   une fois sur 16 (p ≈ 0,06). Aucun modèle concurrent n'a fait de
+   prédiction sur ces mêmes stimuli.
 
-Les chiffres des points 1-3 sont produits par `python3 sensibilite_seuil.py`.
+7. **Le code et les documents ont été écrits avec un assistant IA.** La même
+   instance proposait les hypothèses, écrivait les tests et interprétait les
+   résultats. Que les documents se confirment les uns les autres n'est donc
+   pas une preuve indépendante.
 
-## Moratoire
+Les chiffres des points 1 à 3 sont produits par `python3 sensibilite_seuil.py`.
+Les autres biais connus sont détaillés dans `CADRAGE.md` §7.
+
+## Prochaine étape
 
 Pas d'extension du modèle (nouvelles règles, nouveaux timbres, nouveaux
-diagrammes) tant que l'hypothèse centrale n'a pas survécu à un test
-indépendant. Le protocole de ce test est en brouillon :
-[`PROTOCOLE-TEST-DECISIF.md`](PROTOCOLE-TEST-DECISIF.md).
+balayages) tant que l'hypothèse n'a pas été testée dans des conditions
+indépendantes. Brouillon du protocole : `PROTOCOLE-TEST-INDEPENDANT.md`.
 
 ## Reproduire
 
@@ -103,13 +120,18 @@ seulement par le rendu de la version de matplotlib. `extraction_spectre.py`
 et `segmentation_notes.py` ne sont pas rejoués sur les enregistrements bruts,
 qui ne sont pas commités (cf. `materiau/README.md`).
 
-## Documents (ordre de lecture)
+## Documents
 
-1. `CADRAGE-v2.md` — la question et le cadrage (contient les analogies du point 6).
-2. `PASSATION.md` — état initial et invariants.
-3. `DECISION-PHI.md` — choix de la métrique Φ (étape 1).
-4. `ETAPE2-PROTOCOLE.md` — spectres mesurés, verdicts P5 (étape 2).
-5. `SPEC-v1-graphe-grammaire.md`, `ETAPE3-GRAPHE.md` — grammaire et automates (étape 3).
-6. `ETAPE4-ECOUTE.md` — écoute de falsification informelle (étape 4).
-7. `DIAGRAMME-PHASE.md` — balayage de l'inharmonicité.
-8. `PROTOCOLE-TEST-DECISIF.md` — brouillon du test indépendant.
+1. `CADRAGE.md` — la question, les travaux existants, les biais connus.
+2. `HISTORIQUE.md` — ce qui a été fait, dans l'ordre, et ce que chaque étape montre.
+3. `SPEC-v1-graphe-grammaire.md` — modèle et prédictions, enregistrés avant calcul.
+4. `DECISION-PHI.md` — choix de la mesure Φ (étape 1).
+5. `ETAPE2-PROTOCOLE.md` — spectres mesurés (étape 2).
+6. `ETAPE3-GRAPHE.md` — règles et automates (étape 3).
+7. `ETAPE4-ECOUTE.md` — écoute exploratoire (étape 4).
+8. `DIAGRAMME-PHASE.md` — balayage de l'inharmonicité.
+9. `PROTOCOLE-TEST-INDEPENDANT.md` — brouillon du test indépendant.
+
+Les documents d'étape ont été révisés le 2026-10-28 (ton, vocabulaire,
+réserves) ; leurs prédictions, seuils et résultats chiffrés sont inchangés.
+Les versions d'origine sont dans l'historique git (commit `9a03b9b`).

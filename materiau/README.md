@@ -16,7 +16,7 @@ Rejouer le verdict : `python3 etape2_p5.py materiau/dent994.json`
   `output/lower_bell_spectrum.csv` du dépôt
   github.com/pmcharrison/CarillonConsonancePaper. Entrée du verdict P5
   (substitution déclarée, ETAPE2-PROTOCOLE.md §7, 2026-06-12).
-- `cloche_westerkerk_12c1_extraction.json` — extraction par NOTRE chaîne figée
+- `cloche_westerkerk_12c1_extraction.json` — extraction par notre chaîne figée
   du bourdon brut `12-c1.wav` du même dépôt (contrôle de robustesse).
 
 Rejouer : `python3 etape2_p5.py materiau/cloche_westerkerk_publie.json`

@@ -1,9 +1,11 @@
-# ETAPE2-PROTOCOLE — P5 sur spectre mesuré : protocole figé AVANT la mesure
+# ETAPE2-PROTOCOLE — P5 sur spectre mesuré : protocole figé avant la mesure
 
-*Daté du 2026-06-11. La chaîne de mesure est écrite, paramétrée et validée à
-l'aveugle (sur synthétique) avant qu'aucun enregistrement réel ne soit entré
-dans le système. C'est l'application à l'étape 2 de la discipline du projet :
-la prédiction et l'instrument de mesure précèdent la donnée.*
+*Daté du 2026-06-11. La chaîne de mesure a été écrite, paramétrée et validée
+sur signaux synthétiques avant qu'aucun enregistrement réel ne soit analysé.
+Les §1, §4 et §5 décrivent l'état au 2026-06-11. Texte révisé le 2026-10-28
+(ton ; notes de relecture marquées « Note 2026-10-28 ») ; seuils, règles et
+résultats inchangés. Version d'origine :
+`git show 9a03b9b:ETAPE2-PROTOCOLE.md`.*
 
 ---
 
@@ -38,10 +40,16 @@ la prédiction et l'instrument de mesure précèdent la donnée.*
     de la chaîne (±15 c, §3) et de la JND d'accordage (~10 c) ; en dessous du
     plus petit déplacement prédit par l'analytique (35 c pour l'octave
     comprimée).
-- **Règle d'intégrité : après réception des données réelles, ni ces seuils ni
-  les paramètres d'extraction ne se retouchent.** Toute retouche exige une
-  entrée datée ici, avec justification, et invalide le caractère « à
-  l'aveugle » du réglage concerné.
+- Règle : après réception des données réelles, ni ces seuils ni les
+  paramètres d'extraction ne sont modifiés. Toute modification demande une
+  entrée datée ici, avec justification, et le réglage concerné n'est alors
+  plus « fixé avant la donnée ».
+
+*Note 2026-10-28 : ce critère est peu exigeant. Pour un spectre nettement
+inharmonique, il est presque certain qu'au moins un maximum de Φ s'écarte de
+plus de 25 c des maxima harmoniques. « P5 tient » signifie donc surtout que
+le spectre mesuré est inharmonique et assez riche ; le contenu informatif est
+dans la position des maxima, pas dans le verdict.*
 
 ## 3. Chaîne de mesure (figée)
 
@@ -74,7 +82,7 @@ Réseau du conteneur : seuls `github.com` / `raw.githubusercontent.com` /
 
 - **Wikimedia Commons « Music box notes 1…13.ogg »** (CC BY-SA, notes isolées
   d'une vraie boîte) : la cible idéale, identifiée mais inaccessible d'ici.
-- **Soundfonts GM « music_box » démasqués à la sonde spectrale** — aucun n'est
+- **Soundfonts GM « music_box » écartés après analyse spectrale** — aucun n'est
   une boîte à musique : FluidR3 = barre *accordée* (mode 2 à 4,000× sur toutes
   les notes, signature type vibraphone) ; MusyngKite et FatBoy = quasi
   harmoniques (type célesta). Même verdict pour les « boîtes à musique »
@@ -87,7 +95,7 @@ Réseau du conteneur : seuls `github.com` / `raw.githubusercontent.com` /
   un plan B légitime ; ce serait une substitution d'exemplaire à déclarer.)*
 
 Conclusion : pas de vrai enregistrement de boîte à musique accessible depuis ce
-conteneur. La sonde spectrale qui a démasqué les faux est elle-même un
+conteneur. La sonde spectrale qui les a écartés est elle-même un
 sous-produit utile de l'étape (réutilisée dans `extraction_spectre.py`).
 
 ## 5. Ce qu'il faut pour conclure l'étape 2 (l'un OU l'autre)
@@ -115,7 +123,7 @@ python3 segmentation_notes.py melodie.mp3 notes.json  # front-end mélodie (§7)
 
 ## 7. Entrées datées (modifications et matériau postérieurs au gel)
 
-### 2026-06-11 — premier matériau reçu : mélodie au lieu de notes isolées. Verdict P5 : NON RENDU.
+### 2026-06-11 — premier matériau reçu : mélodie au lieu de notes isolées. Verdict P5 : non rendu.
 
 **Reçu** : enregistrement d'une boîte à manivelle à bande perforée jouant la
 fugue en ré mineur de Bach (~51 s, mp3 stéréo 44,1 kHz ; bruit de manivelle ;
@@ -139,7 +147,7 @@ raisons indépendantes de Φ :**
    qui injecte un faux partiel harmonique dans chaque spectre mesuré.
 2. **Contamination polyphonique démontrée** : le diagnostic « ping d'attaque »
    (fenêtres de 50 ms post-onset, moyennées par dent) montre des composantes à
-   fréquence ABSOLUE fixe partagées entre dents distinctes (926, 829, 1251 Hz)
+   fréquence absolue fixe partagées entre dents distinctes (926, 829, 1251 Hz)
    — les autres voix qui résonnent, vues comme de faux « modes » à des ratios
    différents par chaque dent.
 3. **Indécidabilité sur musique tonale** : le contexte harmonique se répète
@@ -158,7 +166,7 @@ invalide). La chaîne, la segmentation et les diagnostics ont fonctionné :
 c'est la qualification qui a arrêté la mesure, pas un réglage.
 
 **Matériau demandé (précisé — facile avec une boîte à bande perforée)** :
-perforer une bande avec des notes ISOLÉES — une seule note à la fois, ~3-4 s
+perforer une bande avec des notes isolées — une seule note à la fois, ~3-4 s
 entre deux trous, chaque note répétée 3-5 fois, sur 3-5 dents différentes (les
 plus graves de préférence) ; manivelle lente et régulière ; micro à 10-20 cm,
 niveau modéré (pas de saturation), sans AGC ni normalisation si possible ;
@@ -172,7 +180,7 @@ CC BY-SA — la cible identifiée au §4), téléchargée par l'utilisateur et
 déposée dans la conversation, ou récupérée directement si l'allowlist réseau
 est élargie.
 
-### 2026-06-11 — second matériau reçu : « Music box notes 1-5 » (Wikimedia Commons, CC BY-SA), notes isolées. QUALIFIANT.
+### 2026-06-11 — second matériau reçu : « Music box notes 1-5 » (Wikimedia Commons, CC BY-SA), notes isolées. Qualifiant.
 
 **Reçu** : 5 fichiers ogg (44,1 kHz, ~3-7 s), 1 à 3 frappes par fichier, notes
 différentes par frappe (gamme échantillonnée sur ~994-2650 Hz). Niveaux sains
@@ -181,8 +189,8 @@ différentes par frappe (gamme échantillonnée sur ~994-2650 Hz). Niveaux sains
 
 **Constats de mesure** (avant tout calcul de Φ) :
 - chaque frappe : fondamental dominant + composantes faibles ;
-- harmoniques EXACTEMENT entières (2,000 / 2,999, ±0,3 %) faibles, dont le
-  niveau varie entre fichiers pour LA MÊME dent (994 Hz : 2,0 à amp 0,17 dans
+- harmoniques exactement entières (2,000 / 2,999, ±0,3 %) faibles, dont le
+  niveau varie entre fichiers pour la même dent (994 Hz : 2,0 à amp 0,17 dans
   le fichier fort, absente dans le fichier faible) → **distorsion de chaîne
   dépendante du niveau, démontrée en interne** ;
 - un mode inharmonique récurrent : **10,53× sur la dent 994 Hz, vu dans deux
@@ -190,8 +198,8 @@ différentes par frappe (gamme échantillonnée sur ~994-2650 Hz). Niveaux sains
 - composantes faibles sous le fondamental (0,89-0,94×) et à ~1,29-1,46×
   non récurrentes entre dents : sonnerie sympathique de dents voisines.
 
-**Règles de nettoyage, déclarées ICI avant tout calcul de Φ** — le spectre de
-la dent retenu pour Φ est le spectre TRANSPOSABLE de la note (ce que la voix
+**Règles de nettoyage, déclarées ici avant tout calcul de Φ** — le spectre de
+la dent retenu pour Φ est le spectre transposable de la note (ce que la voix
 emporte quand elle se transpose), donc :
 1. exclusion des ratios entiers exacts (|ratio − n| < 0,01, n = 2, 3, 4) :
    artefacts de chaîne prouvés ci-dessus (une lamelle encastrée n'a pas de
@@ -202,12 +210,12 @@ emporte quand elle se transpose), donc :
 3. exclusion des frappes-accords (≥2 composantes fortes dans la zone des
    intervalles musicaux 1,06-2,30).
 4. **Garde de dégénérescence** (ajoutée ici car le harnais figé suppose une
-   courbe structurée ; elle ne peut qu'EMPÊCHER un verdict, jamais en
+   courbe structurée ; elle ne peut qu'empêcher un verdict, jamais en
    fabriquer un) : si max Φ(mesuré) sur (100 c, 1200 c) < 5 % du pic d'octave
-   du cas harmonique de référence, la courbe est déclarée PLATE → cas
-   dégénéré du CADRAGE §9 (« spectre très pauvre → pas de structure → pas de
-   grammaire ») → verdict P5 : SANS OBJET sur cet exemplaire (ni confirmé ni
-   infirmé). Déclaré après lecture des spectres extraits mais AVANT tout
+   du cas harmonique de référence, la courbe est déclarée plate → cas
+   dégénéré du CADRAGE.md §6.4 (« spectre très pauvre → pas de structure → pas de
+   grammaire ») → verdict P5 : sans objet sur cet exemplaire (ni confirmé ni
+   infirmé). Déclaré après lecture des spectres extraits mais avant tout
    calcul de Φ sur ce matériau.
 
 **Spectre retenu** (dent la plus grave, la mieux établie — 2 fichiers
@@ -215,60 +223,59 @@ indépendants) : f0 = 993,8 Hz ; partiels transposables {1,000 : amp 1,00 ;
 10,53 : amp 0,10 (médiane des deux observations)}. Conservé dans
 `materiau/dent994.json`.
 
-**RÉSULTAT (verdict rendu par la chaîne figée + garde déclarée) :**
+**Résultat (verdict rendu par la chaîne figée + garde déclarée) :**
 
-> **P5 : SANS OBJET sur cet exemplaire — cas dégénéré.** La courbe Φ du
-> spectre mesuré nettoyé est PLATE (max Φ = 0,0000 contre 0,7318 au pic
+> **P5 : sans objet sur cet exemplaire — cas dégénéré.** La courbe Φ du
+> spectre mesuré nettoyé est plate (max Φ = 0,0000 contre 0,7318 au pic
 > d'octave harmonique) : le timbre tenu de cette boîte, tel que mesuré, est
 > quasi sinusoïdal ({1 ; 10,53 à amp 0,10} — aucune paire de partiels ne
 > tombe dans l'octave) et **ne porte pas de structure de fusion**. C'est le
-> cas dégénéré prévu par CADRAGE §9 (« ce son ne porte pas de contrepoint ») :
+> cas dégénéré prévu par CADRAGE.md §6.4 (« ce son ne porte pas de contrepoint ») :
 > un résultat légitime, ni confirmation ni infirmation de P5.
 
-**Sensibilité (à valeur démonstrative, PAS de verdict)** : en GARDANT les
+**Sensibilité (démonstration, pas un verdict)** : en gardant les
 harmoniques de distorsion ({2,000 : 0,17 ; 2,999 : 0,08}), Φ pique à 1200 c
 (0,170) puis 701 c (0,014) — la distorsion de chaîne fabrique une grammaire
 harmonique et aurait déclenché à tort le critère d'abandon SPEC §6.2
-(« les pics coïncident »). La qualification du matériau n'est pas du luxe :
-elle sépare un verdict d'un artefact de micro.
+(« les pics coïncident »). Sans l'étape de qualification du matériau, un
+artefact d'enregistrement aurait été pris pour un résultat.
 
-**Implications (à reporter dans PASSATION)** :
-1. **La fragilité n°2 de la passation est tranchée par la mesure** : les
+**Implications** :
+1. **Les amplitudes du modèle analytique sont contredites par la mesure** : les
    amplitudes analytiques (1/√k → mode 2 à 0,71) sont fausses en régime tenu
    pour ce type de boîte — les modes inharmoniques réels y sont ≥10× plus
-   faibles que le fondamental. Le « signe de vie » P5 du test exploratoire
+   faibles que le fondamental. Le premier résultat P5 du test exploratoire
    reposait sur ces amplitudes irréalistes.
 2. **Portée limitée à l'exemplaire** : petit peigne aigu (dents mesurées
    994-2650 Hz ; le mode 10,53 de la dent grave sort à 10,5 kHz, en limite de
    bande). Une grande boîte à cylindre à dents graves lestées (f0 200-400 Hz,
    modes en pleine bande, sustain plus long) peut porter un timbre tenu plus
    riche : P5 y reste testable tel quel.
-3. **L'inharmonicité réelle vit dans l'ATTAQUE** (le « ping » bref) : c'est la
-   dimension temporelle, hors périmètre v1 (simultanéité statique). L'étape
-   « dynamique temporelle » de la PASSATION devient le lieu naturel de P5 pour
-   les petites boîtes.
-4. **Alternative v1 immédiate** : des timbres inharmoniques RICHES en régime
+3. **Sur ces petites boîtes, l'inharmonicité semble surtout présente dans
+   l'attaque** (le « ping » bref), ce qui relève de la dimension temporelle,
+   hors périmètre v1 (simultanéité statique). Hypothèse non vérifiée ici.
+4. **Alternative v1 immédiate** : des timbres inharmoniques riches en régime
    tenu existent et sont documentés (cloches, carillons — cf. Harrison &
-   MacConnachie 2024 cités au CADRAGE §3) : P5 peut être testé en v1 sur un
+   MacConnachie 2024 cités au CADRAGE.md §2) : P5 peut être testé en v1 sur un
    spectre de cloche mesuré publié, en déclarant la substitution d'exemplaire.
 
 **Attribution du matériau** : série « Music box notes » 1-5, Wikimedia
 Commons, licence CC BY-SA 4.0, fichiers déposés par l'utilisateur dans la
-conversation. Les fichiers audio ne sont PAS commités au dépôt : l'attribution
+conversation. Les fichiers audio ne sont pas commités au dépôt : l'attribution
 exacte (auteur) est à compléter (page Commons inaccessible depuis le
 conteneur). Seules les mesures dérivées (faits) sont conservées
 (`materiau/dent994.json`).
 
-### 2026-06-12 — substitution d'exemplaire déclarée : cloche de carillon (Westerkerk), spectre mesuré PUBLIÉ
+### 2026-06-12 — substitution d'exemplaire déclarée : cloche de carillon (Westerkerk), spectre mesuré publié
 
 **Décision validée par l'utilisateur** (option (b) de la réorientation) : P5
 étant sans objet sur la petite boîte (timbre tenu dégénéré), on teste le
-déplacement des pics de fusion sur un timbre inharmonique RICHE en tenu : une
+déplacement des pics de fusion sur un timbre inharmonique riche en tenu : une
 cloche de carillon. La prédiction structurelle P5 (SPEC §5 : les pics de Φ se
 déplacent avec le timbre, donc l'interdit de parallèles R2 aussi) s'applique
 telle quelle ; seul l'exemplaire change, et ce document le déclare.
 
-**Source (publiée, idéale)** : Harrison & MacConnachie (2024), « Consonance in
+**Source (publiée)** : Harrison & MacConnachie (2024), « Consonance in
 the carillon », J. Acoust. Soc. Am. 156(2). Matériaux du papier sur GitHub
 (pmcharrison/CarillonConsonancePaper) : enregistrements bruts des cloches du
 carillon de la Westerkerk + spectres extraits par les auteurs
@@ -279,14 +286,14 @@ duodeciem 2,986/0,35 ; III-4 3,296/0,23 ; octave sup. 4,129/0,23 ; quarte sup.
 5,381/0,19 ; sixte sup. 6,721/0,09).
 
 **Règles, déclarées avant tout calcul de Φ sur ce matériau :**
-1. Entrée du verdict = le spectre publié `lower_bell_spectrum` TEL QUEL (aucun
+1. Entrée du verdict = le spectre publié `lower_bell_spectrum` tel quel (aucun
    nettoyage de notre main ; les règles de nettoyage de l'entrée « boîte à
    musique » étaient propres à ce matériau-là et ne s'appliquent pas — une
-   cloche est ACCORDÉE vers des rapports rationnels, ses quasi-entiers sont
+   cloche est accordée vers des rapports rationnels, ses quasi-entiers sont
    réels).
 2. Seuils du verdict et garde de dégénérescence : inchangés (25 c ; 5 %).
 3. Contrôle de robustesse (rapporté, non décisionnel) : le même verdict relancé
-   sur le spectre que NOTRE chaîne figée extrait du wav brut du bourdon
+   sur le spectre que notre chaîne figée extrait du wav brut du bourdon
    `12-c1.wav` du même dépôt.
 
 **Validation croisée de la chaîne sur réel publié (avant verdict)** : sur
@@ -297,38 +304,40 @@ campanologie : 0,497 (hum), 1,000 (prime), 1,185 (tierce), 1,981 (nominal),
 mesure est donc validée sur matériau réel contre une extraction publiée
 indépendante.
 
-**RÉSULTAT (verdict de la chaîne figée) :**
+**Résultat (verdict de la chaîne figée) :**
 
-> **P5 TIENT sur la cloche de carillon — sur les DEUX entrées.**
+> **P5 tient sur la cloche de carillon — sur les deux entrées.**
 > - Spectre publié (`materiau/cloche_westerkerk_publie.json`) : pics Φ à
 >   **307 c** (Φ=1,28, argmax — la tierce mineure propre de la cloche, paire
 >   tierce/prime 1,194), **887 c** (0,45, paire nominal/tierce), 1193 c (0,41,
 >   quasi-octave), 701 c (0,29, quinte accordée), 394 c, 454 c. Quatre pics
->   principaux DÉPLACÉS (dont l'argmax, à 191 c du plus proche pic
+>   principaux déplacés (dont l'argmax, à 191 c du plus proche pic
 >   harmonique) ; octave et quinte persistent en pics secondaires.
 > - Contrôle de robustesse (notre extraction du bourdon brut,
 >   `materiau/cloche_westerkerk_12c1_extraction.json`) : même famille de pics
->   (1183 / 889 / 703 / 295 / 462 c) → verdict TIENT également.
+>   (1183 / 889 / 703 / 295 / 462 c) → verdict tient également.
 >
-> Conséquence R2 dérivée : sur ce timbre, l'interdit de mouvement parallèle
-> quitte l'exclusivité octave/quinte et se loge sur les intervalles propres de
-> la cloche — le plus robuste aux deux profils d'amplitudes étant **~888 c**
-> (sixte majeure comprimée, déplacée de ~185 c), et selon le profil, la
-> **tierce mineure ~307 c** prend la tête. La grammaire carillon GARDE une
-> part de Fux (pics quinte/octave, héritage de l'accordage des fondeurs) et
-> en déplace une autre : exactement la structure que le projet prédit.
+> Conséquence pour R2 : sur ce timbre, les intervalles de plus forte
+> coïncidence ne sont plus seulement l'octave et la quinte. Le maximum le plus
+> stable entre les deux profils d'amplitudes est vers 888 c ; selon le
+> profil, la tierce mineure vers 307 c passe en tête. Octave et quinte restent
+> des maxima secondaires, ce qui s'explique par l'accordage des cloches par
+> les fondeurs.
 
-**Nuance d'honnêteté (à garder pour l'article)** : l'ARGMAX (la forme forte de
-P5 et l'entrée de R3) dépend du profil d'amplitudes — tierce en tête sur le
+**Nuance** : le maximum (la forme forte de P5, et l'entrée de R3) dépend du
+profil d'amplitudes — tierce en tête sur le
 spectre représentatif publié (hum/tierce lourdes), quasi-octave en tête sur
-notre extraction mono-cloche (nominal lourd). Les POSITIONS des pics
-(substrat) sont stables ; leur HIÉRARCHIE (saillance) dépend de la convention
-d'amplitude et de la cloche — cohérent avec la distinction substrat/saillance
-du CADRAGE §5, et à trancher à l'étape 3 par l'analyse de sensibilité prévue
-(balayage de τ_F).
+notre extraction mono-cloche (nominal lourd). Les positions des pics
+sont stables ; leur ordre dépend de la convention d'amplitude et de la
+cloche. À examiner à l'étape 3 par le balayage de τ_F.
 
-**Cohérence externe (information)** : Harrison & MacConnachie trouvent, côté
-interférence/consonance C, la tierce mineure devenue consonante sur carillon ;
-notre Φ — qui ne contient AUCUNE rugosité (hygiène C≠Φ) — désigne le même
-intervalle comme pic de fusion. Deux mécanismes distincts convergent sur le
-même intervalle, et la SPEC P4 avait enregistré cette direction avant calcul.
+**Rapport avec Harrison & MacConnachie** : ils trouvent, du côté de la
+consonance, la tierce mineure devenue consonante sur carillon ; Φ désigne le
+même intervalle comme maximum de coïncidence.
+
+*Note 2026-10-28 : la version d'origine présentait cela comme deux mécanismes
+indépendants qui convergent. C'est discutable : les deux résultats
+viennent, au moins en grande partie, du même fait spectral (le partiel de tierce de la cloche, à 1,194 ×
+la prime, coïncide avec la prime de l'autre voix à environ 307 c). Leur
+accord était attendu, et ce résultat dépend en partie de données déjà
+publiées sur ce même instrument.*

@@ -1,7 +1,7 @@
-# PROTOCOLE-TEST-DECISIF — pré-enregistrement (BROUILLON, non figé)
+# PROTOCOLE-TEST-INDEPENDANT — pré-enregistrement (brouillon, non figé)
 
 *Brouillon du 2026-10-28. Rien ici n'est encore engageant : le protocole
-devient pré-enregistré au moment du commit-tag `prereg-v1` (§8). Les
+devient pré-enregistré au moment du tag git `prereg-v1` (§8). Les
 décisions ouvertes, que seul le porteur du projet peut trancher, sont listées
 au §9. Contexte et motifs : README.md, « Limites connues ».*
 
@@ -14,9 +14,10 @@ spectrale Φ dérivée du timbre prédit-elle quels mouvements parallèles des
 auditeurs naïfs entendent comme « une seule voix », **mieux que** des modèles
 plus simples ?
 
-Un succès serait le premier résultat substantiel du projet. Un échec
-délimiterait ce qu'une explication spectrale du contrepoint peut porter. Les
-deux sont publiables et seront consignés de la même façon.
+Un succès serait le premier résultat du projet obtenu dans des conditions
+indépendantes. Un échec indiquerait que la coïncidence de partiels ne suffit
+pas à prédire la fusion sur ces timbres. Les deux issues seront consignées de
+la même façon.
 
 ## 2. Hypothèses
 
@@ -24,9 +25,9 @@ deux sont publiables et seront consignés de la même façon.
   note, différant par l'intervalle tenu en mouvement parallèle, les auditeurs
   choisissent comme « plus fondu » l'extrait dont l'intervalle a le Φ le plus
   élevé *pour ce timbre*.
-- **H2 (comparative, celle qui compte).** Sur les essais critiques (§4.3), les
-  prédictions de M_Φ concordent avec les choix plus souvent que celles de
-  M_harm et de M_rug.
+- **H2 (comparative).** Sur les essais critiques (§4.3), les prédictions de
+  M_Φ concordent avec les choix plus souvent que celles de M_harm, de M_rug
+  et de M_hauteur.
 
 H1 seule ne suffit pas : sur la plupart des paires, Φ, la rugosité et la
 simplicité des rapports prédisent la même chose. Seule H2, sur les essais où
@@ -34,7 +35,7 @@ les modèles divergent, peut départager.
 
 ## 3. Modèles concurrents (tous figés avant toute écoute)
 
-Chaque modèle attribue un score à un (timbre, intervalle) ; il prédit
+Chaque modèle attribue un score à un couple (timbre, intervalle) ; il prédit
 « l'extrait au score le plus élevé fusionne plus ».
 
 | Code | Modèle | Dépend du timbre ? | Score |
@@ -42,12 +43,16 @@ Chaque modèle attribue un score à un (timbre, intervalle) ; il prédit
 | **M_Φ** | modèle du projet | oui | Φ(i) sur le spectre mesuré, σ = 6,83 c |
 | **M_harm** | interdit traditionnel | non | Φ(i) sur le spectre harmonique de référence (équivaut au classement des rapports simples) |
 | **M_rug** | rugosité seule | oui | −C(i), la consonance de Sethares sur le spectre mesuré, avec un signe à figer au §9 (plus lisse → plus fondu, a priori) |
+| **M_hauteur** | regroupement par fondamentale commune | oui, faiblement | crible harmonique (`sieve_darwin` de `metriques_fusion.py`) sur le spectre mesuré : l'union des deux voix évoque-t-elle une seule fondamentale ? |
+
+M_hauteur est ajouté parce que Φ a été choisie contre cette famille de
+mesures sans test empirique (DECISION-PHI.md §3, réserve du 2026-10-28).
 
 **Prédicteur continu, sans seuil.** Les tests utilisent Φ brut, pas
 l'ensemble seuillé à τ_F : README.md, limites 1-3, montre que les ensembles
 seuillés sont sensibles à τ_F. Aucun seuil n'intervient dans ce protocole.
 
-**Gel du modèle.** Code au commit-tag `prereg-v1` ; paramètres :
+**Gel du modèle.** Code au tag `prereg-v1` ; paramètres :
 σ = 6,83 c, C de Sethares (paramètres de `metriques_fusion.py`), chaîne
 d'extraction de `extraction_spectre.py`. Interdit après le tag : changer σ,
 la chaîne d'extraction, le règlement de nettoyage des spectres, le signe de
@@ -83,8 +88,9 @@ ensuite.
 Pour chaque timbre, toutes les paires d'intervalles parmi les états R1, en
 excluant l'unisson et en se limitant au compas de l'octave, sont classées :
 
-- **critiques** : M_Φ prédit l'inverse de M_rug **ou** de M_harm ;
-- **concordants** : les trois modèles sont d'accord (ils servent à vérifier que
+- **critiques** : M_Φ prédit l'inverse d'au moins un des trois autres
+  modèles ;
+- **concordants** : les quatre modèles sont d'accord (ils servent à vérifier que
   la tâche fonctionne).
 
 La sélection est faite **par script** (à écrire, `selection_essais.py`) à
@@ -127,17 +133,18 @@ resynthèse additive des partiels, sauf décision contraire au §9.
 - **Mesure primaire** : pour chaque modèle M, la proportion d'essais
   **critiques** où le choix du participant concorde avec la prédiction de M.
 - **Test de H2** : régression logistique à effets mixtes (participant et paire
-  en effets aléatoires) ; comparaison M_Φ contre M_rug et M_Φ contre M_harm
+  en effets aléatoires) ; comparaison de M_Φ à chacun des trois autres modèles
   par différence de concordance appariée par participant, avec IC à 95 %
   par bootstrap sur les participants.
 - **Contrôle de validité** : sur les essais concordants, la concordance doit
   dépasser le hasard. Sinon, la tâche est invalide et le résultat est
   « non concluant », pas « réfuté ».
 - **Règles de décision (figées)** :
-  - **Succès** : la concordance de M_Φ dépasse celle de M_rug **et** celle de
-    M_harm, avec IC à 95 % des deux différences au-dessus de 0, sur T1 et T2
-    pris ensemble, sans effet contraire significatif sur l'un des deux.
-  - **Échec** : au moins une des deux différences a un IC à 95 % entièrement
+  - **Succès** : la concordance de M_Φ dépasse celle de chacun des trois
+    autres modèles, avec IC à 95 % des trois différences au-dessus de 0, sur
+    T1 et T2 pris ensemble, sans effet contraire significatif sur l'un des
+    deux.
+  - **Échec** : au moins une des trois différences a un IC à 95 % entièrement
     ≤ 0, ou M_Φ ne dépasse pas le hasard sur les essais critiques.
   - **Non concluant** : tout le reste. Consigné tel quel, sans lecture
     favorable.
@@ -149,7 +156,7 @@ resynthèse additive des partiels, sauf décision contraire au §9.
 Le tag `prereg-v1` est posé **quand** les fichiers suivants sont commités :
 1. ce document, complété (§9 tranché) ;
 2. les spectres mesurés de T0, T1, T2 (§4.2) ;
-3. les prédictions des trois modèles et la liste des essais (§4.3) ;
+3. les prédictions des quatre modèles et la liste des essais (§4.3) ;
 4. `analyse_prereg.py`, exécuté sur données simulées, avec sa sortie ;
 5. les stimuli rendus, avec leurs hash.
 

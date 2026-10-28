@@ -202,7 +202,7 @@ def main():
           f"atteint par {jmax[1]}")
     print("  F4 (commencer/finir sur unisson/octave) : voir frontières R3 ci-dessous")
     print("  F5 (préférence mouvement contraire) : GABARIT R5 (forme imposée v1,")
-    print("      pas une découverte — CADRAGE §9 ; seuls ses POIDS seraient ajustables)")
+    print("      pas une découverte — CADRAGE.md §6.2 ; seuls ses POIDS seraient ajustables)")
 
     # Automate illustratif : seuils choisis par un schéma DÉCLARÉ et symétrique
     # entre timbres (pas de cherry-picking) :

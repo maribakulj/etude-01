@@ -7,18 +7,18 @@ extension (R6 différée).
 
 Invariants d'architecture honorés ici :
   - RÈGLES = DONNÉES : les gabarits R1/R2/R3/R5 sont le dict GABARITS,
-    interprété par le constructeur — pas du code épars (CADRAGE §10.2).
+    interprété par le constructeur — pas du code épars (CADRAGE.md §6.5).
   - RÉCEPTEUR = PORT : paramètre explicite (bw_scale pour C, sigma pour Φ),
-    jamais soudé (CADRAGE §10.1).
+    jamais soudé (CADRAGE.md §6.5).
   - TRAÇABILITÉ DU SEUILLAGE : chaque état retient (C, tau_C) ; chaque arête
     supprimée retient (mouvement, Φ à l'arrivée, tau_F, paire de partiels
     dominante qui porte la coïncidence) — c'est ce qui distingue règle robuste
-    et règle fragile (CADRAGE §10.4).
+    et règle fragile (CADRAGE.md §6.5).
   - C et Φ jamais mélangés : C vient de rugosite.py, Φ de metriques_fusion.
 
 Décisions de modélisation v1 (déclarées) :
   - Grille d'états par colonne = PICS LOCAUX de C(i) pour ce (timbre ×
-    récepteur) — la « gamme de l'objet » (acquis Sethares, CADRAGE §3) — puis
+    récepteur) — la « gamme de l'objet » (méthode de Sethares, CADRAGE.md §2) — puis
     gate R1 : C(pic) >= tau_C. L'unisson (0 c) est un état si c'est un pic.
   - Cantus donné en cents (ici 12-TET pour comparabilité inter-timbres) ; le
     même cantus sert à tous les automates comparés. Le contrepoint choisit ses

@@ -5,7 +5,7 @@ Ce module implémente plusieurs métriques de fusion / harmonicité tirées de l
 littérature, plus la proxy actuelle, derrière UNE interface commune, pour les
 comparer sur le cas de contrôle (timbre harmonique + récepteur humain).
 
-Contrat (cf. SPEC-v1 §1, CADRAGE-v2 §5, PASSATION) :
+Contrat (cf. SPEC-v1 §1, CADRAGE.md §5) :
   - Φ(i) = tendance à la fusion = harmonicité du spectre combiné (union des
     partiels de la voix A et de la voix B transposée de l'intervalle i).
   - Le SUBSTRAT (localisation des pics de coïncidence) est arithmétique,
