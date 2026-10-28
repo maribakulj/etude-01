@@ -5,12 +5,20 @@ par unité de travail terminée, avec le commit correspondant.*
 
 ## Phase en cours
 
-Phase 0 — Fondations : à commencer.
+Phase 1 — L'oreille, à partir de données : prochaine unité = protocole de la
+phase (composants, données publiées de référence, tolérances), avant tout
+code.
 
 ## Fait
 
 - Étape 1 de la boucle simulée (protocole `2a4e20d`, code `5942083`,
   résultats `fd4b0eb`) ; plan `92d5161`.
+- Phase 0 terminée. Paquet, registre (28 paramètres : 1 oreille,
+  20 techniques, 7 à remplacer), module `oreille/`, 8 tests (`501aaf1`).
+  Critère de sortie rempli : `python3 boucle/boucle.py` puis `rendu.py`
+  redonnent `resultats.json`, les 8 sons et la figure identiques au bit près.
+  Défaut trouvé et corrigé : l'élagage du calcul de coïncidence supposait une
+  grille couvrant tout le registre.
 
 ## En attente d'une personne ou de matériel
 
@@ -24,3 +32,4 @@ Phase 0 — Fondations : à commencer.
 ## Journal
 
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
+- 2026-10-28 : phase 0 terminée.

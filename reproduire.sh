@@ -14,6 +14,9 @@ export MPLBACKEND=Agg
 etape() { echo; echo "===== $* ====="; "$@"; }
 
 {
+  # Tests du paquet boucle (registre, oreille, reproduction de l'étape 1)
+  etape python3 -m pytest -q
+
   # Auto-tests et validation de la chaîne de mesure
   etape python3 metriques_fusion.py
   etape python3 test_extraction.py
