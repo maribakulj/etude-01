@@ -35,6 +35,7 @@
 | `PERIODES_MS` | (100.0, 150.0, 200.0) | périodes T entre événements (réglage varié) | sensibilité : influence mesurée par R (phase 2) ; bornes dans la plage de van Noorden |
 | `TAUS_SYNTH_S` | (0.5, 1.5) | persistance (s) des sons sans décroissance mesurée | sensibilité : influence mesurée par R (phase 2) |
 | `F_REF_SYNTH_HZ` | 220.0 | fréquence (Hz) de t = 0 pour les sons synthétiques | sensibilité : à faire (phase 3) |
+| `EXEMPLES_ECOUTE_PHASE2` | (('harm', 150.0), ('harm', 200.0), ('cloche', 150.0), ('cloche', 200.0), ('cloche12c1', 200.0), ('aleatoire', 200.0)) | trajectoires rendues en audio pour l'écoute (règle argmax, τ le plus court) | sensibilité : sans effet sur les verdicts : sélection d'exemples d'écoute |
 | `W_MIN_SENS` | (0.01, 0.1) | valeurs de sensibilité pour W_MIN (phase 2) | sensibilité : c'est elle-même une analyse de sensibilité |
 | `BIN_INTERVALLES_ETENDUS` | 9600.0 | étendue (± cents) des histogrammes d'intervalles en phase 2, le registre étant plus large qu'à l'étape 1 | sensibilité : sans effet tant qu'aucun intervalle ne dépasse la borne (vérifié au calcul) |
 | `K_HARMONIQUES` | 16 | rang harmonique maximal considéré par la hauteur virtuelle (C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX) | sensibilité : faite pour C5 (PHASE1-RESULTATS.md §3) : 10, 16, 20 ; sans effet sur le verdict |

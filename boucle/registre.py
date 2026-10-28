@@ -127,6 +127,11 @@ PARAMS = {
     'F_REF_SYNTH_HZ': Param(
         220.0, 'technique', "fréquence (Hz) de t = 0 pour les sons synthétiques",
         sensibilite="à faire (phase 3)"),
+    'EXEMPLES_ECOUTE_PHASE2': Param(
+        (('harm', 150.0), ('harm', 200.0), ('cloche', 150.0), ('cloche', 200.0),
+         ('cloche12c1', 200.0), ('aleatoire', 200.0)), 'technique',
+        "trajectoires rendues en audio pour l'écoute (règle argmax, τ le plus court)",
+        sensibilite="sans effet sur les verdicts : sélection d'exemples d'écoute"),
     'W_MIN_SENS': Param(
         (0.01, 0.1), 'technique', "valeurs de sensibilité pour W_MIN (phase 2)",
         sensibilite="c'est elle-même une analyse de sensibilité"),

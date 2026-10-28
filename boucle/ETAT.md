@@ -5,9 +5,9 @@ par unité de travail terminée, avec le commit correspondant.*
 
 ## Phase en cours
 
-Phase 2 — Boucle v2 sans consigne. Protocole commité (`PHASE2-PROTOCOLE.md`).
-Prochaine unité : mesure de la décroissance de la cloche (12-c1.wav), puis
-code de la boucle v2 et de la formation des lignes.
+Phase 2 terminée, critère de sortie **non rempli** (R_traj = 1,42 < 1,5).
+Boucle autonome arrêtée : décision du porteur du projet nécessaire (voir
+PHASE2-RESULTATS.md §7) et écoute des sons `sons/phase2_*.wav`.
 
 ## Fait
 
@@ -24,6 +24,11 @@ code de la boucle v2 et de la formation des lignes.
   Tests de cohérence et C2 passent ; la hauteur virtuelle échoue sur le son
   à partiels décalés et sur la cloche (note de frappe non retrouvée). La
   hauteur des sons inharmoniques est donc « non modélisée ».
+
+- Phase 2 (code `a4f66cb`, résultats `PHASE2-RESULTATS.md`) : Q3 vérifiée ;
+  Q1, Q2, Q4 non vérifiées. R_traj = 1,42 (comme à l'étape 1) ; R_lignes =
+  0,94 (les lignes dépendent plus des réglages que du son). Le zigzag a
+  laissé place à des montées et descentes, probablement dues à l'exclusion.
 
 ## Notes pour les phases suivantes
 
@@ -45,6 +50,7 @@ code de la boucle v2 et de la formation des lignes.
 
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
 - 2026-10-28 : phase 0 terminée.
+- 2026-10-28 : phase 2 terminée ; critère de sortie non rempli ; boucle arrêtée.
 - 2026-10-28 : protocole de la phase 2 (prédictions Q1-Q4).
 - 2026-10-28 : phase 1 terminée ; 2 validations sur 3 de la hauteur virtuelle échouent.
 - 2026-10-28 : protocole de la phase 1 (sources lues : van Noorden 1975 en
