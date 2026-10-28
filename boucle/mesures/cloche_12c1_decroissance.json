@@ -1,0 +1,24 @@
+{
+ "source": "12-c1.wav, github.com/pmcharrison/CarillonConsonancePaper (Harrison & MacConnachie 2024), input/bell-samples",
+ "sha256_16": "401634cac052a27c",
+ "sr": 44100,
+ "duree_s": 20.823,
+ "duree_integree_s": 12.773,
+ "methode": "Schroeder, ajustement −5 à −25 dB, T60 extrapolé",
+ "T60_s": 3.622,
+ "tau_s": 0.524,
+ "sensibilite_T60_s": {
+  "bruit 1.0 s, lissage 0.02 s, facteur 2.0": 3.622,
+  "bruit 1.0 s, lissage 0.02 s, facteur 4.0": 3.622,
+  "bruit 1.0 s, lissage 0.05 s, facteur 2.0": 3.622,
+  "bruit 1.0 s, lissage 0.05 s, facteur 4.0": 3.622,
+  "bruit 2.0 s, lissage 0.02 s, facteur 2.0": 3.622,
+  "bruit 2.0 s, lissage 0.02 s, facteur 4.0": 3.622,
+  "bruit 2.0 s, lissage 0.05 s, facteur 2.0": 3.622,
+  "bruit 2.0 s, lissage 0.05 s, facteur 4.0": 3.622,
+  "bruit 3.0 s, lissage 0.02 s, facteur 2.0": 3.622,
+  "bruit 3.0 s, lissage 0.02 s, facteur 4.0": 3.622,
+  "bruit 3.0 s, lissage 0.05 s, facteur 2.0": 3.622,
+  "bruit 3.0 s, lissage 0.05 s, facteur 4.0": 3.622
+ }
+}

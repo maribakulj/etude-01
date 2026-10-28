@@ -2,6 +2,14 @@
 
 *Généré par `python3 boucle/registre.py` à partir de `boucle/registre.py`. Ne pas modifier à la main.*
 
+## Son
+
+| Paramètre | Valeur | Rôle | Provenance / sensibilité |
+|---|---|---|---|
+| `TAU_CLOCHE_S` | 0.524 | constante de décroissance (s) de l'amplitude de la cloche Westerkerk (bourdon 12-c1), utilisée pour les deux spectres de cette cloche | mesurée : boucle/mesures/cloche_12c1_decroissance.json (T60 = 3,62 s, Schroeder −5 à −25 dB) |
+| `F_REF_CLOCHE_HZ` | 544.8 | fréquence (Hz) de la prime de la cloche, pour t = 0 | notre extraction de 12-c1.wav, materiau/cloche_westerkerk_12c1_extraction.json |
+| `F_REF_DENT994_HZ` | 993.8 | fréquence (Hz) de la dent mesurée, pour t = 0 | materiau/dent994.json |
+
 ## Oreille (données publiées)
 
 | Paramètre | Valeur | Rôle | Provenance / sensibilité |
@@ -17,11 +25,18 @@
 | `TCB_PENTE` | 0.15 | pente de la frontière de cohérence (demi-tons par ms) (C7) | van Noorden (1975), p. 16 : Ic = 0,15 (T − 100) (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
 | `TCB_GENOU_MS` | 100.0 | période (ms) du coude de la frontière de cohérence (C7) | van Noorden (1975), p. 15-16 (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
 | `DECALAGE_COMPLEXE_MS` | 60.0 | décalage de période (ms) pour des sons complexes (C7) | van Noorden (1975), p. 73 : sons harmoniques à spectre plat (lue); test : `test_oreille.py::test_frontieres_van_noorden` |
+| `LIGNE_FERMETURE_MS` | 200.0 | au-delà de cette période (ms), une ligne est close : c'est la borne haute de la plage où la frontière de cohérence a été mesurée | van Noorden (1975), p. 14 : mesures pour 48 ≤ T ≤ 200 ms (lue); test : `test_phase2.py::test_lignes_van_noorden` |
+| `EXCLUSION_ERB` | 1.0 | une candidate est exclue si son partiel dominant est à moins de ce nombre d'ERB de celui d'une copie active (non résolue) | Plomp (1964), JASA 36, résolution des partiels — à vérifier ; ERB de C1; test : `test_phase2.py::test_exclusion_erb`; sensibilité : 0,5 et 1,5 ERB (PHASE2-PROTOCOLE.md §4) |
 
 ## Choix techniques
 
 | Paramètre | Valeur | Rôle | Provenance / sensibilité |
 |---|---|---|---|
+| `PERIODES_MS` | (100.0, 150.0, 200.0) | périodes T entre événements (réglage varié) | sensibilité : influence mesurée par R (phase 2) ; bornes dans la plage de van Noorden |
+| `TAUS_SYNTH_S` | (0.5, 1.5) | persistance (s) des sons sans décroissance mesurée | sensibilité : influence mesurée par R (phase 2) |
+| `F_REF_SYNTH_HZ` | 220.0 | fréquence (Hz) de t = 0 pour les sons synthétiques | sensibilité : à faire (phase 3) |
+| `W_MIN_SENS` | (0.01, 0.1) | valeurs de sensibilité pour W_MIN (phase 2) | sensibilité : c'est elle-même une analyse de sensibilité |
+| `BIN_INTERVALLES_ETENDUS` | 9600.0 | étendue (± cents) des histogrammes d'intervalles en phase 2, le registre étant plus large qu'à l'étape 1 | sensibilité : sans effet tant qu'aucun intervalle ne dépasse la borne (vérifié au calcul) |
 | `K_HARMONIQUES` | 16 | rang harmonique maximal considéré par la hauteur virtuelle (C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX) | sensibilité : faite pour C5 (PHASE1-RESULTATS.md §3) : 10, 16, 20 ; sans effet sur le verdict |
 | `EGALITE_PART` | 1e-09 | tolérance d'égalité entre parts d'amplitude expliquées (C5) | sensibilité : à faire (phase 2) |
 | `PAS_GRILLE` | 2.0 | pas (cents) de la grille des transpositions candidates | sensibilité : à faire (phase 2) ; les maxima sont affinés par interpolation parabolique |
@@ -45,6 +60,10 @@
 | `SR_RENDU` | 22050 | fréquence d'échantillonnage du rendu audio | sensibilité : sans effet sur les trajectoires ; partiels au-dessus de 0,45×SR omis |
 | `ATTAQUE_RENDU` | 0.005 | attaque (s) d'une copie au rendu, anti-clic | sensibilité : sans effet sur les trajectoires |
 | `FONDU_RENDU` | 0.03 | fondu (s) à l'arrêt d'une copie au rendu, anti-clic | sensibilité : sans effet sur les trajectoires |
+| `MESURE_BRUIT_S` | 2.0 | durée (s) de fin d'enregistrement servant à estimer le bruit de fond (mesure de décroissance) | sensibilité : rapportée dans boucle/mesures/cloche_12c1_decroissance.json |
+| `MESURE_LISSAGE_S` | 0.05 | lissage (s) de l'enveloppe pour arrêter l'intégration | sensibilité : rapportée dans boucle/mesures/cloche_12c1_decroissance.json |
+| `MESURE_FACTEUR_BRUIT` | 2.0 | l'intégration s'arrête quand l'enveloppe vaut ce facteur × bruit | sensibilité : rapportée dans boucle/mesures/cloche_12c1_decroissance.json |
+| `W_MIN` | 0.05 | poids sous lequel une copie est retirée | sensibilité : 0,01 et 0,1 (PHASE2-PROTOCOLE.md §2) ; aucune donnée de masquage établie, donc pas de remplacement |
 
 ## Hérités de l'étape 1, à remplacer
 
@@ -53,9 +72,8 @@
 | `T_MIN` | -1200.0 | borne basse (cents) du registre | à remplacer par : région d'existence de la hauteur pour ce son (phase 1) |
 | `T_MAX` | 2400.0 | borne haute (cents) du registre | à remplacer par : région d'existence de la hauteur pour ce son (phase 1) |
 | `EXCLUSION` | 100.0 | zone (cents) exclue autour d'une copie active | à remplacer par : seuil de distinction de deux sons simultanés, tiré de données de discrimination et de fusion (phase 1) |
-| `W_MIN` | 0.05 | poids sous lequel une copie est retirée | à remplacer par : seuil d'audibilité dans le mélange (masquage, phase 1) |
 | `TAUS` | (1.5, 4.0) | persistance des copies (en pas) | à remplacer par : durée de résonance mesurée du son de départ (phase 2) |
 | `DUREE_PAS` | 0.45 | durée (s) d'un pas au rendu | à remplacer par : moment d'un nouvel événement dépendant du son et de l'oreille (phase 2, PLAN.md §4) |
 | `F0_RENDU` | 220.0 | fréquence (Hz) de t = 0 au rendu | à remplacer par : fréquence mesurée du son de départ |
 
-Restent : 7 paramètres à remplacer, 16 analyses de sensibilité à faire.
+Restent : 6 paramètres à remplacer, 17 analyses de sensibilité à faire.

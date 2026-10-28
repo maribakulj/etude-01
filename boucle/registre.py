@@ -34,6 +34,19 @@ class Param:
 
 
 PARAMS = {
+    # --- Son ----------------------------------------------------------------
+    'TAU_CLOCHE_S': Param(
+        0.524, 'son', "constante de décroissance (s) de l'amplitude de la cloche "
+        "Westerkerk (bourdon 12-c1), utilisée pour les deux spectres de cette cloche",
+        reference="mesurée : boucle/mesures/cloche_12c1_decroissance.json "
+                  "(T60 = 3,62 s, Schroeder −5 à −25 dB)"),
+    'F_REF_CLOCHE_HZ': Param(
+        544.8, 'son', "fréquence (Hz) de la prime de la cloche, pour t = 0",
+        reference="notre extraction de 12-c1.wav, materiau/cloche_westerkerk_12c1_extraction.json"),
+    'F_REF_DENT994_HZ': Param(
+        993.8, 'son', "fréquence (Hz) de la dent mesurée, pour t = 0",
+        reference="materiau/dent994.json"),
+
     # --- Oreille ------------------------------------------------------------
     'SIGMA_MILNE': Param(
         6.83, 'oreille',
@@ -92,7 +105,35 @@ PARAMS = {
         reference="van Noorden (1975), p. 73 : sons harmoniques à spectre plat (lue)",
         test='test_oreille.py::test_frontieres_van_noorden'),
 
+    'LIGNE_FERMETURE_MS': Param(
+        200.0, 'oreille', "au-delà de cette période (ms), une ligne est close : "
+        "c'est la borne haute de la plage où la frontière de cohérence a été mesurée",
+        reference="van Noorden (1975), p. 14 : mesures pour 48 ≤ T ≤ 200 ms (lue)",
+        test='test_phase2.py::test_lignes_van_noorden'),
+    'EXCLUSION_ERB': Param(
+        1.0, 'oreille', "une candidate est exclue si son partiel dominant est à moins "
+        "de ce nombre d'ERB de celui d'une copie active (non résolue)",
+        reference="Plomp (1964), JASA 36, résolution des partiels — à vérifier ; ERB de C1",
+        test='test_phase2.py::test_exclusion_erb',
+        sensibilite="0,5 et 1,5 ERB (PHASE2-PROTOCOLE.md §4)"),
+
     # --- Choix techniques ---------------------------------------------------
+    'PERIODES_MS': Param(
+        (100.0, 150.0, 200.0), 'technique', "périodes T entre événements (réglage varié)",
+        sensibilite="influence mesurée par R (phase 2) ; bornes dans la plage de van Noorden"),
+    'TAUS_SYNTH_S': Param(
+        (0.5, 1.5), 'technique', "persistance (s) des sons sans décroissance mesurée",
+        sensibilite="influence mesurée par R (phase 2)"),
+    'F_REF_SYNTH_HZ': Param(
+        220.0, 'technique', "fréquence (Hz) de t = 0 pour les sons synthétiques",
+        sensibilite="à faire (phase 3)"),
+    'W_MIN_SENS': Param(
+        (0.01, 0.1), 'technique', "valeurs de sensibilité pour W_MIN (phase 2)",
+        sensibilite="c'est elle-même une analyse de sensibilité"),
+    'BIN_INTERVALLES_ETENDUS': Param(
+        9600.0, 'technique', "étendue (± cents) des histogrammes d'intervalles en phase 2, "
+        "le registre étant plus large qu'à l'étape 1",
+        sensibilite="sans effet tant qu'aucun intervalle ne dépasse la borne (vérifié au calcul)"),
     'K_HARMONIQUES': Param(
         16, 'technique', "rang harmonique maximal considéré par la hauteur virtuelle "
         "(C4, C5) ; même valeur que le gabarit de Parncutt déjà utilisé (_HMAX)",
@@ -163,6 +204,17 @@ PARAMS = {
         0.03, 'technique', "fondu (s) à l'arrêt d'une copie au rendu, anti-clic",
         sensibilite="sans effet sur les trajectoires"),
 
+    'MESURE_BRUIT_S': Param(
+        2.0, 'technique', "durée (s) de fin d'enregistrement servant à estimer le bruit "
+        "de fond (mesure de décroissance)",
+        sensibilite="rapportée dans boucle/mesures/cloche_12c1_decroissance.json"),
+    'MESURE_LISSAGE_S': Param(
+        0.05, 'technique', "lissage (s) de l'enveloppe pour arrêter l'intégration",
+        sensibilite="rapportée dans boucle/mesures/cloche_12c1_decroissance.json"),
+    'MESURE_FACTEUR_BRUIT': Param(
+        2.0, 'technique', "l'intégration s'arrête quand l'enveloppe vaut ce facteur × bruit",
+        sensibilite="rapportée dans boucle/mesures/cloche_12c1_decroissance.json"),
+
     # --- Hérités de l'étape 1, à remplacer (PLAN.md §3) ----------------------
     'T_MIN': Param(
         -1200.0, 'a_remplacer', "borne basse (cents) du registre",
@@ -175,8 +227,9 @@ PARAMS = {
         remplacement="seuil de distinction de deux sons simultanés, tiré de "
                      "données de discrimination et de fusion (phase 1)"),
     'W_MIN': Param(
-        0.05, 'a_remplacer', "poids sous lequel une copie est retirée",
-        remplacement="seuil d'audibilité dans le mélange (masquage, phase 1)"),
+        0.05, 'technique', "poids sous lequel une copie est retirée",
+        sensibilite="0,01 et 0,1 (PHASE2-PROTOCOLE.md §2) ; aucune donnée de masquage "
+                    "établie, donc pas de remplacement"),
     'TAUS': Param(
         (1.5, 4.0), 'a_remplacer', "persistance des copies (en pas)",
         remplacement="durée de résonance mesurée du son de départ (phase 2)"),
