@@ -132,6 +132,15 @@ PARAMS = {
          ('cloche12c1', 200.0), ('aleatoire', 200.0)), 'technique',
         "trajectoires rendues en audio pour l'écoute (règle argmax, τ le plus court)",
         sensibilite="sans effet sur les verdicts : sélection d'exemples d'écoute"),
+    'SONS_ECOUTE1': Param(
+        ('harm', 'cloche'), 'technique', "sons du contrôle d'écoute 1 (paires A puis B)",
+        sensibilite="sans effet sur la boucle : sélection d'exemples d'écoute"),
+    'PERIODE_ECOUTE1_MS': Param(
+        200.0, 'technique', "période des fichiers du contrôle d'écoute 1",
+        sensibilite="sans effet sur la boucle : celle où le modèle trouve le plus de lignes"),
+    'GRAINE_ECOUTE1': Param(
+        11, 'technique', "graine du mélange des notes et de l'ordre des fichiers (écoute 1)",
+        sensibilite="sans effet sur la boucle"),
     'W_MIN_SENS': Param(
         (0.01, 0.1), 'technique', "valeurs de sensibilité pour W_MIN (phase 2)",
         sensibilite="c'est elle-même une analyse de sensibilité"),
