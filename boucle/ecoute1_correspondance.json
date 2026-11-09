@@ -1,0 +1,18 @@
+{
+ "ecoute1_A1.wav": {
+  "son": "harm",
+  "version": "melange"
+ },
+ "ecoute1_A2.wav": {
+  "son": "harm",
+  "version": "original"
+ },
+ "ecoute1_B1.wav": {
+  "son": "cloche",
+  "version": "original"
+ },
+ "ecoute1_B2.wav": {
+  "son": "cloche",
+  "version": "melange"
+ }
+}

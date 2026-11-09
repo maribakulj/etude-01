@@ -124,3 +124,16 @@ fondement psychoacoustique établi. Détail dans `phase2_resultats.json`.
   d'exclusion.
 - Rien de tout cela n'a été écouté. Les sons `sons/phase2_*.wav` sont faits
   pour cette écoute.
+
+## Correction datée — 2026-11-09
+
+Le §4 dit que les lignes à T = 200 ms « traduisent surtout la largeur de la
+frontière à tempo lent, que n'importe quelle suite de sauts de moins de deux
+octaves franchirait ». C'était trop fort. En mélangeant au hasard les mêmes
+notes, au même tempo, le modèle trouve beaucoup moins de lignes (harmonique :
+31 % des notes au lieu de 88 % ; cloche : 16 % au lieu de 94 % ;
+`ECOUTE1-PROTOCOLE.md`). L'ordre produit par la boucle compte donc pour les
+lignes, et pas seulement le tempo. R_lignes < 1 reste vrai : entre sons
+différents, les lignes varient moins qu'entre réglages. L'écoute 1
+(`ECOUTE1-RESULTATS.md`) va dans le même sens, avec les limites qui y sont
+dites.

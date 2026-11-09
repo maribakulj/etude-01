@@ -30,6 +30,11 @@ PHASE2-RESULTATS.md §7) et écoute des sons `sons/phase2_*.wav`.
   0,94 (les lignes dépendent plus des réglages que du son). Le zigzag a
   laissé place à des montées et descentes, probablement dues à l'exclusion.
 
+- Écoute 1 (2026-11-09) : original contre mêmes notes mélangées, pour
+  l'harmonique et la cloche. L'auditeur désigne l'original comme « plus
+  continu » dans les deux paires (p = 0,25 au hasard). Correction datée
+  ajoutée à PHASE2-RESULTATS.md (§4 surestimait le rôle du tempo).
+
 ## Notes pour les phases suivantes
 
 - Le dépôt public de Harrison & MacConnachie (2024) contient leurs données
@@ -48,6 +53,7 @@ PHASE2-RESULTATS.md §7) et écoute des sons `sons/phase2_*.wav`.
 
 ## Journal
 
+- 2026-11-09 : écoute 1, original désigné dans les deux paires.
 - 2026-10-28 : fichier créé ; boucle autonome lancée.
 - 2026-10-28 : phase 0 terminée.
 - 2026-10-28 : phase 2 terminée ; critère de sortie non rempli ; boucle arrêtée.
